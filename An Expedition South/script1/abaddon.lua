@@ -28,4 +28,17 @@ State {
             },
         }
     };
+
+    OnOneTimeEvent {
+        Conditions = {
+            SquadWasJustHit {
+                Tag = "abaddon"
+            }
+        },
+        Actions = {
+            MapFlagSetTrue {
+                Name = "mf_abaddon_fight_ongoing"
+            }
+        }
+    }
 };
