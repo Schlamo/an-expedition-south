@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<mapgoals>
+	<goal tag="goal_capture_first_wall" sortorder="1" timeleft_colorchange="0" musictype="off" positivetimer="1" goalletter="A" targettag="first_wall_left" hint="0">
+        <text language="en">Recapture territory from the fire troops.</text>
+    </goal>
+
+	<goal tag="goal_destroy_first_aspect_spawner" sortorder="2" timeleft_colorchange="0" musictype="off" positivetimer="1" goalletter="B" targettag="camp_first_aspect_spawner" hint="0">
+        <text language="en">Destroy the first aspect spawner.</text>
+    </goal>
+	<goal tag="goal_destroy_second_aspect_spawner" sortorder="2" timeleft_colorchange="0" musictype="off" positivetimer="1" goalletter="B" targettag="camp_second_aspect_spawner" hint="0">
+        <text language="en">Destroy the second aspect spawner.</text>
+    </goal>
+	<goal tag="goal_destroy_third_aspect_spawner" sortorder="2" timeleft_colorchange="0" musictype="off" positivetimer="1" goalletter="B" targettag="camp_third_aspect_spawner" hint="0">
+        <text language="en">Destroy the third aspect spawner.</text>
+    </goal>
+	<goal tag="goal_destroy_fourth_aspect_spawner" sortorder="2" timeleft_colorchange="0" musictype="off" positivetimer="1" goalletter="B" targettag="camp_fourth_aspect_spawner" hint="0">
+        <text language="en">Destroy the fourth aspect spawner.</text>
+    </goal>
+
+	<goal tag="goal_destroy_fire_crystal" sortorder="1" timeleft_colorchange="0" musictype="off" positivetimer="1" goalletter="D" targettag="camp_fourth_aspect_spawner" hint="0">
+        <text language="en">Destroy the Fire Crystal.</text>
+    </goal>
+	
+	<goal tag="goal_kill_all_remaining_aspects" sortorder="1" timeleft_colorchange="0" musictype="off" positivetimer="1" goalletter="A" hint="0">
+        <text language="en">Kill all remaining aspects.</text>
+    </goal>
+	
+	<goal tag="goal_destroy_both_volcanos" sortorder="1" timeleft_colorchange="0" musictype="off" positivetimer="1" goalletter="E" targettag="sg_volcanos" hint="0">
+        <text language="en">Destroy both volcanos.</text>
+    </goal>
+	<goal tag="goal_withstand_the_incoming_waves" sortorder="1" timeleft_colorchange="0" musictype="off" positivetimer="1" targettag="sg_volcano_spawners" goalletter="F" hint="0">
+        <text language="en">Withstand the incoming waves.</text>
+    </goal>
+	
+	<goal tag="goal_kill_abaddon" sortorder="1" timeleft_colorchange="0" musictype="on" positivetimer="1" goalletter="Z" targettag="abaddon" hint="0">
+        <text language="en">Kill Abaddon.</text>
+    </goal>
+
+	<goal sortorder="3" tag="missiontimer_aspect_1" goalletter="C">
+		<text language="en">A new Aspect will spawn soon!</text>
+		<text language="de">A new Aspect will spawn soon!</text>
+	</goal>
+
+	<goal sortorder="3" tag="missiontimer_aspect_2" goalletter="C">
+		<text language="en">A new Aspect will spawn soon!</text>
+		<text language="de">A new Aspect will spawn soon!</text>
+	</goal>
+
+	<goal sortorder="3" tag="missiontimer_aspect_3" goalletter="C">
+		<text language="en">A new Aspect will spawn soon!</text>
+		<text language="de">A new Aspect will spawn soon!</text>
+	</goal>
+
+	<goal sortorder="3" tag="missiontimer_aspect_4" goalletter="C">
+		<text language="en">A new Aspect will spawn soon!</text>
+		<text language="de">A new Aspect will spawn soon!</text>
+	</goal>
+
+	<goal sortorder="3" tag="missiontimer_aspect_5" goalletter="C">
+		<text language="en">A new Aspect will spawn soon!</text>
+		<text language="de">A new Aspect will spawn soon!</text>
+	</goal>
+
+	<goal sortorder="3" tag="missiontimer_aspect_6" goalletter="C">
+		<text language="en">A new Aspect will spawn soon!</text>
+		<text language="de">A new Aspect will spawn soon!</text>
+	</goal>
+
+	<goal sortorder="3" tag="missiontimer_aspect_7" goalletter="C">
+		<text language="en">A new Aspect will spawn soon!</text>
+		<text language="de">A new Aspect will spawn soon!</text>
+	</goal>
+
+	<goal sortorder="3" tag="missiontimer_aspect_8" goalletter="C">
+		<text language="en">A new Aspect will spawn soon!</text>
+		<text language="de">A new Aspect will spawn soon!</text>
+	</goal>
+
+	<goal sortorder="3" tag="missiontimer_aspect_9" goalletter="C">
+		<text language="en">A new Aspect will spawn soon!</text>
+		<text language="de">A new Aspect will spawn soon!</text>
+	</goal>
+
+	<goal sortorder="3" tag="missiontimer_aspect_10" goalletter="C">
+		<text language="en">A new Aspect will spawn soon!</text>
+		<text language="de">A new Aspect will spawn soon!</text>
+	</goal>
+    
+	<goal sortorder="3" tag="missiontimer_aspect_11" goalletter="C">
+		<text language="en">A new Aspect will spawn soon!</text>
+		<text language="de">A new Aspect will spawn soon!</text>
+	</goal>
+
+	<goal sortorder="3" tag="missiontimer_aspect_12" goalletter="C">
+		<text language="en">A new Aspect will spawn soon!</text>
+		<text language="de">A new Aspect will spawn soon!</text>
+	</goal>
+</mapgoals>

@@ -1,0 +1,36 @@
+State {
+    StateName = "INIT",
+    OnOneTimeEvent {
+        Conditions = { },
+        Actions = {
+            SquadKill {
+                Tag ="sg_volcano_wave_a4",
+            }
+        }
+    },
+    OnRespawnEvent {
+        StartDespawned = true,
+        TargetTag = "volcano_a_spawnpoint",
+        RespawnDelaySeconds = 30,
+        HealthPercent = 100,
+        Conditions = {
+            MapFlagIsTrue {
+                Name = "mf_spawn_wave_volcano_a",
+            },
+            BuildingIsAlive {
+                For = "ALL", 
+                Tag = "volcano_a_spawner"
+            },
+            MapValueIsGreaterOrEqual {
+                Name = "volcano_a_wave_counter",
+                Value = 6
+            }
+        },
+        Actions = {
+            SquadGridGoto {
+                Tag = "sg_volcano_wave_a4", 
+                TargetTag = "fireback_camp_target"
+            },
+        }
+    };
+};
