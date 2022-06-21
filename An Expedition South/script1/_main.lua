@@ -491,6 +491,10 @@ OnOneTimeEvent {
         }
     },
     Actions = {
+        EntityAbilityRemove {
+            Tag = "abaddon",
+            AbilityId = 435
+        },
         EffectVanish {
             Tag = "fire_crystal_effect"
         },
@@ -748,6 +752,21 @@ OnOneTimeEvent {
         }
     }
 };
+
+OnOneTimeEvent {
+    Conditions = {
+        MapTimerIsElapsed {
+            Name = "mt_victory_timer", 
+            Seconds = 5
+        },
+    },
+    Actions = {
+        PlayerGameWon {
+            Player = "ALL"
+        },
+    },
+};
+
 State {
     StateName = "INIT"
 };

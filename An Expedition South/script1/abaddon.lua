@@ -4,7 +4,10 @@ State {
         Conditions = {
         },
         Actions = {
-            EntityAbilityAdd
+            EntityAbilityAdd {
+                Tag = "abaddon",
+                AbilityId = 435
+            }
         }
     };
 
@@ -15,9 +18,7 @@ State {
             }
         }, 
         Actions = {
-            MissionTimerStart {
-                Name = "mt_winning_delay"
-            }
+            MapTimerStart {Name = "mt_victory_timer"},
             MissionOutcry {
                 TextTag = "",
                 Player = "ALL",
@@ -25,20 +26,6 @@ State {
                 PortraitFileName = "moon",
                 DurationSeconds = 5
             },
-        }
-    };
-
-    OnOneTimeEvent {
-        Conditions = {
-            MapTimerIsElapsed {
-                Name = "mt_winning_delay",
-                Seconds = 6
-            }
-        }, 
-        Actions = {
-            PlayerGameWon {
-                Player = "All"
-            }
         }
     };
 };
