@@ -5,8 +5,8 @@ local OrdinalNumbers = {
     [4] = "fourth",
 };
 
-aspectInitialDelay = 60; --default 60
-aspectFrequencyInSeconds = 120; --default 90
+aspectInitialDelay = 90; --default 90
+aspectFrequencyInSeconds = 120; --default 120
 maxAspectsPerSpawner = 3;
 
 function AspectSpawnerByIndex (index)
@@ -360,7 +360,7 @@ for aspectCounter = 1,12 do --max 3 spawns per Spawner (12 in total)
             },
             FogOfWarObserve {
                 TargetTag = "aspect_"..aspectCounter,
-                Range = 20,
+                Range = 25,
                 Team = "tm_Team1"
             },
             MiniMapAlert {
@@ -375,11 +375,6 @@ for aspectCounter = 1,12 do --max 3 spawns per Spawner (12 in total)
                 TargetTag = "aspect_"..aspectCounter,
                 MaxHealthAbsolute = 1000 + 500 * (aspectCounter-1)
             },
-            FogOfWarObserve {
-                TargetTag = "aspect_"..aspectCounter,
-                Range = 15,
-                Team = "tm_Team1"
-            }
         }
     };
 
