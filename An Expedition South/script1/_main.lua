@@ -13,6 +13,10 @@ function AspectSpawnerByIndex (index)
     return "camp_"..OrdinalNumbers[index].."_aspect_spawner"
 end
 
+function AspectSpawnerGoalByIndex (index)
+    return "goal_destroy_"..OrdinalNumbers[index].."_aspect_spawner"
+end
+
 function AspectSpawnpointByIndex (index)
     return "camp_"..OrdinalNumbers[index].."_aspect_spawnpoint"
 end
@@ -121,6 +125,7 @@ OnOneTimeEvent {
             TargetTag = "final_camp_volcano_right",
             MaxHealthAbsolute = 10000
         },
+        --ToDo
         --CutsceneCameraPlay{
         --    Camera = "MolochCam"
         --}
@@ -128,29 +133,31 @@ OnOneTimeEvent {
 };
 
 ------------------------------
--- First Mission
+-- First Missions
 ------------------------------
-
 OnOneTimeEvent {
     Conditions = {
         MapTimerIsElapsed {
             Name = "mt_global",
-            Seconds = 3
+            Seconds = 0
         }
     },
     Actions = {
-		EntitySpellCast{
-			Tag = "test",
-			TargetTag = "test2",
-			SpellId = 2806
-		},
+        MissionOutcry {
+            PortraitFileName = "moon",
+            DurationSeconds = 5,
+            TextTag = "",
+            Player = "ALL",
+            Text = "Moon: The expedition was separated and has been ambushed! You must come to their aid!"
+        }
     }
 };
+
 OnOneTimeEvent {
     Conditions = {
-        MapTimerIsElapsed {
-            Name = "mt_global",
-            Seconds = 10
+        ScriptGroupAliveAmountIsEqual {
+            Group = "sg_first_wave_fire",
+            Value = 0
         }
     },
     Actions = {
@@ -160,19 +167,72 @@ OnOneTimeEvent {
             TargetTag = "first_wall_left", 
             Summary = "Recapture territory from the fire troops."
         },
-        MissionTaskSetActive {
-            Player = "All",
-            TaskTag = "goal_destroy_first_aspect_spawner", 
-            TargetTag = "camp_first_aspect_spawner", 
-            Summary = "Destroy the first aspect spawner."
+        MissionOutcry {
+            PortraitFileName = "moon",
+            DurationSeconds = 8,
+            TextTag = "",
+            Player = "ALL",
+            Text = "Moon: With your help, the attack could be repelled but it will not be the last. You should gather some ground before you are overrun."
         }
     }
 };
 
 OnOneTimeEvent {
     Conditions = {
-        BuildingIsDestroyed { Tag = AspectSpawnerByIndex(1) },
-        BuildingIsAlive { Tag = AspectSpawnerByIndex(2) }
+        MapTimerIsElapsed {
+            Name = "mt_global",
+            Seconds = 15
+        }
+    },
+    Actions = {
+        MissionTaskSetActive {
+            Player = "All",
+            TaskTag = "goal_destroy_first_aspect_spawner", 
+            TargetTag = "camp_first_aspect_spawner", 
+            Summary = "Destroy the first aspect spawner."
+        },
+        MissionOutcry {
+            PortraitFileName = "moon",
+            DurationSeconds = 5,
+            TextTag = "",
+            Player = "ALL",
+            Text = "Moon: "
+        }
+    }
+};
+
+------------------------------
+-- Aspect Spawner Stuff
+------------------------------
+for spawnerIndex = 1,4 do --do for each aspect spawner
+    OnOneTimeEvent {
+        Conditions = {
+            BuildingIsDestroyed { 
+                Tag = AspectSpawnerByIndex(spawnerIndex) 
+            }
+        },
+        Actions = {
+            MapFlagSetTrue {
+                Name = "mf_"..OrdinalNumbers[spawnerIndex].."_aspect_spawner_destroyed"
+            }
+            MissionTaskSetSolved {  
+                Player = "All",
+                TaskTag = AspectSpawnerGoalByIndex(spawnerIndex), 
+                TargetTag = AspectSpawnerByIndex(spawnerIndex) , 
+                Summary = "Destroy the "..OrdinalNumbers[spawnerIndex].." aspect spawner."
+            },
+        }
+    };
+end
+
+OnOneTimeEvent {
+    Conditions = {
+        BuildingIsDestroyed { 
+            Tag = AspectSpawnerByIndex(1) 
+        },
+        BuildingIsAlive { 
+            Tag = AspectSpawnerByIndex(2) 
+        }
     },
     Actions = {
         MissionTaskSetActive {
@@ -184,77 +244,21 @@ OnOneTimeEvent {
     }
 };
 
-OnOneTimeEvent {
-    Conditions = {
-        BuildingIsDestroyed { Tag = AspectSpawnerByIndex(1) }
-    },
-    Actions = {
-        MissionTaskSetSolved {  
-            Player = "All",
-            TaskTag = "goal_destroy_first_aspect_spawner", 
-            TargetTag = "camp_first_aspect_spawner", 
-            Summary = "Destroy the first aspect spawner."
-        },
-    }
-};
-
-OnOneTimeEvent {
-    Conditions = {
-        BuildingIsDestroyed { Tag = AspectSpawnerByIndex(2) }
-    },
-    Actions = {
-        MissionTaskSetSolved {  
-            Player = "All",
-            TaskTag = "goal_second_first_wall", 
-            TargetTag = "second_wall_left", 
-            Summary = "Recapture territory from the fire troops."
-        },
-    }
-};
-
-OnOneTimeEvent {
-    Conditions = {
-        BuildingIsDestroyed { Tag = AspectSpawnerByIndex(3) }
-    },
-    Actions = {
-        MissionTaskSetSolved {  
-            Player = "All",
-            TaskTag = "goal_capture_third_wall", 
-            TargetTag = "third_wall_left", 
-            Summary = "Recapture territory from the fire troops."
-        },
-    }
-};
-
-OnOneTimeEvent {
-    Conditions = {
-        BuildingIsDestroyed { Tag = AspectSpawnerByIndex(4) }
-    },
-    Actions = {
-        MissionTaskSetSolved {  
-            Player = "All",
-            TaskTag = "goal_capture_fourth_wall", 
-            TargetTag = "fourth_wall_left", 
-            Summary = "Recapture territory from the fire troops."
-        },
-    }
-};
-
 ------------------------------
 -- Aspects
 ------------------------------
-for aspectCounter = 1,12 do --max 3 spawns per Spawner (12 in total)
+for aspectIndex = 1,12 do --max 3 spawns per Spawner (12 in total)
     --Minimap Alerts
     OnIntervalEvent {
         Seconds = 1,
         Conditions = { 
             SquadIsAlive {
-                Tag = "aspect_"..aspectCounter,
+                Tag = "aspect_"..aspectIndex,
             }
         },
         Actions = {
             MiniMapAlert {
-                TargetTag = "aspect_"..aspectCounter,
+                TargetTag = "aspect_"..aspectIndex,
                 AlertType = AlertQuest
             }
         }
@@ -264,12 +268,12 @@ for aspectCounter = 1,12 do --max 3 spawns per Spawner (12 in total)
         Seconds = 1,
         Conditions = { 
             SquadIsAlive {
-                Tag = "converted_aspect_"..aspectCounter,
+                Tag = "converted_aspect_"..aspectIndex,
             }
         },
         Actions = {
             MiniMapAlert {
-                TargetTag = "converted_aspect_"..aspectCounter,
+                TargetTag = "converted_aspect_"..aspectIndex,
                 AlertType = AlertQuest
             }
         }
@@ -280,15 +284,15 @@ for aspectCounter = 1,12 do --max 3 spawns per Spawner (12 in total)
         Conditions = { 
             MapTimerIsElapsed {
                 Name = "mt_global",
-                Seconds = aspectFrequencyInSeconds * aspectCounter
+                Seconds = aspectFrequencyInSeconds * aspectIndex
             },
             BuildingIsAlive { 
-                Tag = GetSpawnerTagByAspectIndex(aspectCounter) 
+                Tag = GetSpawnerTagByAspectIndex(aspectIndex) 
             }
         },
         Actions = {
             MissionTimerStart {
-                TimerTag = "missiontimer_aspect_"..aspectCounter,
+                TimerTag = "missiontimer_aspect_"..aspectIndex,
                 LocaTag = "",
                 Seconds = aspectInitialDelay
             }
@@ -299,16 +303,16 @@ for aspectCounter = 1,12 do --max 3 spawns per Spawner (12 in total)
         Conditions = {
             OR {
                 MissionTimerHasRunOut {
-                    TimerTag = "missiontimer_aspect_"..aspectCounter
+                    TimerTag = "missiontimer_aspect_"..aspectIndex
                 },
                 BuildingIsDestroyed {
-                    Tag = GetSpawnerTagByAspectIndex(aspectCounter) 
+                    Tag = GetSpawnerTagByAspectIndex(aspectIndex) 
                 }
             }
         },
         Actions = {
             MissionTimerStop {
-                TimerTag = "missiontimer_aspect_"..aspectCounter
+                TimerTag = "missiontimer_aspect_"..aspectIndex
             }
         }
     }
@@ -318,21 +322,21 @@ for aspectCounter = 1,12 do --max 3 spawns per Spawner (12 in total)
         Conditions = { 
             MapTimerIsElapsed {
                 Name = "mt_global",
-                Seconds = aspectInitialDelay + aspectFrequencyInSeconds * aspectCounter
+                Seconds = aspectInitialDelay + aspectFrequencyInSeconds * aspectIndex
             },
             BuildingIsAlive { 
-                Tag = GetSpawnerTagByAspectIndex(aspectCounter) 
+                Tag = GetSpawnerTagByAspectIndex(aspectIndex) 
             },
         },
         Actions = {
             PlayerSquadSpawnWithTag {
-                Tag = "aspect_"..aspectCounter,
-                TargetTag = GetSpawnpointTagByAspectIndex(aspectCounter),
+                Tag = "aspect_"..aspectIndex,
+                TargetTag = GetSpawnpointTagByAspectIndex(aspectIndex),
                 Player = "pl_Enemy1",
                 SquadId = 30007
             },
             MapFlagSetTrue {
-                Name = "mf_aspect_"..aspectCounter.."_spawned"
+                Name = "mf_aspect_"..aspectIndex.."_spawned"
             }
         }
     };
@@ -341,7 +345,7 @@ for aspectCounter = 1,12 do --max 3 spawns per Spawner (12 in total)
     OnOneTimeEvent {
         Conditions = { 
             MapFlagIsTrue {
-                Name = "mf_aspect_"..aspectCounter.."_spawned"
+                Name = "mf_aspect_"..aspectIndex.."_spawned"
             }
         },
         Actions = {
@@ -359,21 +363,21 @@ for aspectCounter = 1,12 do --max 3 spawns per Spawner (12 in total)
                 Sound = "sfx_global_horn"
             },
             FogOfWarObserve {
-                TargetTag = "aspect_"..aspectCounter,
+                TargetTag = "aspect_"..aspectIndex,
                 Range = 25,
                 Team = "tm_Team1"
             },
             MiniMapAlert {
-                TargetTag = "aspect_"..aspectCounter,
+                TargetTag = "aspect_"..aspectIndex,
                 AlertType = 5
             },
             SquadGotoForced {
-                Tag = "aspect_"..aspectCounter, 
+                Tag = "aspect_"..aspectIndex, 
                 TargetTag = "aspect_target"
             },
             EntitySetMaxHealthAbsolute {
-                TargetTag = "aspect_"..aspectCounter,
-                MaxHealthAbsolute = 1000 + 500 * (aspectCounter-1)
+                TargetTag = "aspect_"..aspectIndex,
+                MaxHealthAbsolute = 1000 + 500 * (aspectIndex-1)
             },
         }
     };
@@ -382,27 +386,27 @@ for aspectCounter = 1,12 do --max 3 spawns per Spawner (12 in total)
     OnOneTimeEvent {
         Conditions = { 
             EntityIsInRange {
-                Tag = "aspect_"..aspectCounter,
+                Tag = "aspect_"..aspectIndex,
                 TargetTag = "aspect_target",
                 Range = 15
             }
         },
         Actions = {
             MapTimerStart {
-                Name = "mt_aspect_"..aspectCounter.."_reached_the_crystal"
+                Name = "mt_aspect_"..aspectIndex.."_reached_the_crystal"
             },
         }
     };
     OnOneTimeEvent {
         Conditions = {
             MapTimerIsElapsed {
-                Name = "mt_aspect_"..aspectCounter.."_reached_the_crystal",
+                Name = "mt_aspect_"..aspectIndex.."_reached_the_crystal",
                 Seconds = 5
             }
         },
         Actions = {
             EffectStart {
-                Tag = "aspect_"..aspectCounter,
+                Tag = "aspect_"..aspectIndex,
                 Effect = "test_mb_explosion"
             }
         }
@@ -411,32 +415,32 @@ for aspectCounter = 1,12 do --max 3 spawns per Spawner (12 in total)
     OnOneTimeEvent {
         Conditions = {
             MapTimerIsElapsed {
-                Name =  "mt_aspect_"..aspectCounter.."_reached_the_crystal",
+                Name =  "mt_aspect_"..aspectIndex.."_reached_the_crystal",
                 Seconds = 7
             }
         },
         Actions = {
             SquadVanish {
-                Tag = "aspect_"..aspectCounter
+                Tag = "aspect_"..aspectIndex
             },
             EffectStopAll {
-                Tag = "aspect_"..aspectCounter
+                Tag = "aspect_"..aspectIndex
             },
             PlayerSquadSpawnWithTag {
-                Tag = "converted_aspect_"..aspectCounter,
+                Tag = "converted_aspect_"..aspectIndex,
                 TargetTag = "aspect_target",
                 Player = "pl_Enemy1",
                 SquadId = 30001
             },
             MapFlagSetTrue {
-                Name = "mf_converted_aspect_"..aspectCounter.."_spawned"
+                Name = "mf_converted_aspect_"..aspectIndex.."_spawned"
             },
             EffectStart {
-                Tag = "converted_aspect_"..aspectCounter,
+                Tag = "converted_aspect_"..aspectIndex,
                 Effect = "effect_story_templeheadexplode"
             },
             EntitySetMaxHealthAbsolute {
-                TargetTag = "converted_aspect_"..aspectCounter,
+                TargetTag = "converted_aspect_"..aspectIndex,
                 MaxHealthAbsolute = 2000
             }
         }
@@ -445,17 +449,17 @@ for aspectCounter = 1,12 do --max 3 spawns per Spawner (12 in total)
     OnOneTimeEvent {
         Conditions = {
             MapTimerIsElapsed {
-                Name = "mt_aspect_"..aspectCounter.."_reached_the_crystal",
+                Name = "mt_aspect_"..aspectIndex.."_reached_the_crystal",
                 Seconds = 9
             }
         },
         Actions = {
             SquadGridGoto {
-                Tag = "converted_aspect_"..aspectCounter,
+                Tag = "converted_aspect_"..aspectIndex,
                 TargetTag = "converted_aspect_target"
             },
             MapTimerStop {
-                Name = "mt_aspect_"..aspectCounter.."_reached_the_crystal"
+                Name = "mt_aspect_"..aspectIndex.."_reached_the_crystal"
             }
         }
     };
