@@ -156,7 +156,7 @@ OnOneTimeEvent {
 ------------------------------
 -- Destroy Spawner Missions
 ------------------------------
-for spawnerIndex = 1,4
+for spawnerIndex = 1,4 do
     OnOneTimeEvent {
         Conditions = {
             MapTimerIsElapsed {
@@ -228,7 +228,7 @@ OnOneTimeEvent {
             Text = "Moon: With your help, the attack could be repelled but it will not be the last. You should gather some ground before you are overrun."
         },
         MapFlagSetTrue {
-            "mf_goal_capture_first_wall_active"
+            Name = "mf_goal_capture_first_wall_active"
         }
     }
 };
