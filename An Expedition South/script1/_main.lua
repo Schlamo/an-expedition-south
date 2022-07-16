@@ -5,8 +5,8 @@ local OrdinalNumbers = {
     [4] = "fourth",
 };
 
-aspectInitialDelay = 90; --default 90
-aspectFrequencyInSeconds = 120; --default 120
+aspectInitialDelay = 10; --default 90
+aspectFrequencyInSeconds = 5; --default 120
 maxAspectsPerSpawner = 3;
 
 function AspectSpawnerByIndex (index)
@@ -133,7 +133,25 @@ OnOneTimeEvent {
             Tag = "aspect1"
         },
         SquadKill {
+            Tag = "aspect2"
+        },
+        SquadKill {
+            Tag = "aspect3"
+        },
+        SquadKill {
+            Tag = "aspect4"
+        },
+        SquadKill {
             Tag = "converted_aspect1"
+        },
+        SquadKill {
+            Tag = "converted_aspect2"
+        },
+        SquadKill {
+            Tag = "converted_aspect3"
+        },
+        SquadKill {
+            Tag = "converted_aspect4"
         },
         
     }

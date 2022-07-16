@@ -2,24 +2,24 @@
 
 OnRespawnEvent {
     RespawnDelaySeconds = aspectFrequencyInSeconds,
-    TargetTag = "camp_first_aspect_spawnpoint",
+    TargetTag = "camp_second_aspect_spawnpoint",
     Conditions = {
         BuildingIsAlive {
-            Tag = "camp_first_aspect_spawner"
+            Tag = "camp_second_aspect_spawner"
         },
         MapTimerIsElapsed {
             Name = "mt_global",
-            Seconds = aspectInitialDelay + aspectFrequencyInSeconds
+            Seconds = aspectInitialDelay + (aspectFrequencyInSeconds * 3)
         }
     },
     Actions = {
         SquadGotoForced {
-            Tag = "aspect1", 
+            Tag = "aspect2", 
             TargetTag = "fire_crystal"
         },
         EntitySetMaxHealthAbsolute {
-            TargetTag = "aspect1",
-            MaxHealthAbsolute = 1000
+            TargetTag = "aspect2",
+            MaxHealthAbsolute = 1500
         },
         AudioSoundUIPlay {
             Sound = "sfx_global_horn"
@@ -35,12 +35,12 @@ OnRespawnEvent {
             Sound = "sfx_global_horn"
         },
         FogOfWarObserve {
-            TargetTag = "aspect1",
+            TargetTag = "aspect2",
             Range = 25,
             Team = "tm_Team1"
         },
         MiniMapAlert {
-            TargetTag = "aspect1",
+            TargetTag = "aspect2",
             AlertType = 5
         },
     }
@@ -50,20 +50,20 @@ OnRespawnEvent {
 OnEvent {
     Conditions = {
         EntityIsInRange {
-            Tag = "aspect1",
+            Tag = "aspect2",
             TargetTag = "fire_crystal",
             Range = 5
         },
         MapFlagIsFalse {
-            Name = "mf_aspect1_conversion_active"
+            Name = "mf_aspect2_conversion_active"
         }
     },
     Actions = {
         MapFlagSetTrue {
-            Name = "mf_aspect1_conversion_active"
+            Name = "mf_aspect2_conversion_active"
         },
         MapTimerStart {
-            Name = "mt_aspect1_conversion"
+            Name = "mt_aspect2_conversion"
         },
         MissionOutcry {
             PortraitFileName = "moon",
@@ -79,12 +79,12 @@ OnIntervalEvent {
     Seconds = 1,
     Conditions = { 
         SquadIsAlive {
-            Tag = "aspect1",
+            Tag = "aspect2",
         }
     },
     Actions = {
         MiniMapAlert {
-            TargetTag = "aspect1",
+            TargetTag = "aspect2",
             AlertType = AlertQuest
         }
     }
