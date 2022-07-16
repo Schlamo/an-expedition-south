@@ -11,7 +11,7 @@ State {
     OnRespawnEvent {
         StartDespawned = true,
         TargetTag = "volcano_a_spawnpoint",
-        RespawnDelaySeconds = 30,
+        RespawnDelaySeconds = 60,
         HealthPercent = 100,
         Conditions = {
             MapFlagIsTrue {

@@ -11,7 +11,7 @@ State {
     OnRespawnEvent {
         StartDespawned = false,
         TargetTag = "first_base_spawnpoint",
-        RespawnDelaySeconds = 30,
+        RespawnDelaySeconds = 40,
         HealthPercent = 100,
         Conditions = {
             MapTimerIsElapsed {

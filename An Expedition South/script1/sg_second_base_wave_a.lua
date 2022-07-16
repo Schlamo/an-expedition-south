@@ -11,12 +11,12 @@ State {
     OnRespawnEvent {
         StartDespawned = false,
         TargetTag = "second_base_spawnpoint",
-        RespawnDelaySeconds = 30,
+        RespawnDelaySeconds = 40,
         HealthPercent = 100,
         Conditions = {
             MapTimerIsElapsed {
                 Name = "mt_first_base_spawner_destroyed",
-                Seconds = 60
+                Seconds = 90
             },
             BuildingIsAlive {
                 For = "ALL", 
