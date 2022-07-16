@@ -1,21 +1,11 @@
 --Aspect
 
 OnRespawnEvent {
-    RespawnDelaySeconds = 0,
+    RespawnDelaySeconds = aspectFrequencyInSeconds,
     TargetTag = "camp_first_aspect_spawnpoint",
     Conditions = {
-        EntityIsDead {
-            Tag = "converted_aspect1"
-        },
         BuildingIsAlive {
             Tag = "camp_first_aspect_spawner"
-        },
-        MapTimerIsElapsed {
-            Name = "mt_aspect1_respawn",
-            Seconds = 10
-        },
-        MapFlagIsTrue {
-            Name = "mf_aspect1_respawn_enabled"
         },
         MapTimerIsElapsed {
             Name = "mt_global",
@@ -23,9 +13,6 @@ OnRespawnEvent {
         }
     },
     Actions = {
-        MapTimerStop {
-            Name = "mt_aspect1_respawn"
-        },
         SquadGotoForced {
             Tag = "aspect1", 
             TargetTag = "fire_crystal"
@@ -56,14 +43,6 @@ OnRespawnEvent {
             TargetTag = "aspect1",
             AlertType = 5
         },
-        MapFlagSetFalse {
-            Name = "mf_aspect1_respawn_enabled"
-        }
-    },
-    OnDeathActions = {
-        MapTimerStart {
-            Name = "mt_aspect1_respawn"
-        }
     }
 };
 
@@ -110,7 +89,6 @@ OnIntervalEvent {
         }
     }
 };
-
 
 State {
     StateName = "INIT"

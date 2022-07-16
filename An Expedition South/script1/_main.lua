@@ -5,8 +5,8 @@ local OrdinalNumbers = {
     [4] = "fourth",
 };
 
-aspectInitialDelay = 0; --default 90
-aspectFrequencyInSeconds = 0; --default 120
+aspectInitialDelay = 90; --default 90
+aspectFrequencyInSeconds = 120; --default 120
 maxAspectsPerSpawner = 3;
 
 function AspectSpawnerByIndex (index)
