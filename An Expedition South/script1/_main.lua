@@ -84,15 +84,11 @@ OnOneTimeEvent {
             Player = "pl_Player2",
             CardSpellId = 947
         },
-        MapValueSet {
-            Name = "mv_total_aspects_spawned",
-            Value = 0
-        },
         MapTimerStart {
             Name = "mt_global"
         },
         FogOfWarObserve {
-            TargetTag = "marker_fow_glance",
+            TargetTag = "sg_marker_fow_glance",
             Team = "tm_Team1",
             Range = 40
         },
@@ -158,7 +154,39 @@ OnOneTimeEvent {
 };
 
 ------------------------------
--- First Missions
+-- Destroy Spawner Missions
+------------------------------
+for spawnerIndex = 1,4
+    OnOneTimeEvent {
+        Conditions = {
+            MapTimerIsElapsed {
+                Name = "mt_global",
+                Seconds = aspectInitialDelay + (aspectFrequencyInSeconds * spawnerIndex) - 30
+            },
+            BuildingIsAlive {
+                Tag = AspectSpawnerByIndex(spawnerIndex)
+            },
+            BuildingIsAlive {
+                Tag = "fire_altar"
+            }
+        },
+        Actions = {
+            MissionOutcry {
+                PortraitFileName = "moon",
+                DurationSeconds = 5,
+                TextTag = "",
+                Player = "ALL",
+                Text = "Moon: Another Aspect Spawner will become active soon!"
+            }
+        }
+    };
+
+    OnOneTimeEvent {
+
+    }
+end
+------------------------------
+-- First Missions Left Side
 ------------------------------
 OnOneTimeEvent {
     Conditions = {
@@ -198,6 +226,9 @@ OnOneTimeEvent {
             TextTag = "",
             Player = "ALL",
             Text = "Moon: With your help, the attack could be repelled but it will not be the last. You should gather some ground before you are overrun."
+        },
+        MapFlagSetTrue {
+            "mf_goal_capture_first_wall_active"
         }
     }
 };
@@ -206,7 +237,10 @@ OnOneTimeEvent {
     Conditions = {
         MapTimerIsElapsed {
             Name = "mt_global",
-            Seconds = 15
+            Seconds = 30
+        },
+        BuildingIsAlive {
+            Tag = "fire_altar"
         }
     },
     Actions = {
@@ -216,12 +250,33 @@ OnOneTimeEvent {
             TargetTag = "camp_first_aspect_spawner", 
             Summary = "Destroy the first aspect spawner."
         },
+        MissionTaskSetActive {
+            Player = "All",
+            TaskTag = "goal_destroy_second_aspect_spawner", 
+            TargetTag = "camp_second_aspect_spawner", 
+            Summary = "Destroy the second aspect spawner."
+        },
+        MissionTaskSetActive {
+            Player = "All",
+            TaskTag = "goal_destroy_third_aspect_spawner", 
+            TargetTag = "camp_third_aspect_spawner", 
+            Summary = "Destroy the third aspect spawner."
+        },
+        MissionTaskSetActive {
+            Player = "All",
+            TaskTag = "goal_destroy_fourth_aspect_spawner", 
+            TargetTag = "camp_fourth_aspect_spawner", 
+            Summary = "Destroy the fourth aspect spawner."
+        },
         MissionOutcry {
             PortraitFileName = "moon",
-            DurationSeconds = 5,
+            DurationSeconds = 8,
             TextTag = "",
             Player = "ALL",
-            Text = "Moon: "
+            Text = "Moon: Sooner or later these spawners will become active and spawn Aspects of Summer, which will aim for the Fire Altar. Once they've reached it, the Twilight Curse will take hold of them and transform them into powerful elemental beings."
+        },
+        MapFlagSetTrue {
+            "mf_goal_destroy_first_aspect_spawner_active"
         }
     }
 };
@@ -243,6 +298,11 @@ OnOneTimeEvent {
         },
     }
 };
+
+
+------------------------------
+-- Fire Altar has been destroyed
+------------------------------
 OnOneTimeEvent {
     Conditions = {
         BuildingIsDestroyed {
@@ -269,15 +329,15 @@ OnOneTimeEvent {
             DurationSeconds = 8,
             TextTag = "",
             Player = "ALL",
-            Text = "The fire altar has been destroyed. Good work!"
+            Text = "Moon: The fire altar has been destroyed. Good work!"
         },
+        -- Set all current Objectives done and next goal is to kill the fireback
     }
 };
 
 ------------------------------
 -- Scythe Fiends Mini Event
 ------------------------------
-
 OnOneTimeEvent {
     Conditions = {
         EntityIsOwnedByPlayer {
@@ -289,6 +349,13 @@ OnOneTimeEvent {
         MapTimerStart {
             Name = "powerslot_scythefiends_taken"
         },
+        MissionOutcry {
+            PortraitFileName = "moon",
+            DurationSeconds = 8,
+            TextTag = "",
+            Player = "ALL",
+            Text = "Moon: Ambush, beware!"
+        }
     }
 };
 
@@ -410,7 +477,7 @@ OnOneTimeEvent {
         MapTimerIsElapsed {
             Name = "mt_fireback_killed",
             Seconds = 40
-        }
+        },
     },
     Actions = {
         MapFlagSetTrue {
@@ -464,6 +531,12 @@ OnOneTimeEvent {
             TaskTag = "goal_withstand_the_incoming_waves", 
             TargetTag = "sg_volcanos", 
             Summary = "Withstand the incoming waves."
+        },
+        MapFlagSetTrue {
+            "mf_goal_destroy_both_volcanos_active"
+        },
+        MapFlagSetTrue {
+            "mf_goal_withstand_the_incoming_waves_active"
         },
         MapTimerStart {
             Name = "mt_post_fireback_phase"

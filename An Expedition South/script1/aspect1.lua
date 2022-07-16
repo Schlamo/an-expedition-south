@@ -43,6 +43,12 @@ OnRespawnEvent {
             TargetTag = "aspect1",
             AlertType = 5
         },
+        MissionTaskSetActive {
+            Player = "All",
+            TaskTag = "goal_kill_all_aspects", 
+            TargetTag = "sg_aspects", 
+            Summary = "Kill all Aspects."
+        },
     }
 };
 
