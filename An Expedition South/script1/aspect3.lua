@@ -15,7 +15,7 @@ OnRespawnEvent {
     Actions = {
         SquadGotoForced {
             Tag = "aspect3", 
-            TargetTag = "fire_crystal"
+            TargetTag = "fire_altar"
         },
         EntitySetMaxHealthAbsolute {
             TargetTag = "aspect3",
@@ -51,7 +51,7 @@ OnEvent {
     Conditions = {
         EntityIsInRange {
             Tag = "aspect3",
-            TargetTag = "fire_crystal",
+            TargetTag = "fire_altar",
             Range = 5
         },
         MapFlagIsFalse {

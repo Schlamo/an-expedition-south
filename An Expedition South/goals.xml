@@ -17,8 +17,8 @@
         <text language="en">Destroy the fourth aspect spawner.</text>
     </goal>
 
-	<goal tag="goal_destroy_fire_crystal" sortorder="1" timeleft_colorchange="0" musictype="off" positivetimer="1" goalletter="D" targettag="camp_fourth_aspect_spawner" hint="0">
-        <text language="en">Destroy the Fire Crystal.</text>
+	<goal tag="goal_destroy_fire_altar" sortorder="1" timeleft_colorchange="0" musictype="off" positivetimer="1" goalletter="D" targettag="camp_fourth_aspect_spawner" hint="0">
+        <text language="en">Destroy the Fire Altar.</text>
     </goal>
 	
 	<goal tag="goal_kill_all_remaining_aspects" sortorder="1" timeleft_colorchange="0" musictype="off" positivetimer="1" goalletter="A" hint="0">

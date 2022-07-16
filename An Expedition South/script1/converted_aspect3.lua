@@ -1,9 +1,9 @@
 OnRespawnEvent {
     RespawnDelaySeconds = 0,
-    TargetTag = "fire_crystal",
+    TargetTag = "fire_altar",
     Conditions = {
         BuildingIsAlive {
-            Tag = "fire_crystal"
+            Tag = "fire_altar"
         },
         MapTimerIsElapsed {
             Name = "mt_aspect3_conversion",

@@ -4,7 +4,7 @@ State {
         Seconds = 1,
         Conditions = {            
             BuildingIsAlive {
-                Tag = "fire_crystal",
+                Tag = "fire_altar",
             }
         },
         Actions = {

@@ -48,35 +48,35 @@ OnOneTimeEvent {
     },
     Actions = {
         EntityAbilityRemove {
-            Tag = "fire_crystal",
+            Tag = "fire_altar",
             AbilityId = 435
         },
         EntityAbilityRemove {
-            Tag = "fire_crystal",
+            Tag = "fire_altar",
             AbilityId = 1297
         },
         EntityAbilityRemove {
-            Tag = "fire_crystal",
+            Tag = "fire_altar",
             AbilityId = 2089
         },
         EntityAbilityRemove {
-            Tag = "fire_crystal",
+            Tag = "fire_altar",
             AbilityId = 993
         },
         EntityAbilityRemove {
-            Tag = "fire_crystal",
+            Tag = "fire_altar",
             AbilityId = 1201
         },
         EntityAbilityRemove {
-            Tag = "fire_crystal",
+            Tag = "fire_altar",
             AbilityId = 1213
         },
         EntityAbilityRemove {
-            Tag = "fire_crystal",
+            Tag = "fire_altar",
             AbilityId = 3595
         },
         EntityAbilityRemove {
-            Tag = "fire_crystal",
+            Tag = "fire_altar",
             AbilityId = 434
         },
         PlayerCardSpellFakePlay {
@@ -97,12 +97,12 @@ OnOneTimeEvent {
             Range = 40
         },
         FogOfWarObserve {
-            TargetTag = "fire_crystal",
+            TargetTag = "fire_altar",
             Team = "tm_Team1",
             Range = 30
         },
         EntitySetMaxHealthAbsolute {
-            TargetTag = "fire_crystal",
+            TargetTag = "fire_altar",
             MaxHealthAbsolute = 10000
         },
         EntitySetMaxHealthAbsolute {
@@ -225,273 +225,8 @@ OnOneTimeEvent {
         }
     }
 };
-
 ------------------------------
--- Aspect Spawner Stuff
-------------------------------
---for spawnerIndex = 1,4 do --do for each aspect spawner
---    OnOneTimeEvent {
---        Conditions = {
---            BuildingIsDestroyed { 
---                Tag = AspectSpawnerByIndex(spawnerIndex) 
---            }
---        },
---        Actions = {
---            MapFlagSetTrue {
---                Name = "mf_"..OrdinalNumbers[spawnerIndex].."_aspect_spawner_destroyed"
---            }
---            MissionTaskSetSolved {  
---                Player = "All",
---                TaskTag = AspectSpawnerGoalByIndex(spawnerIndex), 
---                TargetTag = AspectSpawnerByIndex(spawnerIndex) , 
---                Summary = "Destroy the "..OrdinalNumbers[spawnerIndex].." aspect spawner."
---            },
---        }
---    };
---end
---
---OnOneTimeEvent {
---    Conditions = {
---        BuildingIsDestroyed { 
---            Tag = AspectSpawnerByIndex(1) 
---        },
---        BuildingIsAlive { 
---            Tag = AspectSpawnerByIndex(2) 
---        }
---    },
---    Actions = {
---        MissionTaskSetActive {
---            Player = "All",
---            TaskTag = "goal_destroy_second_aspect_spawner", 
---            TargetTag = "camp_second_aspect_spawner", 
---            Summary = "Destroy the second aspect spawner."
---        }
---    }
---};
---
-------------------------------
--- Aspects
-------------------------------
---for aspectIndex = 1,12 do --max 3 spawns per Spawner (12 in total)
---    --Minimap Alerts
---    OnIntervalEvent {
---        Seconds = 1,
---        Conditions = { 
---            SquadIsAlive {
---                Tag = "aspect_"..aspectIndex,
---            }
---        },
---        Actions = {
---            MiniMapAlert {
---                TargetTag = "aspect_"..aspectIndex,
---                AlertType = AlertQuest
---            }
---        }
---    };
---
---    OnIntervalEvent {
---        Seconds = 1,
---        Conditions = { 
---            SquadIsAlive {
---                Tag = "converted_aspect_"..aspectIndex,
---            }
---        },
---        Actions = {
---            MiniMapAlert {
---                TargetTag = "converted_aspect_"..aspectIndex,
---                AlertType = AlertQuest
---            }
---        }
---    };
---
---    --Aspect Mission Timer
---    OnOneTimeEvent {
---        Conditions = { 
---            MapTimerIsElapsed {
---                Name = "mt_global",
---                Seconds = aspectFrequencyInSeconds * aspectIndex
---            },
---            BuildingIsAlive { 
---                Tag = GetSpawnerTagByAspectIndex(aspectIndex) 
---            }
---        },
---        Actions = {
---            MissionTimerStart {
---                TimerTag = "missiontimer_aspect_"..aspectIndex,
---                LocaTag = "",
---                Seconds = aspectInitialDelay
---            }
---        }
---    };
---
---    OnOneTimeEvent {
---        Conditions = {
---            OR {
---                MissionTimerHasRunOut {
---                    TimerTag = "missiontimer_aspect_"..aspectIndex
---                },
---                BuildingIsDestroyed {
---                    Tag = GetSpawnerTagByAspectIndex(aspectIndex) 
---                }
---            }
---        },
---        Actions = {
---            MissionTimerStop {
---                TimerTag = "missiontimer_aspect_"..aspectIndex
---            }
---        }
---    }
---
---    --First Spawner
---    OnOneTimeEvent {
---        Conditions = { 
---            MapTimerIsElapsed {
---                Name = "mt_global",
---                Seconds = aspectInitialDelay + aspectFrequencyInSeconds * aspectIndex
---            },
---            BuildingIsAlive { 
---                Tag = GetSpawnerTagByAspectIndex(aspectIndex) 
---            },
---        },
---        Actions = {
---            PlayerSquadSpawnWithTag {
---                Tag = "aspect_"..aspectIndex,
---                TargetTag = GetSpawnpointTagByAspectIndex(aspectIndex),
---                Player = "pl_Enemy1",
---                SquadId = 30007
---            },
---            MapFlagSetTrue {
---                Name = "mf_aspect_"..aspectIndex.."_spawned"
---            }
---        }
---    };
---
---    --Spawn UX
---    OnOneTimeEvent {
---        Conditions = { 
---            MapFlagIsTrue {
---                Name = "mf_aspect_"..aspectIndex.."_spawned"
---            }
---        },
---        Actions = {
---            AudioSoundUIPlay {
---                Sound = "sfx_global_horn"
---            },
---            MissionOutcry {
---                PortraitFileName = "moon",
---                DurationSeconds = 8,
---                TextTag = "",
---                Player = "ALL",
---                Text = "A new fire aspect aspect spawned!"
---            },
---            AudioSoundUIPlay {
---                Sound = "sfx_global_horn"
---            },
---            FogOfWarObserve {
---                TargetTag = "aspect_"..aspectIndex,
---                Range = 25,
---                Team = "tm_Team1"
---            },
---            MiniMapAlert {
---                TargetTag = "aspect_"..aspectIndex,
---                AlertType = 5
---            },
---            SquadGotoForced {
---                Tag = "aspect_"..aspectIndex, 
---                TargetTag = "aspect_target"
---            },
---            EntitySetMaxHealthAbsolute {
---                TargetTag = "aspect_"..aspectIndex,
---                MaxHealthAbsolute = 1000 + 500 * (aspectIndex-1)
---            },
---        }
---    };
---
---    --Aspect Conversion
---    OnOneTimeEvent {
---        Conditions = { 
---            EntityIsInRange {
---                Tag = "aspect_"..aspectIndex,
---                TargetTag = "aspect_target",
---                Range = 15
---            }
---        },
---        Actions = {
---            MapTimerStart {
---                Name = "mt_aspect_"..aspectIndex.."_reached_the_crystal"
---            },
---        }
---    };
---    OnOneTimeEvent {
---        Conditions = {
---            MapTimerIsElapsed {
---                Name = "mt_aspect_"..aspectIndex.."_reached_the_crystal",
---                Seconds = 5
---            }
---        },
---        Actions = {
---            EffectStart {
---                Tag = "aspect_"..aspectIndex,
---                Effect = "test_mb_explosion"
---            }
---        }
---    };
---
---    OnOneTimeEvent {
---        Conditions = {
---            MapTimerIsElapsed {
---                Name =  "mt_aspect_"..aspectIndex.."_reached_the_crystal",
---                Seconds = 7
---            }
---        },
---        Actions = {
---            SquadVanish {
---                Tag = "aspect_"..aspectIndex
---            },
---            EffectStopAll {
---                Tag = "aspect_"..aspectIndex
---            },
---            PlayerSquadSpawnWithTag {
---                Tag = "converted_aspect_"..aspectIndex,
---                TargetTag = "aspect_target",
---                Player = "pl_Enemy1",
---                SquadId = 30001
---            },
---            MapFlagSetTrue {
---                Name = "mf_converted_aspect_"..aspectIndex.."_spawned"
---            },
---            EffectStart {
---                Tag = "converted_aspect_"..aspectIndex,
---                Effect = "effect_story_templeheadexplode"
---            },
---            EntitySetMaxHealthAbsolute {
---                TargetTag = "converted_aspect_"..aspectIndex,
---                MaxHealthAbsolute = 2000
---            }
---        }
---    };
---
---    OnOneTimeEvent {
---        Conditions = {
---            MapTimerIsElapsed {
---                Name = "mt_aspect_"..aspectIndex.."_reached_the_crystal",
---                Seconds = 9
---            }
---        },
---        Actions = {
---            SquadGridGoto {
---                Tag = "converted_aspect_"..aspectIndex,
---                TargetTag = "converted_aspect_target"
---            },
---            MapTimerStop {
---                Name = "mt_aspect_"..aspectIndex.."_reached_the_crystal"
---            }
---        }
---    };
---end
-
-------------------------------
--- Other Stuff
+-- Stuff
 ------------------------------
 
 OnOneTimeEvent {
@@ -511,7 +246,7 @@ OnOneTimeEvent {
 OnOneTimeEvent {
     Conditions = {
         BuildingIsDestroyed {
-            Tag = "fire_crystal"
+            Tag = "fire_altar"
         }
     },
     Actions = {
@@ -520,13 +255,13 @@ OnOneTimeEvent {
             AbilityId = 435
         },
         EffectVanish {
-            Tag = "fire_crystal_effect"
+            Tag = "fire_altar_effect"
         },
         EffectVanish {
-            Tag = "fire_crystal_effect_glow"
+            Tag = "fire_altar_effect_glow"
         },
         EffectStart {
-            Tag = "fire_crystal",
+            Tag = "fire_altar",
             Effect = "effect_flamechanter_imp"
         },
         MissionOutcry {
