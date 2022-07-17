@@ -5,8 +5,8 @@ local OrdinalNumbers = {
     [4] = "fourth",
 };
 
-aspectInitialDelay = 10; --default 90
-aspectFrequencyInSeconds = 5; --default 120
+aspectInitialDelay = 0; --default 90
+aspectFrequencyInSeconds = 2; --default 120
 maxAspectsPerSpawner = 3;
 
 function AspectSpawnerByIndex (index)
@@ -149,6 +149,9 @@ OnOneTimeEvent {
         SquadKill {
             Tag = "converted_aspect4"
         },
+        MapFlagSetFalse {
+            Name = "mf_aspect1_conversion_active"
+        }
         
     }
 };
@@ -180,11 +183,122 @@ for spawnerIndex = 1,4 do
             }
         }
     };
-
-    OnOneTimeEvent {
-
-    }
 end
+
+OnOneTimeEvent {
+    Conditions = {
+        MapFlagIsTrue {
+            Name = "mf_aspect_spawned"
+        }
+    },
+    Actions = {
+        MissionTaskSetActive {
+            Player = "All",
+            TaskTag = "goal_kill_all_aspects", 
+            TargetTag = "sg_aspects", 
+            Summary = "Kill all Aspects."
+        },
+    }
+};
+
+OnOneTimeEvent {
+    Conditions = {
+        AND {
+            OR {
+                AND {
+                    BuildingIsDestroyed {
+                        Tag = "camp_first_aspect_spawner"
+                    },
+                    BuildingIsDestroyed {
+                        Tag = "camp_second_aspect_spawner"
+                    },
+                    BuildingIsDestroyed {
+                        Tag = "camp_third_aspect_spawner"
+                    },
+                    BuildingIsDestroyed {
+                        Tag = "camp_fourth_aspect_spawner"
+                    },
+                },
+                BuildingIsDestroyed {
+                    Tag = "fire_altar"
+                }
+            },
+            MapFlagIsTrue {
+                Name = "mf_aspect_spawned"
+            },
+            ScriptGroupAliveAmountIsEqual {
+                Group = "sg_aspects",
+                Value = 0
+            }
+        }
+    },
+    Actions = {
+        MissionTaskSetSolved {
+            Player = "All",
+            TaskTag = "goal_kill_all_aspects", 
+            TargetTag = "sg_aspects", 
+            Summary = "Kill all Aspects of Summer."
+        },
+    }
+};
+
+OnOneTimeEvent {
+    Conditions = {
+        MapFlagIsTrue {
+            Name = "mf_converted_aspect_spawned"
+        }
+    },
+    Actions = {
+        MissionTaskSetActive {
+            Player = "All",
+            TaskTag = "goal_kill_all_converted_aspects", 
+            TargetTag = "sg_converted_aspects", 
+            Summary = "Kill all Converted Fire Elementals."
+        },
+    }
+};
+
+OnOneTimeEvent {
+    Conditions = {
+        AND {
+            OR {
+                AND {
+                    BuildingIsDestroyed {
+                        Tag = "camp_first_aspect_spawner"
+                    },
+                    BuildingIsDestroyed {
+                        Tag = "camp_second_aspect_spawner"
+                    },
+                    BuildingIsDestroyed {
+                        Tag = "camp_third_aspect_spawner"
+                    },
+                    BuildingIsDestroyed {
+                        Tag = "camp_fourth_aspect_spawner"
+                    },
+                },
+                BuildingIsDestroyed {
+                    Tag = "fire_altar"
+                }
+            },
+            MapFlagIsTrue {
+                Name = "mf_converted_aspect_spawned"
+            },
+            ScriptGroupAliveAmountIsEqual {
+                Group = "sg_aspects",
+                Value = 0
+            }
+        }
+    },
+    Actions = {
+        MissionTaskSetSolved {
+            Player = "All",
+            TaskTag = "goal_kill_all_aspects", 
+            TargetTag = "sg_aspects", 
+            Summary = "Kill all Aspects of Summer."
+        },
+    }
+};
+
 ------------------------------
 -- First Missions Left Side
 ------------------------------
@@ -276,7 +390,7 @@ OnOneTimeEvent {
             Text = "Moon: Sooner or later these spawners will become active and spawn Aspects of Summer, which will aim for the Fire Altar. Once they've reached it, the Twilight Curse will take hold of them and transform them into powerful elemental beings."
         },
         MapFlagSetTrue {
-            "mf_goal_destroy_first_aspect_spawner_active"
+            Name = "mf_goal_destroy_first_aspect_spawner_active"
         }
     }
 };
@@ -286,10 +400,8 @@ OnOneTimeEvent {
 
 OnOneTimeEvent {
     Conditions = {
-        OR {
-            BuildingIsDestroyed {
-                Tag = "camp_second_left_spawner"
-            }
+        BuildingIsDestroyed {
+            Tag = "camp_second_left_spawner"
         }
     },
     Actions = {
@@ -533,10 +645,10 @@ OnOneTimeEvent {
             Summary = "Withstand the incoming waves."
         },
         MapFlagSetTrue {
-            "mf_goal_destroy_both_volcanos_active"
+            Name = "mf_goal_destroy_both_volcanos_active"
         },
         MapFlagSetTrue {
-            "mf_goal_withstand_the_incoming_waves_active"
+            Name = "mf_goal_withstand_the_incoming_waves_active"
         },
         MapTimerStart {
             Name = "mt_post_fireback_phase"

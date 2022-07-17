@@ -1,6 +1,6 @@
 OnRespawnEvent {
     RespawnDelaySeconds = 0,
-    TargetTag = "fire_altar",
+    TargetTag = "fire_altar_target",
     Conditions = {
         BuildingIsAlive {
             Tag = "fire_altar"
@@ -28,17 +28,8 @@ OnRespawnEvent {
             TargetTag = "converted_aspect3",
             MaxHealthAbsolute = 2000
         },
-    }
-};
-
-OnIntervalEvent {
-    Seconds = 1,
-    Conditions = { 
-    },
-    Actions = {
-        MiniMapAlert {
-            TargetTag = "converted_aspect3",
-            AlertType = AlertQuest
+        MapFlagSetTrue {
+            Name = "mf_converted_aspect_spawned"
         }
     }
 };

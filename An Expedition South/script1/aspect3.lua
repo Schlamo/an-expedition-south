@@ -15,7 +15,7 @@ OnRespawnEvent {
     Actions = {
         SquadGotoForced {
             Tag = "aspect3", 
-            TargetTag = "fire_altar"
+            TargetTag = "fire_altar_target"
         },
         EntitySetMaxHealthAbsolute {
             TargetTag = "aspect3",
@@ -29,7 +29,7 @@ OnRespawnEvent {
             DurationSeconds = 8,
             TextTag = "",
             Player = "ALL",
-            Text = "A new fire aspect aspect spawned!"
+            Text = "Moon: An Aspect of Summer has spawned!"
         },
         AudioSoundUIPlay {
             Sound = "sfx_global_horn"
@@ -43,15 +43,19 @@ OnRespawnEvent {
             TargetTag = "aspect3",
             AlertType = 5
         },
+        MapFlagSetTrue {
+            Name = "mf_aspect_spawned"
+        }
     }
 };
 
 --Start Conversion
-OnEvent {
+OnIntervalEvent {
+    Seconds = 1,
     Conditions = {
         EntityIsInRange {
             Tag = "aspect3",
-            TargetTag = "fire_altar",
+            TargetTag = "fire_altar_target",
             Range = 5
         },
         MapFlagIsFalse {
@@ -70,25 +74,10 @@ OnEvent {
             DurationSeconds = 1,
             TextTag = "",
             Player = "ALL",
-            Text = "Start Conversion!"
+            Text = "Moon: Start Conversion!"
         },
     }
 }
-
-OnIntervalEvent {
-    Seconds = 1,
-    Conditions = { 
-        SquadIsAlive {
-            Tag = "aspect3",
-        }
-    },
-    Actions = {
-        MiniMapAlert {
-            TargetTag = "aspect3",
-            AlertType = AlertQuest
-        }
-    }
-};
 
 State {
     StateName = "INIT"

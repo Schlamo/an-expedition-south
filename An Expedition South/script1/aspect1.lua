@@ -15,7 +15,7 @@ OnRespawnEvent {
     Actions = {
         SquadGotoForced {
             Tag = "aspect1", 
-            TargetTag = "fire_altar"
+            TargetTag = "fire_altar_target"
         },
         EntitySetMaxHealthAbsolute {
             TargetTag = "aspect1",
@@ -29,7 +29,7 @@ OnRespawnEvent {
             DurationSeconds = 8,
             TextTag = "",
             Player = "ALL",
-            Text = "A new fire aspect aspect spawned!"
+            Text = "Moon: An Aspect of Summer has spawned!"
         },
         AudioSoundUIPlay {
             Sound = "sfx_global_horn"
@@ -43,21 +43,19 @@ OnRespawnEvent {
             TargetTag = "aspect1",
             AlertType = 5
         },
-        MissionTaskSetActive {
-            Player = "All",
-            TaskTag = "goal_kill_all_aspects", 
-            TargetTag = "sg_aspects", 
-            Summary = "Kill all Aspects."
-        },
+        MapFlagSetTrue {
+            Name = "mf_aspect_spawned"
+        }
     }
 };
 
 --Start Conversion
-OnEvent {
+OnIntervalEvent {
+    Seconds = 1,
     Conditions = {
         EntityIsInRange {
             Tag = "aspect1",
-            TargetTag = "fire_altar",
+            TargetTag = "fire_altar_target",
             Range = 5
         },
         MapFlagIsFalse {
@@ -76,23 +74,8 @@ OnEvent {
             DurationSeconds = 1,
             TextTag = "",
             Player = "ALL",
-            Text = "Start Conversion!"
+            Text = "Moon: Start Conversion!"
         },
-    }
-}
-
-OnIntervalEvent {
-    Seconds = 1,
-    Conditions = { 
-        SquadIsAlive {
-            Tag = "aspect1",
-        }
-    },
-    Actions = {
-        MiniMapAlert {
-            TargetTag = "aspect1",
-            AlertType = AlertQuest
-        }
     }
 };
 
