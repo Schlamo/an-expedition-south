@@ -592,6 +592,42 @@ OnOneTimeEvent {
 ------------------------------
 -- Second Major Game Phase
 ------------------------------
+
+OnOneTimeEvent {
+    Conditions = {
+        MapTimerIsElapsed {
+            Name = "mt_fireback_killed",
+            Seconds = 10
+        }
+    },
+    Actions = {    
+        MissionOutcry {
+            PortraitFileName = "moon",
+            DurationSeconds = 5,
+            TextTag = "",
+            Player = "ALL",
+            Text = "Moon: The Fireback was also just a minion. A minion of the prime evil Abaddon."
+        },
+    }
+};
+OnOneTimeEvent {
+    Conditions = {
+        MapTimerIsElapsed {
+            Name = "mt_fireback_killed",
+            Seconds = 15
+        }
+    },
+    Actions = {    
+        MissionOutcry {
+            PortraitFileName = "abaddon",
+            DurationSeconds = 8,
+            TextTag = "",
+            Player = "ALL",
+            Text = "Abaddon: This is not even my final form."
+        },
+    }
+};
+
 OnOneTimeEvent {
     Conditions = {
         MapTimerIsElapsed {
@@ -599,16 +635,39 @@ OnOneTimeEvent {
             Seconds = 20 --20
         }
     },
+    Actions = {    
+        MissionTaskSetActive {  
+            Player = "All",
+            TaskTag = "goal_kill_abaddon", 
+            TargetTag = "abaddon", 
+            Summary = "Kill Abaddon."
+        },
+    }
+};    
+
+OnOneTimeEvent {
+    Conditions = {
+        MapTimerIsElapsed {
+            Name = "mt_fireback_killed",
+            Seconds = 25 --25
+        }
+    },
     Actions = {
-        MissionOutcry {
-            PortraitFileName = "abaddon",
-            DurationSeconds = 8,
-            TextTag = "",
-            Player = "ALL",
-            Text = "That's not even my final form."        
+        MissionTaskSetActive {  
+            Player = "pl_Player1",
+            TaskTag = "goal_destroy_both_volcanos", 
+            TargetTag = "sg_volcanos", 
+            Summary = "Destroy both volcanos."
+        },
+        MissionTaskSetActive {  
+            Player = "pl_Player2",
+            TaskTag = "goal_withstand_the_incoming_waves", 
+            TargetTag = "sg_volcano_spawners", 
+            Summary = "Withstand the incoming waves."
         },
     }
 };
+
 OnOneTimeEvent {
     Conditions = {
         MapTimerIsElapsed {
@@ -619,40 +678,10 @@ OnOneTimeEvent {
     Actions = {
         MissionOutcry {
             PortraitFileName = "moon",
-            DurationSeconds = 8,
+            DurationSeconds = 10,
             TextTag = "",
             Player = "ALL",
-            Text = "Thats not good."        
-        },
-    }
-};
-OnOneTimeEvent {
-    Conditions = {
-        MapTimerIsElapsed {
-            Name = "mt_fireback_killed",
-            Seconds = 40
-        },
-    },
-    Actions = {
-        MapFlagSetTrue {
-            Name = "mf_spawn_wave_volcano_a"
-        },
-        MapFlagSetTrue {
-            Name = "mf_spawn_wave_volcano_b"
-        },
-        MapFlagSetTrue {
-            Name = "mf_spawn_wave_moloch"
-        },
-        SquadGridGoto {
-            Tag = "moloch", 
-            TargetTag = "moloch_target"
-        },
-        MissionOutcry {
-            PortraitFileName = "moon",
-            DurationSeconds = 8,
-            TextTag = "",
-            Player = "ALL",
-            Text = "The spawners in the east are magically bond to those volcanos in the west and can't be attacked n stuff. Kill the volcanos first, then the spawners!"        
+            Text = "Moon: The spawners in the east are magically bond to those volcanos in the west and can't be attacked. Kill the volcanos first, then the spawners! But watch out for waves in the east"        
         },
         FogOfWarObserve {
             TargetTag = "volcano_a_spawner",
@@ -674,17 +703,29 @@ OnOneTimeEvent {
             Team = "tm_Team1",
             Range = 20
         },
-        MissionTaskSetActive {  
-            Player = "pl_Player1",
-            TaskTag = "goal_destroy_both_volcanos", 
-            TargetTag = "sg_volcanos", 
-            Summary = "Destroy both volcanos."
+    }
+};
+
+OnOneTimeEvent {
+    Conditions = {
+        MapTimerIsElapsed {
+            Name = "mt_fireback_killed",
+            Seconds = 40
         },
-        MissionTaskSetActive {  
-            Player = "pl_Player2",
-            TaskTag = "goal_withstand_the_incoming_waves", 
-            TargetTag = "sg_volcano_spawners", 
-            Summary = "Withstand the incoming waves."
+    },
+    Actions = {
+        MapFlagSetTrue {
+            Name = "mf_spawn_wave_volcano_a"
+        },
+        MapFlagSetTrue {
+            Name = "mf_spawn_wave_volcano_b"
+        },
+        MapFlagSetTrue {
+            Name = "mf_spawn_wave_moloch"
+        },
+        SquadGridGoto {
+            Tag = "moloch", 
+            TargetTag = "moloch_target"
         },
         MapFlagSetTrue {
             Name = "mf_goal_destroy_both_volcanos_active"
@@ -709,18 +750,12 @@ OnOneTimeEvent {
         },
     },
     Actions = {
-        MissionTaskSetActive {  
-            Player = "All",
-            TaskTag = "goal_kill_abaddon", 
-            TargetTag = "abaddon", 
-            Summary = "Kill Abaddon."
-        },
         MissionOutcry {
             PortraitFileName = "moon",
             DurationSeconds = 8,
             TextTag = "",
             Player = "ALL",
-            Text = "On to your last task, Skylords."        
+            Text = "Moon: On to your last task, Skylords. Kill Abaddon!"        
         },
         MapTimerStart {
             Name = "mt_open_the_gate"

@@ -18,11 +18,11 @@ State {
                 Amount = 20
             },
             MissionOutcry {
-                PortraitFileName = "moon",
-                DurationSeconds = 8,
+                PortraitFileName = "goldChest",
+                DurationSeconds = 3,
                 TextTag = "",
                 Player = "ALL",
-                Text = "Some gold has been taken!"
+                Text = "Some gold has been looted!"
             },
         }
     };

@@ -15,7 +15,14 @@ State {
                 TaskTag = "goal_kill_fireback", 
                 TargetTag = "fireback", 
                 Summary = "Kill Fireback."
-            }
+            },
+            MissionOutcry {
+                PortraitFileName = "moon",
+                DurationSeconds = 8,
+                TextTag = "",
+                Player = "ALL",
+                Text = "Moon: You killed the Fireback. Good job n stuff. Now you have to split up again."
+            },
         }
     };
 };
