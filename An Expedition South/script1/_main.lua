@@ -633,15 +633,15 @@ OnOneTimeEvent {
             Range = 20
         },
         MissionTaskSetActive {  
-            Player = "All",
+            Player = "pl_Player1",
             TaskTag = "goal_destroy_both_volcanos", 
             TargetTag = "sg_volcanos", 
             Summary = "Destroy both volcanos."
         },
         MissionTaskSetActive {  
-            Player = "All",
+            Player = "pl_Player2",
             TaskTag = "goal_withstand_the_incoming_waves", 
-            TargetTag = "sg_volcanos", 
+            TargetTag = "sg_volcano_spawners", 
             Summary = "Withstand the incoming waves."
         },
         MapFlagSetTrue {
@@ -655,6 +655,35 @@ OnOneTimeEvent {
         }
     }
 };
+
+OnOneTimeEvent {
+    Conditions =
+    {
+        MapFlagIsTrue {
+            Name = "mf_goal_destroy_both_volcanos_solved"
+        },
+        MapFlagIsTrue {
+            Name = "mf_goal_withstand_the_incoming_waves_solved"
+        },
+    },
+    Actions = {
+        MissionTaskSetActive {  
+            Player = "All",
+            TaskTag = "goal_kill_abaddon", 
+            TargetTag = "abaddon", 
+            Summary = "Kill Abaddon."
+        },
+        MissionOutcry {
+            PortraitFileName = "moon",
+            DurationSeconds = 8,
+            TextTag = "",
+            Player = "ALL",
+            Text = "On to your last task, skylords."        
+        },
+            --todo: kill abaddon quest / open the gate /
+    }
+};
+
 OnOneTimeEvent {
     Conditions = {
         BuildingIsDestroyed {

@@ -80,6 +80,15 @@ State {
                 TargetTag = "sg_volcano_spawners", 
                 Summary = "Withstand the incoming waves."
             },
+            MissionTaskSetSolved {  
+                Player = "All",
+                TaskTag = "goal_withstand_the_incoming_waves", 
+                TargetTag = "sg_volcano_spawners", 
+                Summary = "Withstand the incoming waves."
+            },
+            MapFlagSetTrue {
+                Name = "mf_goal_withstand_the_incoming_waves_solved"
+            }
         }
     }
 };
