@@ -5,8 +5,8 @@ local OrdinalNumbers = {
     [4] = "fourth",
 };
 
-aspectInitialDelay = 0; --default 90
-aspectFrequencyInSeconds = 2; --default 120
+aspectInitialDelay = 90; --default 90
+aspectFrequencyInSeconds = 120; --default 120
 maxAspectsPerSpawner = 3;
 
 function AspectSpawnerByIndex (index)
@@ -720,9 +720,52 @@ OnOneTimeEvent {
             DurationSeconds = 8,
             TextTag = "",
             Player = "ALL",
-            Text = "On to your last task, skylords."        
+            Text = "On to your last task, Skylords."        
         },
-        --todo: open the gate /
+        MapTimerStart {
+            Name = "mt_open_the_gate"
+        },
+        EffectStart {
+            Tag = "left_gate_forcefield",
+            Effect = "effect_global_level_magicgate_destruction"
+        },
+        EffectStart {
+            Tag = "right_gate_forcefield",
+            Effect = "effect_global_level_magicgate_destruction"
+        },
+    }
+};
+
+OnOneTimeEvent {
+    Conditions = {
+        MapTimerIsElapsed {
+            Name = "mt_open_the_gate",
+            Seconds = 0.5
+        }
+    },
+    Actions = {
+        EffectVanish {
+            Tag = "left_gate_effect"
+        },
+        ObjectVanish {
+            Tag = "left_gate_forcefield"
+        },
+        ObjectSpawn {
+            TargetTag = "left_gate_effect",
+            ObjectId = 529,
+            Direction = 90
+        },
+        EffectVanish {
+            Tag = "right_gate_effect"
+        },
+        ObjectVanish {
+            Tag = "right_gate_forcefield"
+        },
+        ObjectSpawn {
+            TargetTag = "right_gate_effect",
+            ObjectId = 529,
+            Direction = 56
+        }
     }
 };
 
