@@ -75,7 +75,7 @@ State {
         },
         Actions = {
             MissionTaskSetSolved {  
-                Player = "All",
+                Player = "pl_Player2",
                 TaskTag = "goal_withstand_the_incoming_waves", 
                 TargetTag = "sg_volcano_spawners", 
                 Summary = "Withstand the incoming waves."

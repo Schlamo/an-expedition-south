@@ -203,7 +203,7 @@ for spawnerIndex = 1,4 do
         },
         Actions = {
             MissionTaskSetSolved {
-                Player = "All",
+                Player = "pl_Player2",
                 TaskTag = AspectSpawnerGoalByIndex(spawnerIndex), 
                 TargetTag = AspectSpawnerByIndex(spawnerIndex), 
                 Summary = "Destroy the "..OrdinalNumbers[spawnerIndex].." aspect spawner."
@@ -488,9 +488,15 @@ OnOneTimeEvent {
 ------------------------------
 OnOneTimeEvent {
     Conditions = {
-        EntityIsOwnedByPlayer {
-            Tag = "powerslot_scythefiends",
-            Player = "Any"
+        OR {
+            EntityIsOwnedByPlayer {
+                Tag = "powerslot_scythefiends",
+                Player = "pl_Player1"
+            },
+            EntityIsOwnedByPlayer {
+                Tag = "powerslot_scythefiends",
+                Player = "pl_Player2"
+            }
         }
     },
     Actions = {
@@ -499,7 +505,7 @@ OnOneTimeEvent {
         },
         MissionOutcry {
             PortraitFileName = "moon",
-            DurationSeconds = 8,
+            DurationSeconds = 2,
             TextTag = "",
             Player = "ALL",
             Text = "Moon: Ambush, beware!"

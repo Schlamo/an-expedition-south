@@ -82,7 +82,7 @@ State {
         },
         Actions = {
             MissionTaskSetSolved {  
-                Player = "All",
+                Player = "pl_Player1",
                 TaskTag = "goal_destroy_both_volcanos", 
                 TargetTag = "first_wall_left", 
                 Summary = "Recapture territory from the fire troops."
