@@ -47,6 +47,12 @@ OnOneTimeEvent {
     Conditions = {
     },
     Actions = {
+        MissionTaskSetActive {
+            Player = "All",
+            TaskTag = "goal_destroy_fire_altar", 
+            TargetTag = "fire_altar", 
+            Summary = "Destroy the corrupted Fire Altar."
+        },
         EntityAbilityRemove {
             Tag = "fire_altar",
             AbilityId = 435
@@ -121,7 +127,7 @@ OnOneTimeEvent {
             TargetTag = "final_camp_volcano_right",
             MaxHealthAbsolute = 10000
         },
-        --ToDo
+        --todo
         --CutsceneCameraPlay{
         --    Camera = "MolochCam"
         --}
@@ -183,6 +189,27 @@ for spawnerIndex = 1,4 do
             }
         }
     };
+
+    OnOneTimeEvent {
+        Conditions = {
+            OR {
+                BuildingIsDestroyed {
+                    Tag = AspectSpawnerByIndex(spawnerIndex)
+                },
+                BuildingIsDestroyed {
+                    Tag = "fire_altar"
+                }
+            }
+        },
+        Actions = {
+            MissionTaskSetSolved {
+                Player = "All",
+                TaskTag = AspectSpawnerGoalByIndex(spawnerIndex), 
+                TargetTag = AspectSpawnerByIndex(spawnerIndex), 
+                Summary = "Destroy the "..OrdinalNumbers[spawnerIndex].." aspect spawner."
+            }
+        }
+    };
 end
 
 OnOneTimeEvent {
@@ -193,7 +220,7 @@ OnOneTimeEvent {
     },
     Actions = {
         MissionTaskSetActive {
-            Player = "All",
+            Player = "pl_Player2",
             TaskTag = "goal_kill_all_aspects", 
             TargetTag = "sg_aspects", 
             Summary = "Kill all Aspects."
@@ -234,7 +261,7 @@ OnOneTimeEvent {
     },
     Actions = {
         MissionTaskSetSolved {
-            Player = "All",
+            Player = "pl_Player2",
             TaskTag = "goal_kill_all_aspects", 
             TargetTag = "sg_aspects", 
             Summary = "Kill all Aspects of Summer."
@@ -250,7 +277,7 @@ OnOneTimeEvent {
     },
     Actions = {
         MissionTaskSetActive {
-            Player = "All",
+            Player = "pl_Player2",
             TaskTag = "goal_kill_all_converted_aspects", 
             TargetTag = "sg_converted_aspects", 
             Summary = "Kill all Converted Fire Elementals."
@@ -291,10 +318,10 @@ OnOneTimeEvent {
     },
     Actions = {
         MissionTaskSetSolved {
-            Player = "All",
-            TaskTag = "goal_kill_all_aspects", 
+            Player = "pl_Player2",
+            TaskTag = "goal_kill_all_converted_aspects", 
             TargetTag = "sg_aspects", 
-            Summary = "Kill all Aspects of Summer."
+            Summary = "Kill all Converted Fire Elementals."
         },
     }
 };
@@ -329,7 +356,7 @@ OnOneTimeEvent {
     },
     Actions = {
         MissionTaskSetActive {  
-            Player = "All",
+            Player = "pl_Player1",
             TaskTag = "goal_capture_first_wall", 
             TargetTag = "first_wall_left", 
             Summary = "Recapture territory from the fire troops."
@@ -359,25 +386,25 @@ OnOneTimeEvent {
     },
     Actions = {
         MissionTaskSetActive {
-            Player = "All",
+            Player = "pl_Player2",
             TaskTag = "goal_destroy_first_aspect_spawner", 
             TargetTag = "camp_first_aspect_spawner", 
             Summary = "Destroy the first aspect spawner."
         },
         MissionTaskSetActive {
-            Player = "All",
+            Player = "pl_Player2",
             TaskTag = "goal_destroy_second_aspect_spawner", 
             TargetTag = "camp_second_aspect_spawner", 
             Summary = "Destroy the second aspect spawner."
         },
         MissionTaskSetActive {
-            Player = "All",
+            Player = "pl_Player2",
             TaskTag = "goal_destroy_third_aspect_spawner", 
             TargetTag = "camp_third_aspect_spawner", 
             Summary = "Destroy the third aspect spawner."
         },
         MissionTaskSetActive {
-            Player = "All",
+            Player = "pl_Player2",
             TaskTag = "goal_destroy_fourth_aspect_spawner", 
             TargetTag = "camp_fourth_aspect_spawner", 
             Summary = "Destroy the fourth aspect spawner."
@@ -388,9 +415,6 @@ OnOneTimeEvent {
             TextTag = "",
             Player = "ALL",
             Text = "Moon: Sooner or later these spawners will become active and spawn Aspects of Summer, which will aim for the Fire Altar. Once they've reached it, the Twilight Curse will take hold of them and transform them into powerful elemental beings."
-        },
-        MapFlagSetTrue {
-            Name = "mf_goal_destroy_first_aspect_spawner_active"
         }
     }
 };
@@ -443,7 +467,19 @@ OnOneTimeEvent {
             Player = "ALL",
             Text = "Moon: The fire altar has been destroyed. Good work!"
         },
-        -- Set all current Objectives done and next goal is to kill the fireback
+        MissionTaskSetSolved {
+            Player = "All",
+            TaskTag = "goal_destroy_fire_altar", 
+            TargetTag = "fire_altar", 
+            Summary = "Destroy the Fire Altar."
+        },
+        MissionTaskSetActive {
+            Player = "All",
+            TaskTag = "goal_kill_fireback", 
+            TargetTag = "fireback", 
+            Summary = "Kill Fireback."
+        }
+        --todo? delay the kill fireback thingy by a few seconds
     }
 };
 
@@ -680,7 +716,7 @@ OnOneTimeEvent {
             Player = "ALL",
             Text = "On to your last task, skylords."        
         },
-            --todo: kill abaddon quest / open the gate /
+        --todo: open the gate /
     }
 };
 

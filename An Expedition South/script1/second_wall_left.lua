@@ -17,15 +17,32 @@ State {
         Conditions = {
             BarrierModulePercentageIsDead {
                 Tag = "second_wall_left",
-                Percent = 50
+                Percent = 70
             }
         },
         Actions = {
             BarrierDestroy {
                 Tag = "second_wall_left"
             },
-            MapTimerStart {
-                Name = "mt_second_wall_left_destroyed"
+            MapFlagSetTrue {
+                Name = "mf_second_wall_left_destroyed"
+            }
+        }
+    };
+    OnOneTimeEvent {
+        MapFlagIsTrue {
+            Name = "mf_second_wall_left_destroyed"
+        },
+        ScriptGroupAliveAmountIsEqual {
+            Group = "sg_camp_second_left",
+            Value = 0
+        },
+        Actions = {
+            MissionTaskSetSolved {
+                Player = "pl_Player1",
+                TaskTag = "goal_capture_second_wall", 
+                TargetTag = "second_wall_left", 
+                Summary = "Recapture territory from the fire troops."
             }
         }
     };

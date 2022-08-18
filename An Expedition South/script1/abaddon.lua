@@ -19,6 +19,12 @@ State {
         }, 
         Actions = {
             MapTimerStart {Name = "mt_victory_timer"},
+            MissionTaskSetSolved {
+                Player = "All",
+                TaskTag = "goal_kill_abaddon", 
+                TargetTag = "abaddon", 
+                Summary = "Kill Abaddon."
+            },
             MissionOutcry {
                 TextTag = "",
                 Player = "ALL",
