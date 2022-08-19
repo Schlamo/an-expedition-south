@@ -1,0 +1,1 @@
+dotnet run -- "bin\debug\net6.0\LoCReader.exe ..\..\..\An Expedition South\"

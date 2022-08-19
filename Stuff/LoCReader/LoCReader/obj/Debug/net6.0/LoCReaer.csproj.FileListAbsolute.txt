@@ -1,0 +1,15 @@
+D:\Kreativer Output\BattleForge Maps\an-expedition-south\Stuff\LoCReader\LoCReader\bin\Debug\net6.0\LoCReaer.exe
+D:\Kreativer Output\BattleForge Maps\an-expedition-south\Stuff\LoCReader\LoCReader\bin\Debug\net6.0\LoCReaer.deps.json
+D:\Kreativer Output\BattleForge Maps\an-expedition-south\Stuff\LoCReader\LoCReader\bin\Debug\net6.0\LoCReaer.runtimeconfig.json
+D:\Kreativer Output\BattleForge Maps\an-expedition-south\Stuff\LoCReader\LoCReader\bin\Debug\net6.0\LoCReaer.dll
+D:\Kreativer Output\BattleForge Maps\an-expedition-south\Stuff\LoCReader\LoCReader\bin\Debug\net6.0\ref\LoCReaer.dll
+D:\Kreativer Output\BattleForge Maps\an-expedition-south\Stuff\LoCReader\LoCReader\bin\Debug\net6.0\LoCReaer.pdb
+D:\Kreativer Output\BattleForge Maps\an-expedition-south\Stuff\LoCReader\LoCReader\obj\Debug\net6.0\LoCReaer.csproj.AssemblyReference.cache
+D:\Kreativer Output\BattleForge Maps\an-expedition-south\Stuff\LoCReader\LoCReader\obj\Debug\net6.0\LoCReaer.GeneratedMSBuildEditorConfig.editorconfig
+D:\Kreativer Output\BattleForge Maps\an-expedition-south\Stuff\LoCReader\LoCReader\obj\Debug\net6.0\LoCReaer.AssemblyInfoInputs.cache
+D:\Kreativer Output\BattleForge Maps\an-expedition-south\Stuff\LoCReader\LoCReader\obj\Debug\net6.0\LoCReaer.AssemblyInfo.cs
+D:\Kreativer Output\BattleForge Maps\an-expedition-south\Stuff\LoCReader\LoCReader\obj\Debug\net6.0\LoCReaer.csproj.CoreCompileInputs.cache
+D:\Kreativer Output\BattleForge Maps\an-expedition-south\Stuff\LoCReader\LoCReader\obj\Debug\net6.0\LoCReaer.dll
+D:\Kreativer Output\BattleForge Maps\an-expedition-south\Stuff\LoCReader\LoCReader\obj\Debug\net6.0\ref\LoCReaer.dll
+D:\Kreativer Output\BattleForge Maps\an-expedition-south\Stuff\LoCReader\LoCReader\obj\Debug\net6.0\LoCReaer.pdb
+D:\Kreativer Output\BattleForge Maps\an-expedition-south\Stuff\LoCReader\LoCReader\obj\Debug\net6.0\LoCReaer.genruntimeconfig.cache
