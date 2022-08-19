@@ -39,10 +39,25 @@ end
 -- Map Flags
 ------------------------------
 
+
+
+--Testing
+OnOneTimeEvent {
+    Conditions = {
+        MapTimerIsElapsed {
+            Name = "mt_global",
+            Seconds = 5
+        }
+    },
+    Actions = {
+    }
+};
+
+
+
 ------------------------------
 -- Timer
 ------------------------------
-
 OnOneTimeEvent {
     Conditions = {
     },
@@ -434,11 +449,118 @@ OnOneTimeEvent {
         },
     }
 };
+--a
 
+OnOneTimeEvent {
+    Conditions = {
+        EntityHealthIsLess {
+            Tag = "fire_altar",
+            Percent = 75
+        }
+    },
+    Actions = {
+        MapFlagSetTrue {
+            Name = "mf_fire_altar_second_phase"
+        },
+        MapTimerStart {
+            Name = "mt_fire_altar_second_phase"
+        },
+        EffectStart {
+            Tag = "altar_spawn_a_effect",
+            Effect = "effect_firedragon_att_air"
+        },
+        EffectStart {
+            Tag = "altar_spawn_b_effect",
+            Effect = "effect_firedragon_att_air"
+        },
+        EffectStart {
+            Tag = "altar_spawn_c_effect",
+            Effect = "effect_firedragon_att_air"
+        },
+    }
+};
 
-------------------------------
--- Fire Altar has been destroyed
-------------------------------
+OnOneTimeEvent {
+    Conditions = {
+        EntityHealthIsLess {
+            Tag = "fire_altar",
+            Percent = 25
+        }
+    },
+    Actions = {
+        MapFlagSetTrue {
+            Name = "mf_fire_altar_third_phase"
+        },
+        MapTimerStart {
+            Name = "mt_fire_altar_third_phase"
+        },
+        EffectStart {
+            Tag = "altar_spawn_a_effect",
+            Effect = "effect_firedragon_att_air"
+        },
+        EffectStart {
+            Tag = "altar_spawn_b_effect",
+            Effect = "effect_firedragon_att_air"
+        },
+        EffectStart {
+            Tag = "altar_spawn_c_effect",
+            Effect = "effect_firedragon_att_air"
+        },
+    }
+};
+
+OnOneTimeEvent {
+    Conditions = {
+        MapTimerIsElapsed {
+            Name = "mt_fire_altar_second_phase",
+            Seconds = 1.3
+        }
+    }, 
+    Actions = {
+        PlayerSquadSpawn {
+            TargetTag = "altar_spawn_a",
+            SquadId = 39019,
+            Player = "pl_Enemy1",
+        },
+        PlayerSquadSpawn {
+            TargetTag = "altar_spawn_b",
+            SquadId = 39019,
+            Player = "pl_Enemy1",
+        },
+        PlayerSquadSpawn {
+            TargetTag = "altar_spawn_c",
+            SquadId = 39019,
+            Player = "pl_Enemy1",
+        }
+    }
+};
+
+OnOneTimeEvent {
+    Conditions = {
+        MapTimerIsElapsed {
+            Name = "mt_fire_altar_third_phase",
+            Seconds = 1.3
+        }
+    }, 
+    Actions = {
+        PlayerSquadSpawn {
+            TargetTag = "altar_spawn_a",
+            SquadId = 39019,
+            Player = "pl_Enemy1",
+        },
+        PlayerSquadSpawn {
+            TargetTag = "altar_spawn_b",
+            SquadId = 39019,
+            Player = "pl_Enemy1",
+        },
+        PlayerSquadSpawn {
+            TargetTag = "altar_spawn_c",
+            SquadId = 39019,
+            Player = "pl_Enemy1",
+        }
+    }
+};
+
 OnOneTimeEvent {
     Conditions = {
         BuildingIsDestroyed {
@@ -446,6 +568,9 @@ OnOneTimeEvent {
         }
     },
     Actions = {
+        MapTimerStart {
+            Name = "mt_show_kill_fireback_goal"
+        },
         EntityAbilityRemove {
             Tag = "abaddon",
             AbilityId = 435
@@ -472,17 +597,26 @@ OnOneTimeEvent {
             TaskTag = "goal_destroy_fire_altar", 
             TargetTag = "fire_altar", 
             Summary = "Destroy the Fire Altar."
-        },
+        }
+    }
+};
+
+OnOneTimeEvent {
+    Conditions = {
+        MapTimerIsElapsed {
+            Name = "mt_show_kill_fireback_goal",
+            Seconds = 3
+        }
+    },
+    Actions = {
         MissionTaskSetActive {
             Player = "All",
             TaskTag = "goal_kill_fireback", 
             TargetTag = "fireback", 
             Summary = "Kill Fireback."
         }
-        --todo? delay the kill fireback thingy by a few seconds
     }
 };
-
 ------------------------------
 -- Scythe Fiends Mini Event
 ------------------------------
