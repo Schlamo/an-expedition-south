@@ -46,7 +46,7 @@ OnOneTimeEvent {
     Conditions = {
         MapTimerIsElapsed {
             Name = "mt_global",
-            Seconds = 5
+            Seconds = 0
         }
     },
     Actions = {
@@ -123,12 +123,16 @@ OnOneTimeEvent {
             MaxHealthAbsolute = 10000
         },
         EntitySetMaxHealthAbsolute {
+            TargetTag = "abaddon",
+            MaxHealthAbsolute = 30000
+        },
+        EntitySetMaxHealthAbsolute {
             TargetTag = "volcano_a",
-            MaxHealthAbsolute = 20000
+            MaxHealthAbsolute = 15000
         },
         EntitySetMaxHealthAbsolute {
             TargetTag = "volcano_b",
-            MaxHealthAbsolute = 20000
+            MaxHealthAbsolute = 15000
         },
         EntitySetMaxHealthAbsolute {
             TargetTag = "final_camp_volcano_left",
@@ -136,7 +140,7 @@ OnOneTimeEvent {
         },
         EntitySetMaxHealthAbsolute {
             TargetTag = "fireback",
-            MaxHealthAbsolute = 25000
+            MaxHealthAbsolute = 20000
         },
         EntitySetMaxHealthAbsolute {
             TargetTag = "final_camp_volcano_right",
@@ -740,7 +744,7 @@ OnOneTimeEvent {
             DurationSeconds = 5,
             TextTag = "",
             Player = "ALL",
-            Text = "Moon: The Fireback was also just a minion. A minion of the prime evil Abaddon."
+            Text = "Moon: The strongest minion of the prime evil Abaddon has been defeated."
         },
     }
 };
@@ -754,10 +758,13 @@ OnOneTimeEvent {
     Actions = {    
         MissionOutcry {
             PortraitFileName = "abaddon",
-            DurationSeconds = 8,
+            DurationSeconds = 4,
             TextTag = "",
             Player = "ALL",
-            Text = "Abaddon: This is not even my final form."
+            Text = "Abaddon: You have no idea who you have summoned!"
+        },
+        AudioSoundUIPlay {
+            Sound = "ack_batariel_selection2"
         },
     }
 };
