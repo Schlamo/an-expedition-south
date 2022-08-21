@@ -38,40 +38,12 @@ State {
 
     OnOneTimeEvent {
         Conditions = {
-            MapFlagIsTrue {
-                Name = "mf_volcano_spawner_a_destroyed"
+            BuildingIsDestroyed {
+                Name = "volcano_a_spawner"
             },
-            MapFlagIsTrue {
-                Name = "mf_volcano_spawner_b_destroyed"
-            },
-            ScriptGroupAliveAmountIsEqual {
-                Group = "sg_volcano_wave_a1",
-                Value = 0
-            },
-            ScriptGroupAliveAmountIsEqual {
-                Group = "sg_volcano_wave_a2",
-                Value = 0
-            },
-            ScriptGroupAliveAmountIsEqual {
-                Group = "sg_volcano_wave_a3",
-                Value = 0
-            },
-            ScriptGroupAliveAmountIsEqual {
-                Group = "sg_volcano_wave_a4",
-                Value = 0
-            },
-            ScriptGroupAliveAmountIsEqual {
-                Group = "sg_volcano_wave_b1",
-                Value = 0
-            },
-            ScriptGroupAliveAmountIsEqual {
-                Group = "sg_volcano_wave_b2",
-                Value = 0
-            },
-            ScriptGroupAliveAmountIsEqual {
-                Group = "sg_volcano_wave_b3",
-                Value = 0
-            },
+            BuildingIsDestroyed {
+                Name = "volcano_b_spawner"
+            }
         },
         Actions = {
             MissionTaskSetSolved {  
