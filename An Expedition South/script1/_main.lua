@@ -5,8 +5,8 @@ local OrdinalNumbers = {
     [4] = "fourth",
 };
 
-aspectInitialDelay = 90; --default 90
-aspectFrequencyInSeconds = 120; --default 120
+aspectInitialDelay = 120; --default 90
+aspectFrequencyInSeconds = 90; --default 120
 maxAspectsPerSpawner = 3;
 
 function AspectSpawnerByIndex (index)
@@ -35,29 +35,18 @@ function GetSpawnpointTagByAspectIndex(index)
     if index >= 10 and index <= 12 then return AspectSpawnerByIndex(4); end
 end
 
-------------------------------
--- Map Flags
-------------------------------
-
-
-
 --Testing
 OnOneTimeEvent {
     Conditions = {
         MapTimerIsElapsed {
             Name = "mt_global",
-            Seconds = 0
+            Seconds = 5
         }
     },
     Actions = {
     }
 };
 
-
-
-------------------------------
--- Timer
-------------------------------
 OnOneTimeEvent {
     Conditions = {
     },
@@ -124,7 +113,7 @@ OnOneTimeEvent {
         },
         EntitySetMaxHealthAbsolute {
             TargetTag = "abaddon",
-            MaxHealthAbsolute = 30000
+            MaxHealthAbsolute = 40000
         },
         EntitySetMaxHealthAbsolute {
             TargetTag = "volcano_a",
@@ -181,9 +170,6 @@ OnOneTimeEvent {
     }
 };
 
-------------------------------
--- Destroy Spawner Missions
-------------------------------
 for spawnerIndex = 1,4 do
     OnOneTimeEvent {
         Conditions = {
@@ -345,9 +331,6 @@ OnOneTimeEvent {
     }
 };
 
-------------------------------
--- First Missions Left Side
-------------------------------
 OnOneTimeEvent {
     Conditions = {
         MapTimerIsElapsed {
@@ -437,9 +420,6 @@ OnOneTimeEvent {
         }
     }
 };
-------------------------------
--- Stuff
-------------------------------
 
 OnOneTimeEvent {
     Conditions = {
@@ -453,7 +433,6 @@ OnOneTimeEvent {
         },
     }
 };
---a
 
 OnOneTimeEvent {
     Conditions = {
@@ -572,6 +551,9 @@ OnOneTimeEvent {
         }
     },
     Actions = {
+        EffectVanish {
+            Tag = "sg_firewall"
+        },
         MapTimerStart {
             Name = "mt_show_kill_fireback_goal"
         },
@@ -621,9 +603,7 @@ OnOneTimeEvent {
         }
     }
 };
-------------------------------
--- Scythe Fiends Mini Event
-------------------------------
+
 OnOneTimeEvent {
     Conditions = {
         OR {
@@ -693,27 +673,6 @@ OnOneTimeEvent {
 
 OnOneTimeEvent {
     Conditions = {
-        MapTimerIsElapsed {
-            Name = "powerslot_scythefiends_taken",
-            Seconds = 3
-        }
-    },
-    Actions = {
-        EffectStart {
-            Tag = "powerslot_scythefiends_spawn3",
-            Effect = "effect_fireworm_moveup"
-        },
-        PlayerSquadSpawn {
-            TargetTag = "powerslot_scythefiends_spawn3",
-            SquadId = 39005,
-            Player = "pl_Enemy1"
-        }
-    }
-};
-
-
-OnOneTimeEvent {
-    Conditions = {
         EntityHealthIsLess {
             For = "ANY", 
             Tag = "sg_camp_first_left", 
@@ -726,10 +685,6 @@ OnOneTimeEvent {
         },
     }
 };
-
-------------------------------
--- Second Major Game Phase
-------------------------------
 
 OnOneTimeEvent {
     Conditions = {
@@ -748,6 +703,7 @@ OnOneTimeEvent {
         },
     }
 };
+
 OnOneTimeEvent {
     Conditions = {
         MapTimerIsElapsed {
@@ -850,11 +806,14 @@ OnOneTimeEvent {
 OnOneTimeEvent {
     Conditions = {
         MapTimerIsElapsed {
-            Name = "mt_fireback_killed",
+            Name = "mt_global",
             Seconds = 40
         },
     },
     Actions = {
+        CutsceneCameraPlay {
+            Camera = "moloch_cam"
+        },
         MapFlagSetTrue {
             Name = "mf_spawn_wave_volcano_a"
         },
@@ -974,6 +933,7 @@ OnOneTimeEvent {
         }
     }
 };
+
 OnOneTimeEvent {
     Conditions = {
         BuildingIsDestroyed {

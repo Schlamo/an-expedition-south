@@ -16,7 +16,7 @@ State {
         Conditions = {
             MapTimerIsElapsed {
                 Name = "mt_first_base_spawner_destroyed",
-                Seconds = 120
+                Seconds = 150
             },
             BuildingIsAlive {
                 For = "ALL", 

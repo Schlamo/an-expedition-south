@@ -48,7 +48,7 @@ State {
             },
             MissionTaskSetActive {
                 Player = "pl_Player1",
-                TaskTag = "goal_capture_second_wall", 
+                TaskTag = "goal_advance_to_the_north", 
                 TargetTag = "second_wall_left", 
                 Summary = "Advance to the north."
             }

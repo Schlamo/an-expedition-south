@@ -33,14 +33,10 @@ State {
         MapFlagIsTrue {
             Name = "mf_second_wall_left_destroyed"
         },
-        ScriptGroupAliveAmountIsEqual {
-            Group = "sg_camp_second_left",
-            Value = 0
-        },
         Actions = {
             MissionTaskSetSolved {
                 Player = "pl_Player1",
-                TaskTag = "goal_capture_second_wall", 
+                TaskTag = "goal_advance_to_the_north", 
                 TargetTag = "second_wall_left", 
                 Summary = "Recapture territory from the fire troops."
             }

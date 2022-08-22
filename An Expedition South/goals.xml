@@ -1,33 +1,33 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <mapgoals>
-	<goal tag="goal_destroy_fire_altar" goalletter="A" sortorder="1" timeleft_colorchange="0" musictype="off" positivetimer="1" targettag="camp_fourth_aspect_spawner" hint="0">
+	<goal tag="goal_destroy_fire_altar" goalletter="F" sortorder="6" timeleft_colorchange="0" musictype="off" positivetimer="1" targettag="fire_altar" hint="0">
         <text language="en">Destroy the Fire Altar.</text>
     </goal>
 
-	<goal tag="goal_destroy_first_aspect_spawner" goalletter="B" sortorder="2" timeleft_colorchange="0" musictype="off" positivetimer="1" targettag="camp_first_aspect_spawner" hint="0">
+	<goal tag="goal_destroy_first_aspect_spawner" goalletter="A" sortorder="2" timeleft_colorchange="0" musictype="off" positivetimer="1" targettag="camp_first_aspect_spawner" hint="0">
         <text language="en">Destroy the first aspect spawner.</text>
     </goal>
-	<goal tag="goal_destroy_second_aspect_spawner" goalletter="C" sortorder="3" timeleft_colorchange="0" musictype="off" positivetimer="1" targettag="camp_second_aspect_spawner" hint="0">
+	<goal tag="goal_destroy_second_aspect_spawner" goalletter="B" sortorder="3" timeleft_colorchange="0" musictype="off" positivetimer="1" targettag="camp_second_aspect_spawner" hint="0">
         <text language="en">Destroy the second aspect spawner.</text>
     </goal>
-	<goal tag="goal_destroy_third_aspect_spawner" goalletter="D" sortorder="4" timeleft_colorchange="0" musictype="off" positivetimer="1" targettag="camp_third_aspect_spawner" hint="0">
+	<goal tag="goal_destroy_third_aspect_spawner" goalletter="C" sortorder="4" timeleft_colorchange="0" musictype="off" positivetimer="1" targettag="camp_third_aspect_spawner" hint="0">
         <text language="en">Destroy the third aspect spawner.</text>
     </goal>
-	<goal tag="goal_destroy_fourth_aspect_spawner" goalletter="E" sortorder="5" timeleft_colorchange="0" musictype="off" positivetimer="1" targettag="camp_fourth_aspect_spawner" hint="0">
+	<goal tag="goal_destroy_fourth_aspect_spawner" goalletter="D" sortorder="5" timeleft_colorchange="0" musictype="off" positivetimer="1" targettag="camp_fourth_aspect_spawner" hint="0">
         <text language="en">Destroy the fourth aspect spawner.</text>
     </goal>
 
-	<goal tag="goal_capture_first_wall" goalletter="F" sortorder="6" timeleft_colorchange="0" musictype="off" positivetimer="1" targettag="first_wall_left" hint="0">
+	<goal tag="goal_capture_first_wall" goalletter="E" sortorder="7" timeleft_colorchange="0" musictype="off" positivetimer="1" targettag="first_wall_left" hint="0">
         <text language="en">Recapture territory from the fire troops.</text>
     </goal>
-	<goal tag="goal_capture_second_wall" goalletter="F" sortorder="6" timeleft_colorchange="0" musictype="off" positivetimer="1" targettag="first_wall_left" hint="0">
+	<goal tag="goal_advance_to_the_north" goalletter="E" sortorder="7" timeleft_colorchange="0" musictype="off" positivetimer="1" targettag="second_wall_left" hint="0">
         <text language="en">Advance to the north.</text>
     </goal>
 	
-	<goal tag="goal_kill_all_aspects" goalletter="G" sortorder="7" timeleft_colorchange="0" musictype="off" positivetimer="1" targettag="sg_aspects" hint="0">
+	<goal tag="goal_kill_all_aspects" goalletter="G" sortorder="8" timeleft_colorchange="0" musictype="off" positivetimer="1" targettag="sg_aspects" hint="0">
         <text language="en">Kill all Aspects of Summer.</text>
     </goal>
-	<goal tag="goal_kill_all_converted_aspects" goalletter="H" sortorder="8" timeleft_colorchange="0" musictype="off" positivetimer="1" targettag="sg_converted_aspects" hint="0">
+	<goal tag="goal_kill_all_converted_aspects" goalletter="H" sortorder="9" timeleft_colorchange="0" musictype="off" positivetimer="1" targettag="sg_converted_aspects" hint="0">
         <text language="en">Kill all Converted Fire Elementals.</text>
     </goal>
 	
@@ -35,10 +35,10 @@
         <text language="en">Kill Fireback.</text>
     </goal>
 	
-	<goal tag="goal_destroy_both_volcanos" goalletter="A" sortorder="1" timeleft_colorchange="0" musictype="off" positivetimer="1" targettag="sg_volcanos" hint="0">
+	<goal tag="goal_destroy_both_volcanos" goalletter="B" sortorder="2" timeleft_colorchange="0" musictype="off" positivetimer="1" targettag="sg_volcanos" hint="0">
         <text language="en">Destroy both volcanos.</text>
     </goal>
-	<goal tag="goal_withstand_the_incoming_waves" goalletter="B" sortorder="2" timeleft_colorchange="0" musictype="off" positivetimer="1" targettag="sg_volcano_spawners" hint="0">
+	<goal tag="goal_withstand_the_incoming_waves" goalletter="C" sortorder="3" timeleft_colorchange="0" musictype="off" positivetimer="1" targettag="sg_volcano_spawners" hint="0">
         <text language="en">Withstand the incoming waves.</text>
     </goal>
 	<goal tag="goal_kill_abaddon" goalletter="A" sortorder="1" timeleft_colorchange="0" musictype="on" positivetimer="1" targettag="abaddon" hint="0">

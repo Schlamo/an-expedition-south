@@ -39,7 +39,7 @@ State {
             },
             MissionOutcry {
                 PortraitFileName = "abaddon",
-                DurationSeconds = 5,
+                DurationSeconds = 4,
                 TextTag = "",
                 Player = "ALL",
                 Text = "Abaddon: You are challenging me!?"
@@ -54,7 +54,7 @@ State {
         Conditions = {
             MapTimerIsElapsed {
                 Name = "mt_abaddon_second_phase",
-                Seconds = 4
+                Seconds = 1
             }
         },
         Actions = {
@@ -69,7 +69,7 @@ State {
         Conditions = {
             MapTimerIsElapsed {
                 Name = "mt_abaddon_second_phase",
-                Seconds = 4.3
+                Seconds = 1.3
             }
         },
         Actions = {
@@ -84,7 +84,7 @@ State {
         Conditions = {
             MapTimerIsElapsed {
                 Name = "mt_abaddon_second_phase",
-                Seconds = 4.6
+                Seconds = 1.6
             }
         },
         Actions = {
@@ -99,7 +99,7 @@ State {
         Conditions = {
             MapTimerIsElapsed {
                 Name = "mt_abaddon_second_phase",
-                Seconds = 4.9
+                Seconds = 1.9
             }
         },
         Actions = {
@@ -114,7 +114,7 @@ State {
         Conditions = {
             MapTimerIsElapsed {
                 Name = "mt_abaddon_second_phase",
-                Seconds = 5
+                Seconds = 2
             }
         },
         Actions = {
@@ -134,7 +134,7 @@ State {
         Conditions = {
             MapTimerIsElapsed {
                 Name = "mt_abaddon_second_phase",
-                Seconds = 7
+                Seconds = 3
             }
         },
         Actions = {

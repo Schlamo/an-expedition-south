@@ -22,6 +22,10 @@ State {
                 For = "ALL", 
                 Tag = "second_base_spawner"
             },
+            EntityIsOwnedByPlayer {
+                Tag = "t3_orb",
+                Player = "pl_Player1"
+            }
         },
         Actions = {
             SquadGridGoto {

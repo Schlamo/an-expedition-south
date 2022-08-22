@@ -1,0 +1,56 @@
+<cutscene version="4" length="8.00000000" position="673.555,57.5764,339.265">
+    <controller controllerid="1" fourcc="1129665615" version="2" name="Cutscene">
+        <speed version="2" />
+    </controller>
+    <controller controllerid="3" fourcc="1128353103" version="8" name="Camera" cameratype="0">
+        <active version="2" />
+        <position version="2">
+            <track version="4" offset="673.555,57.5764,339.265" starttime="0.00000000" length="8.00000000" interpolationfunc="1">
+                <key time="0.00000000" value="15.7127,16.9707,7.82907" continuity="1" />
+                <key time="1.00000000" value="15.7128,17.0796,17.2539" continuity="1" />
+                <controlpoint time="0.33333334" value="15.7127,16.9707,7.82907" />
+                <controlpoint time="0.66666669" value="15.7128,17.0796,17.2539" />
+                <data type="0" version="1" />
+            </track>
+        </position>
+        <target version="2">
+            <track version="4" offset="673.555,57.5764,339.265" starttime="0.00000000" length="8.00000000" interpolationfunc="1">
+                <key time="0.00000000" value="-14.0269,-2.19577,18.9269" continuity="1" />
+                <key time="0.50000000" value="-6.82953,-3.6906,12.5612" continuity="1" />
+                <key time="1.00000000" value="-10.7202,-3.01742,3.10669" continuity="1" />
+                <controlpoint time="0.16666667" value="-14.0269,-2.19577,18.9269" />
+                <controlpoint time="0.33333334" value="-7.57452,-3.2154,14.8951" />
+                <controlpoint time="0.66666669" value="-6.08453,-4.16579,10.2273" />
+                <controlpoint time="0.83333337" value="-10.7202,-3.01742,3.10669" />
+                <data type="0" version="1" />
+            </track>
+        </target>
+        <shakeamplitudet version="2" />
+        <shakefreqt version="2" />
+        <shakeamplituder version="2" />
+        <shakefreqr version="2" />
+        <zoomfactor version="2" />
+        <tiltfactor version="2" />
+        <crossfadealpha version="2">
+            <track version="4" offset="0.00000000" starttime="0.00000000" length="1.00555551" interpolationfunc="1">
+                <key time="0.00000000" value="0.00000000" continuity="1" />
+                <key time="1.00000000" value="0.00000000" continuity="1" />
+                <controlpoint time="0.33333334" value="0.00000000" />
+                <controlpoint time="0.66666669" value="0.00000000" />
+                <data type="2" version="1" />
+            </track>
+            <track version="4" offset="0.00000000" starttime="7.01249981" length="0.98750019" interpolationfunc="1">
+                <key time="0.00000000" value="0.00000000" continuity="1" />
+                <key time="1.00000000" value="0.00000000" continuity="1" />
+                <controlpoint time="0.33333334" value="0.00000000" />
+                <controlpoint time="0.66666669" value="0.00000000" />
+                <data type="2" version="1" />
+            </track>
+        </crossfadealpha>
+        <subtitle version="2" />
+        <overlayimage version="2" />
+        <localrotation version="2" />
+        <worldrotation version="2" />
+        <relativetag version="2" />
+    </controller>
+</cutscene>
