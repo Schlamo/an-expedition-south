@@ -63,8 +63,15 @@ OnIntervalEvent {
         }
     },
     Actions = {
+        CutsceneCameraPlay {
+            Camera = "conversion_cam"
+        },
         MapFlagSetTrue {
             Name = "mf_aspect2_conversion_active"
+        },
+        EffectStart {
+            Effect = "effect_global_level_transformation_fire",
+            Tag = "fire_altar_target"
         },
         MapTimerStart {
             Name = "mt_aspect2_conversion"

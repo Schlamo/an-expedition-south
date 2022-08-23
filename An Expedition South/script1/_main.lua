@@ -5,8 +5,8 @@ local OrdinalNumbers = {
     [4] = "fourth",
 };
 
-aspectInitialDelay = 120; --default 90
-aspectFrequencyInSeconds = 90; --default 120
+aspectInitialDelay = 0; --default 90
+aspectFrequencyInSeconds = 20; --default 120
 maxAspectsPerSpawner = 3;
 
 function AspectSpawnerByIndex (index)
@@ -135,10 +135,7 @@ OnOneTimeEvent {
             TargetTag = "final_camp_volcano_right",
             MaxHealthAbsolute = 10000
         },
-        --todo
-        --CutsceneCameraPlay{
-        --    Camera = "MolochCam"
-        --}
+        
         SquadKill {
             Tag = "aspect1"
         },
@@ -806,7 +803,7 @@ OnOneTimeEvent {
 OnOneTimeEvent {
     Conditions = {
         MapTimerIsElapsed {
-            Name = "mt_global",
+            Name = "mt_fireback_killed",
             Seconds = 40
         },
     },
