@@ -1,7 +1,7 @@
 --Aspect
 
 OnRespawnEvent {
-    RespawnDelaySeconds = aspectFrequencyInSeconds,
+    RespawnDelaySeconds = aspectFrequencyInSeconds-20,
     TargetTag = "camp_third_aspect_spawnpoint",
     Conditions = {
         BuildingIsAlive {

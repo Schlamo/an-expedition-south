@@ -5,9 +5,9 @@ local OrdinalNumbers = {
     [4] = "fourth",
 };
 
-aspectInitialDelay = 0; --default 90
-aspectFrequencyInSeconds = 20; --default 120
-maxAspectsPerSpawner = 3;
+aspectInitialDelay         = 90; --default 90
+aspectFrequencyInSeconds   = 120; --default 120
+aspectMissionTimerDuration = 20; --default 20
 
 function AspectSpawnerByIndex (index)
     return "camp_"..OrdinalNumbers[index].."_aspect_spawner"
@@ -358,7 +358,7 @@ OnOneTimeEvent {
             Player = "pl_Player1",
             TaskTag = "goal_capture_first_wall", 
             TargetTag = "first_wall_left", 
-            Summary = "Recapture territory from the fire troops."
+            Summary = "Capture territory from the fire troops."
         },
         MissionOutcry {
             PortraitFileName = "moon",

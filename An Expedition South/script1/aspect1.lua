@@ -46,6 +46,27 @@ OnRespawnEvent {
         MapFlagSetTrue {
             Name = "mf_aspect_spawned"
         }
+    },
+    OnDeathActions = {
+        MapTimerStart {
+            Name = "mt_aspect1_missiontimer_timer"
+        }
+    }
+};
+
+OnIntervalEvent {
+    Seconds = 1,
+    Conditions = {
+        MapTimerIsElapsed {
+            Name = "mt_aspect1_missiontimer_timer",
+            Seconds = aspectFrequencyInSeconds
+        },
+        MapFlagIsFalse {
+            Name = "mf_timer_running"
+        }
+    },
+    Actions = {
+
     }
 };
 

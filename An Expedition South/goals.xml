@@ -18,7 +18,7 @@
     </goal>
 
 	<goal tag="goal_capture_first_wall" goalletter="E" sortorder="7" timeleft_colorchange="0" musictype="off" positivetimer="1" targettag="first_wall_left" hint="0">
-        <text language="en">Recapture territory from the fire troops.</text>
+        <text language="en">Capture territory from the fire troops.</text>
     </goal>
 	<goal tag="goal_advance_to_the_north" goalletter="E" sortorder="7" timeleft_colorchange="0" musictype="off" positivetimer="1" targettag="second_wall_left" hint="0">
         <text language="en">Advance to the north.</text>

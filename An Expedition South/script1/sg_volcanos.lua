@@ -85,7 +85,7 @@ State {
                 Player = "pl_Player1",
                 TaskTag = "goal_destroy_both_volcanos", 
                 TargetTag = "first_wall_left", 
-                Summary = "Recapture territory from the fire troops."
+                Summary = "Capture territory from the fire troops."
             },
             MapFlagSetTrue {
                 Name = "mf_goal_destroy_both_volcanos_solved"

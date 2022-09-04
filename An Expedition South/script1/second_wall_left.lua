@@ -30,15 +30,17 @@ State {
         }
     };
     OnOneTimeEvent {
-        MapFlagIsTrue {
-            Name = "mf_second_wall_left_destroyed"
+        Conditions = {
+            MapFlagIsTrue {
+                Name = "mf_second_wall_left_destroyed"
+            },
         },
         Actions = {
             MissionTaskSetSolved {
                 Player = "pl_Player1",
                 TaskTag = "goal_advance_to_the_north", 
                 TargetTag = "second_wall_left", 
-                Summary = "Recapture territory from the fire troops."
+                Summary = "Capture territory from the fire troops."
             }
         }
     };

@@ -16,7 +16,7 @@ State {
         Conditions = {
             MapTimerIsElapsed {
                 Name = "mt_global",
-                Seconds = (aspectInitialDelay - 30) + (aspectFrequencyInSeconds * maxAspectsPerSpawner)
+                Seconds = (aspectInitialDelay - 30) + (aspectFrequencyInSeconds * 3)
             },
             BuildingIsAlive {
                 For = "ALL", 
