@@ -25,4 +25,38 @@ State {
             },
         }
     };
+    
+    OnOneTimeEvent {
+        Conditions = { },
+        Actions = {
+            SquadBarrierMount {
+                Tag = "sg_fireback_front_wall_archers",
+                TargetTag = "fireback_front_wall"
+            },
+            SquadBarrierMount {
+                Tag = "fireback_camp_squad",
+                TargetTag = "fireback_left_wall"
+            },
+            SquadBarrierMount {
+                Tag = "fireback_camp_squad1",
+                TargetTag = "fireback_left_wall"
+            },
+            SquadBarrierMount {
+                Tag = "fireback_camp_squad2",
+                TargetTag = "fireback_left_wall"
+            },
+            SquadBarrierMount {
+                Tag = "fireback_camp_squad5",
+                TargetTag = "fireback_right_wall"
+            },
+            SquadBarrierMount {
+                Tag = "fireback_camp_squad6",
+                TargetTag = "fireback_right_wall"
+            },
+            SquadBarrierMount {
+                Tag = "fireback_camp_squad8",
+                TargetTag = "fireback_right_wall"
+            },
+        }
+    };
 };

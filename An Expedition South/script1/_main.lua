@@ -47,6 +47,329 @@ OnOneTimeEvent {
     }
 };
 
+--Difficulties
+OnOneTimeEvent {
+    Conditions = {
+        MissionDifficultyIsEqual {
+            Difficulty = DifficultyStandard
+        }
+    },
+    Actions = {
+        --general stuff both players
+        EntitySetMaxHealthAbsolute {
+            TargetTag = "fire_altar",
+            MaxHealthAbsolute = 5000
+        },
+        EntitySetMaxHealthAbsolute {
+            TargetTag = "abaddon",
+            MaxHealthAbsolute = 20000
+        },
+        EntitySetMaxHealthAbsolute {
+            TargetTag = "volcano_a",
+            MaxHealthAbsolute = 5000
+        },
+        EntitySetMaxHealthAbsolute {
+            TargetTag = "volcano_b",
+            MaxHealthAbsolute = 5000
+        },
+        EntitySetMaxHealthAbsolute {
+            TargetTag = "final_camp_volcano_left",
+            MaxHealthAbsolute = 3000
+        },
+        EntitySetMaxHealthAbsolute {
+            TargetTag = "fireback",
+            MaxHealthAbsolute = 10000
+        },
+        EntitySetMaxHealthAbsolute {
+            TargetTag = "final_camp_volcano_right",
+            MaxHealthAbsolute = 3000
+        },
+        --general stuff p2
+        BuildingVanish {
+            Tag = "some_rocket_tower"
+        },
+        SquadVanish {
+            Tag = "sun_reaver1"
+        },  
+        SquadVanish {
+            Tag = "sun_reaver2"
+        },  
+        --first patrol p2
+        SquadVanish {
+            Tag = "patrol_nomad_sunderer"
+        },      
+        --second patrol p2
+        SquadVanish {
+            Tag = "patrol_nomad_vulcan1"
+        },        
+        --first camp p2
+        SquadVanish {
+            Tag = "camp_first_well_right_squad1"
+        },   
+        SquadVanish {
+            Tag = "camp_first_well_right_squad4"
+        },   
+        SquadVanish {
+            Tag = "camp_first_well_right_tower"
+        },
+        --first aspect spawner camp p2
+        PlayerBuildingSpawn {
+            TargetTag = "camp_first_aspect_tower",
+            Player = "pl_Enemy1",
+            BuildingId = 39050
+        },
+        BuildingVanish {
+            Tag = "camp_first_aspect_tower"
+        },
+        SquadVanish {
+            Tag = "camp_first_aspect_squad5"
+        },
+        SquadVanish {
+            Tag = "camp_first_aspect_squad7"
+        },
+        --second aspect spawner camp p2
+        PlayerBuildingSpawn {
+            TargetTag = "camp_second_aspect_tower3",
+            Player = "pl_Enemy1",
+            BuildingId = 39050
+        },
+        BuildingVanish {
+            Tag = "camp_second_aspect_tower3"
+        },
+        --third aspect spawner camp p2
+        PlayerBuildingSpawn {
+            TargetTag = "some_flame_tower",
+            Player = "pl_Enemy1",
+            BuildingId = 39050
+        },
+        BuildingVanish {
+            Tag = "some_flame_tower"
+        },
+        SquadVanish {
+            Tag = "third_aspect_camp_squad5"
+        },
+        --third aspect wave p2
+        SquadVanish {
+            Tag = "third_aspect_wave1"
+        },
+        --fake aspect wave p2
+        SquadVanish {
+            Tag = "fake_aspect_wave"
+        },
+        SquadVanish {
+            Tag = "fake_aspect_camp_squad"
+        },
+        SquadVanish {
+            Tag = "fake_aspect_camp_squad5"
+        },
+        --fourth aspect spawner camp p2
+        SquadVanish {
+            Tag = ""
+        },
+        --fourth aspect wave p2
+        SquadVanish {
+            Tag = "fourth_aspect_wave2"
+        },
+        BuildingVanish {
+            Tag = "fourth_aspect_camp_squad3"
+        },
+        SquadVanish {
+            Tag = "fourth_aspect_camp_squad6"
+        },
+        SquadVanish {
+            Tag = "fourth_aspect_camp_squad8"
+        },
+        SquadVanish {
+            Tag = "fourth_aspect_camp_squad9"
+        },
+        --general stuff p1
+        PlayerBuildingSpawn {
+            TargetTag = "some_rocket_tower1",
+            Player = "pl_Enemy1",
+            BuildingId = 39050
+        },
+        BuildingVanish {
+            Tag = "some_rocket_tower1"
+        },
+        --first camp p1
+        SquadVanish {
+            Tag = "camp_first_left3"
+        },
+        SquadVanish {
+            Tag = "camp_first_left4"
+        },
+        SquadVanish {
+            Tag = "camp_first_left7"
+        },
+        --second camp p1
+        SquadVanish {
+            Tag = "camp_second_left"
+        },
+        SquadVanish {
+            Tag = "camp_second_left2"
+        },
+        --first base p1
+        BuildingVanish {
+            Tag = "some_pyromaniac"
+        },
+        SquadVanish {
+            Tag = "boom_b"
+        },
+        BuildingVanish {
+            Tag = "some_makeshift_tower"
+        },
+        BuildingVanish {
+            Tag = "some_makeshift_tower1"
+        },
+        --first base wave p1
+        SquadVanish {
+            Tag = "first_base_wave_a1"
+        },
+        SquadVanish {
+            Tag = "first_base_wave_b1"
+        },
+        SquadVanish {
+            Tag = "first_base_wave_b2"
+        },
+        --second base p1
+        PlayerBuildingSpawn {
+            TargetTag = "some_flame_tower1",
+            Player = "pl_Enemy1",
+            BuildingId = 39051
+        },
+        BuildingVanish {
+            Tag = "some_flame_tower1"
+        },
+        SquadVanish {
+            Tag = "second_base_squad7"
+        },
+        SquadVanish {
+            Tag = "second_base_squad10"
+        },
+        SquadVanish {
+            Tag = "second_base_squad2"
+        },
+        SquadVanish {
+            Tag = "second_base_squad4"
+        },
+        SquadVanish {
+            Tag = "second_base_squad6"
+        },
+        --second base waves p1
+        SquadVanish {
+            Tag = "second_base_wave_a1"
+        },
+        SquadVanish {
+            Tag = "second_base_wave_b1"
+        },
+        SquadVanish {
+            Tag = "second_base_wave_c1"
+        },
+        --fire altar camp
+        SquadVanish {
+            Tag = "fire_altar_squad5"
+        },
+        SquadVanish {
+            Tag = "fire_altar_squad6"
+        },
+        SquadVanish {
+            Tag = "fire_altar_squad10"
+        },
+        SquadVanish {
+            Tag = "fire_altar_squad11"
+        },
+        SquadVanish {
+            Tag = "fire_altar_squad12"
+        },
+        SquadVanish {
+            Tag = "fire_altar_squad16"
+        },
+        SquadVanish {
+            Tag = "fire_altar_squad17"
+        },
+        SquadVanish {
+            Tag = "fire_altar_squad18"
+        },
+    }
+};
+
+OnOneTimeEvent {
+    Conditions = {
+        MissionDifficultyIsEqual {
+            Difficulty = DifficultyAdvanced
+        }
+    },
+    Actions = {
+        EntitySetMaxHealthAbsolute {
+            TargetTag = "fire_altar",
+            MaxHealthAbsolute = 10000
+        },
+        EntitySetMaxHealthAbsolute {
+            TargetTag = "abaddon",
+            MaxHealthAbsolute = 40000
+        },
+        EntitySetMaxHealthAbsolute {
+            TargetTag = "volcano_a",
+            MaxHealthAbsolute = 15000
+        },
+        EntitySetMaxHealthAbsolute {
+            TargetTag = "volcano_b",
+            MaxHealthAbsolute = 15000
+        },
+        EntitySetMaxHealthAbsolute {
+            TargetTag = "final_camp_volcano_left",
+            MaxHealthAbsolute = 10000
+        },
+        EntitySetMaxHealthAbsolute {
+            TargetTag = "fireback",
+            MaxHealthAbsolute = 20000
+        },
+        EntitySetMaxHealthAbsolute {
+            TargetTag = "final_camp_volcano_right",
+            MaxHealthAbsolute = 10000
+        },
+    }
+};
+
+OnOneTimeEvent {
+    Conditions = {
+        MissionDifficultyIsEqual {
+            Difficulty = DifficultyExpert
+        }
+    },
+    Actions = {
+        EntitySetMaxHealthAbsolute {
+            TargetTag = "fire_altar",
+            MaxHealthAbsolute = 10000
+        },
+        EntitySetMaxHealthAbsolute {
+            TargetTag = "abaddon",
+            MaxHealthAbsolute = 40000
+        },
+        EntitySetMaxHealthAbsolute {
+            TargetTag = "volcano_a",
+            MaxHealthAbsolute = 15000
+        },
+        EntitySetMaxHealthAbsolute {
+            TargetTag = "volcano_b",
+            MaxHealthAbsolute = 15000
+        },
+        EntitySetMaxHealthAbsolute {
+            TargetTag = "final_camp_volcano_left",
+            MaxHealthAbsolute = 10000
+        },
+        EntitySetMaxHealthAbsolute {
+            TargetTag = "fireback",
+            MaxHealthAbsolute = 20000
+        },
+        EntitySetMaxHealthAbsolute {
+            TargetTag = "final_camp_volcano_right",
+            MaxHealthAbsolute = 10000
+        },
+    }
+};
+
+--General Stuff
 OnOneTimeEvent {
     Conditions = {
     },
@@ -107,35 +430,6 @@ OnOneTimeEvent {
             Team = "tm_Team1",
             Range = 30
         },
-        EntitySetMaxHealthAbsolute {
-            TargetTag = "fire_altar",
-            MaxHealthAbsolute = 10000
-        },
-        EntitySetMaxHealthAbsolute {
-            TargetTag = "abaddon",
-            MaxHealthAbsolute = 40000
-        },
-        EntitySetMaxHealthAbsolute {
-            TargetTag = "volcano_a",
-            MaxHealthAbsolute = 15000
-        },
-        EntitySetMaxHealthAbsolute {
-            TargetTag = "volcano_b",
-            MaxHealthAbsolute = 15000
-        },
-        EntitySetMaxHealthAbsolute {
-            TargetTag = "final_camp_volcano_left",
-            MaxHealthAbsolute = 10000
-        },
-        EntitySetMaxHealthAbsolute {
-            TargetTag = "fireback",
-            MaxHealthAbsolute = 20000
-        },
-        EntitySetMaxHealthAbsolute {
-            TargetTag = "final_camp_volcano_right",
-            MaxHealthAbsolute = 10000
-        },
-        
         SquadKill {
             Tag = "aspect1"
         },
@@ -159,11 +453,7 @@ OnOneTimeEvent {
         },
         SquadKill {
             Tag = "converted_aspect4"
-        },
-        MapFlagSetFalse {
-            Name = "mf_aspect1_conversion_active"
         }
-        
     }
 };
 
@@ -837,8 +1127,7 @@ OnOneTimeEvent {
 };
 
 OnOneTimeEvent {
-    Conditions =
-    {
+    Conditions = {
         MapFlagIsTrue {
             Name = "mf_goal_destroy_both_volcanos_solved"
         },

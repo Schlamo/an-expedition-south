@@ -81,6 +81,9 @@ OnIntervalEvent {
         },
         MapFlagIsFalse {
             Name = "mf_aspect1_conversion_active"
+        },
+        BuildingIsAlive {
+            Tag = "fire_crystal"
         }
     },
     Actions = {
