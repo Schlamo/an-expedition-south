@@ -9,6 +9,10 @@ State {
             EntityAbilityAdd {
                 Tag = "abaddon",
                 AbilityId = 435
+            },
+            EntityAbilityAdd {
+                Tag = "abaddon",
+                AbilityId = 1106
             }
         }
     };
@@ -28,9 +32,9 @@ State {
 
     OnOneTimeEvent {
         Conditions = {
-            EntityHealthIsLess {
-                Tag = "abaddon",
-                Percent = 50
+            MapTimerIsElapsed {
+                Name = "mt_global",
+                Seconds = 10
             }
         },
         Actions = {
@@ -47,6 +51,9 @@ State {
             AudioSoundUIPlay {
                 Sound = "ack_batariel_powenemyspotted1"
             },
+            CutsceneCameraPlay {
+                Camera = "vulcanos_cam"
+            }
         }
     };
 
@@ -134,7 +141,10 @@ State {
         Conditions = {
             MapTimerIsElapsed {
                 Name = "mt_abaddon_second_phase",
-                Seconds = 3
+                Seconds = 2
+            },
+            MissionDifficultyIsEqual {
+                Difficulty = DifficultyStandard
             }
         },
         Actions = {
@@ -152,6 +162,80 @@ State {
                 TargetTag = "vulcanos",
                 MaxHealthAbsolute = 5000
             },
+        }
+    };
+
+    OnOneTimeEvent {
+        Conditions = {
+            MapTimerIsElapsed {
+                Name = "mt_abaddon_second_phase",
+                Seconds = 2
+            },
+            MissionDifficultyIsEqual {
+                Difficulty = DifficultyAdvanced
+            }
+        },
+        Actions = {
+            PlayerCardSquadFakePlayWithTag {
+                TargetTag = "abaddon_miniboss_target",
+                Player = "pl_Enemy1",
+                Direction = 180,
+                CardSquadId = 30000,
+                Tag = "vulcanos"
+            },
+            MapFlagSetTrue {
+                Name = "mf_vulcano_spawned"
+            },
+            EntitySetMaxHealthAbsolute {
+                TargetTag = "vulcanos",
+                MaxHealthAbsolute = 10000
+            },
+        }
+    };
+
+    OnOneTimeEvent {
+        Conditions = {
+            MapTimerIsElapsed {
+                Name = "mt_abaddon_second_phase",
+                Seconds = 2
+            },
+            MissionDifficultyIsEqual {
+                Difficulty = DifficultyExpert
+            }
+        },
+        Actions = {
+            PlayerCardSquadFakePlayWithTag {
+                TargetTag = "abaddon_miniboss_target",
+                Player = "pl_Enemy1",
+                Direction = 180,
+                CardSquadId = 30000,
+                Tag = "vulcanos"
+            },
+            MapFlagSetTrue {
+                Name = "mf_vulcano_spawned"
+            },
+            EntitySetMaxHealthAbsolute {
+                TargetTag = "vulcanos",
+                MaxHealthAbsolute = 20000
+            },
+        }
+    };
+
+    OnOneTimeEvent {
+        Conditions = {
+            MapTimerIsElapsed {
+                Name = "mt_abaddon_second_phase",
+                Seconds = 4
+            },
+            SquadIsDead {
+                Tag = "vulcanos",
+            }
+        },
+        Actions = {
+            EntityAbilityRemove {
+                Tag = "abaddon",
+                AbilityId = 1106
+            }
         }
     };
 

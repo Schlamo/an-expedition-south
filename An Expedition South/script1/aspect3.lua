@@ -62,7 +62,7 @@ OnIntervalEvent {
             Name = "mf_aspect3_conversion_active"
         },
         BuildingIsAlive {
-            Tag = "fire_crystal"
+            Tag = "fire_altar"
         }
     },
     Actions = {

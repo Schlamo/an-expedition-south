@@ -36,16 +36,40 @@ function GetSpawnpointTagByAspectIndex(index)
 end
 
 --Testing
-OnOneTimeEvent {
-    Conditions = {
-        MapTimerIsElapsed {
-            Name = "mt_global",
-            Seconds = 5
-        }
-    },
-    Actions = {
-    }
-};
+--OnOneTimeEvent {
+--    Conditions = {
+--        MapTimerIsElapsed {
+--            Name = "mt_global",
+--            Seconds = 4
+--        }
+--    },
+--    Actions = {
+--        FogOfWarObserve {
+--            TargetTag = "abaddon",
+--            Team = "tm_Team1",
+--            Range = 25
+--        },
+--        CutsceneCameraPlay {
+--            Camera = "abaddon_cam"
+--        },
+--    }
+--};
+--
+--OnOneTimeEvent {
+--    Conditions = {
+--        MapTimerIsElapsed {
+--            Name = "mt_global",
+--            Seconds = 5
+--        }
+--    },
+--    Actions = {
+--        SquadAnimPlay {
+--            Tag = "abaddon",
+--            Unit = "skel_demon",
+--            Anim = "special_death_beam1"
+--        },
+--    }
+--};
 
 --Difficulties
 OnOneTimeEvent {
@@ -290,6 +314,19 @@ OnOneTimeEvent {
         SquadVanish {
             Tag = "fire_altar_squad18"
         },
+        --fireback camp
+        SquadVanish {
+            Tag = "fireback_camp_squad12"
+        },
+        SquadVanish {
+            Tag = "fireback_camp_squad13"
+        },
+        SquadVanish {
+            Tag = "fireback_camp_squad19"
+        },
+        SquadVanish {
+            Tag = "fireback_camp_squad27"
+        },
     }
 };
 
@@ -360,7 +397,7 @@ OnOneTimeEvent {
         },
         EntitySetMaxHealthAbsolute {
             TargetTag = "fireback",
-            MaxHealthAbsolute = 20000
+            MaxHealthAbsolute = 30000
         },
         EntitySetMaxHealthAbsolute {
             TargetTag = "final_camp_volcano_right",
@@ -1098,6 +1135,9 @@ OnOneTimeEvent {
         },
     },
     Actions = {
+        AudioSoundUIPlay {
+            Sound = "sfx_xl_moloch_cheer_02"
+        },
         CutsceneCameraPlay {
             Camera = "moloch_cam"
         },
