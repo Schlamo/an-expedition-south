@@ -3,7 +3,7 @@ State {
     OnRespawnEvent {
         StartDespawned = false,
         TargetTag = "moloch_spawnpoint",
-        RespawnDelaySeconds = 60,
+        RespawnDelaySeconds = 150,
         HealthPercent = 100,
         Conditions = {
             MapFlagIsTrue {

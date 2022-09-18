@@ -32,9 +32,13 @@ State {
             },
             EffectVanish {
                 Tag = "volcano_b_effect"
+            },
+            BuildingDestroy {
+                Tag = "volcano_a_spawner"
             }
         }
     };
+    
     OnOneTimeEvent {
         Conditions = { },
         Actions = {
@@ -43,7 +47,8 @@ State {
                 Value = 0
             },
         }
-    },
+    };
+
     OnOneTimeEvent {
         Conditions = {
             BuildingIsDestroyed {
@@ -67,6 +72,9 @@ State {
             },
             EffectVanish {
                 Tag = "volcano_a_effect"
+            },
+            BuildingDestroy {
+                Tag = "volcano_a_spawner"
             }
         }
     };
@@ -82,6 +90,12 @@ State {
         },
         Actions = {
             MissionTaskSetSolved {  
+                Player = "pl_Player2",
+                TaskTag = "goal_withstand_the_incoming_waves", 
+                TargetTag = "sg_volcano_spawners", 
+                Summary = "Withstand the incoming waves."
+            },
+            MissionTaskSetSolved {  
                 Player = "pl_Player1",
                 TaskTag = "goal_destroy_both_volcanos", 
                 TargetTag = "first_wall_left", 
@@ -89,8 +103,11 @@ State {
             },
             MapFlagSetTrue {
                 Name = "mf_goal_destroy_both_volcanos_solved"
+            },
+            MapFlagSetTrue {
+                Name = "mf_goal_withstand_the_incoming_waves_solved"
             }
         }
-    }
+    };
 };
  

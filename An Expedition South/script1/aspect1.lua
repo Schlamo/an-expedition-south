@@ -47,27 +47,6 @@ OnRespawnEvent {
             Name = "mf_aspect_spawned"
         }
     },
-    OnDeathActions = {
-        MapTimerStart {
-            Name = "mt_aspect1_missiontimer_timer"
-        }
-    }
-};
-
-OnIntervalEvent {
-    Seconds = 1,
-    Conditions = {
-        MapTimerIsElapsed {
-            Name = "mt_aspect1_missiontimer_timer",
-            Seconds = aspectFrequencyInSeconds
-        },
-        MapFlagIsFalse {
-            Name = "mf_timer_running"
-        }
-    },
-    Actions = {
-
-    }
 };
 
 --Start Conversion
@@ -97,13 +76,13 @@ OnIntervalEvent {
         MapTimerStart {
             Name = "mt_aspect1_conversion"
         },
-        MissionOutcry {
-            PortraitFileName = "moon",
-            DurationSeconds = 1,
-            TextTag = "",
-            Player = "ALL",
-            Text = "Moon: Start Conversion!"
-        },
+        --MissionOutcry {
+        --    PortraitFileName = "moon",
+        --    DurationSeconds = 5,
+        --    TextTag = "",
+        --    Player = "ALL",
+        --    Text = "Moon: Start Conversion!"
+        --},
         CutsceneCameraPlay {
             Camera = "conversion_cam"
         }

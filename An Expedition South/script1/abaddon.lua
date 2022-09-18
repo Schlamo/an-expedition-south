@@ -32,9 +32,9 @@ State {
 
     OnOneTimeEvent {
         Conditions = {
-            MapTimerIsElapsed {
-                Name = "mt_global",
-                Seconds = 10
+            EntityHealthIsLess {
+                Tag = "abaddon",
+                Percent = 50
             }
         },
         Actions = {
@@ -190,6 +190,12 @@ State {
                 TargetTag = "vulcanos",
                 MaxHealthAbsolute = 10000
             },
+            ObjectVanish {
+                Tag = "vulcanos_block_1"
+            },
+            ObjectVanish {
+                Tag = "vulcanos_block_2"
+            }
         }
     };
 

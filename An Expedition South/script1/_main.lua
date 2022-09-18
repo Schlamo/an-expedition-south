@@ -35,42 +35,6 @@ function GetSpawnpointTagByAspectIndex(index)
     if index >= 10 and index <= 12 then return AspectSpawnerByIndex(4); end
 end
 
---Testing
---OnOneTimeEvent {
---    Conditions = {
---        MapTimerIsElapsed {
---            Name = "mt_global",
---            Seconds = 4
---        }
---    },
---    Actions = {
---        FogOfWarObserve {
---            TargetTag = "abaddon",
---            Team = "tm_Team1",
---            Range = 25
---        },
---        CutsceneCameraPlay {
---            Camera = "abaddon_cam"
---        },
---    }
---};
---
---OnOneTimeEvent {
---    Conditions = {
---        MapTimerIsElapsed {
---            Name = "mt_global",
---            Seconds = 5
---        }
---    },
---    Actions = {
---        SquadAnimPlay {
---            Tag = "abaddon",
---            Unit = "skel_demon",
---            Anim = "special_death_beam1"
---        },
---    }
---};
-
 --Difficulties
 OnOneTimeEvent {
     Conditions = {
@@ -375,6 +339,12 @@ OnOneTimeEvent {
         }
     },
     Actions = {
+        --GeneratorVanish {
+        --    Tag = "third_well_p1"
+        --},
+        --GeneratorVanish {
+        --    Tag = "third_well_p2"
+        --},
         EntitySetMaxHealthAbsolute {
             TargetTag = "fire_altar",
             MaxHealthAbsolute = 10000
@@ -405,12 +375,27 @@ OnOneTimeEvent {
         },
     }
 };
-
 --General Stuff
 OnOneTimeEvent {
     Conditions = {
     },
     Actions = {
+        EntitySpellAdd {
+            Tag = "left_stone",
+            SpellId = 2749
+        },
+        EntitySpellRemove {
+            Tag = "left_stone",
+            SpellId = 2225
+        },
+        EntitySpellAdd {
+            Tag = "right_stone",
+            SpellId = 2749
+        },
+        EntitySpellRemove {
+            Tag = "right_stone",
+            SpellId = 2225
+        },
         MissionTaskSetActive {
             Player = "All",
             TaskTag = "goal_destroy_fire_altar", 
@@ -1099,7 +1084,7 @@ OnOneTimeEvent {
     Actions = {
         MissionOutcry {
             PortraitFileName = "moon",
-            DurationSeconds = 10,
+            DurationSeconds = 8,
             TextTag = "",
             Player = "ALL",
             Text = "Moon: The spawners in the east are magically bond to those volcanos in the west and can't be attacked. Kill the volcanos first, then the spawners! But watch out for waves in the east"        
@@ -1166,69 +1151,6 @@ OnOneTimeEvent {
     }
 };
 
-OnOneTimeEvent {
-    Conditions = {
-        MapFlagIsTrue {
-            Name = "mf_goal_destroy_both_volcanos_solved"
-        },
-        MapFlagIsTrue {
-            Name = "mf_goal_withstand_the_incoming_waves_solved"
-        },
-    },
-    Actions = {
-        MissionOutcry {
-            PortraitFileName = "moon",
-            DurationSeconds = 8,
-            TextTag = "",
-            Player = "ALL",
-            Text = "Moon: On to your last task, Skylords. Kill Abaddon!"        
-        },
-        MapTimerStart {
-            Name = "mt_open_the_gate"
-        },
-        EffectStart {
-            Tag = "left_gate_forcefield",
-            Effect = "effect_global_level_magicgate_destruction"
-        },
-        EffectStart {
-            Tag = "right_gate_forcefield",
-            Effect = "effect_global_level_magicgate_destruction"
-        },
-    }
-};
-
-OnOneTimeEvent {
-    Conditions = {
-        MapTimerIsElapsed {
-            Name = "mt_open_the_gate",
-            Seconds = 0.5
-        }
-    },
-    Actions = {
-        EffectVanish {
-            Tag = "left_gate_effect"
-        },
-        ObjectVanish {
-            Tag = "left_gate_forcefield"
-        },
-        ObjectSpawn {
-            TargetTag = "left_gate_effect",
-            ObjectId = 529,
-            Direction = 90
-        },
-        EffectVanish {
-            Tag = "right_gate_effect"
-        },
-        ObjectVanish {
-            Tag = "right_gate_forcefield"
-        },
-        ObjectSpawn {
-            TargetTag = "right_gate_effect",
-            ObjectId = 529,
-            Direction = 56
-        }
-    }
-};
 
 OnOneTimeEvent {
     Conditions = {
@@ -1285,6 +1207,159 @@ OnOneTimeEvent {
             Player = "ALL"
         },
     },
+};
+
+OnOneTimeEvent {
+    Conditions = {
+        MapFlagIsTrue {
+            Name = "mf_goal_destroy_both_volcanos_solved"
+        },
+        MapFlagIsTrue {
+            Name = "mf_goal_withstand_the_incoming_waves_solved"
+        },
+        MapFlagIsTrue {
+            Name = "mf_left_gate_opened"
+        },
+        MapFlagIsTrue {
+            Name = "mf_right_gate_opened"
+        },
+
+    },
+    Actions = {
+        MissionOutcry {
+            PortraitFileName = "moon",
+            DurationSeconds = 8,
+            TextTag = "",
+            Player = "ALL",
+            Text = "Moon: On to your last task, Skylords. Kill Abaddon!"        
+        },
+    }
+};
+
+------------------------------------------------------------------------------
+
+OnOneTimeEvent {
+    Conditions = {
+        ScriptGroupAliveAmountIsEqual {
+            Group = "sg_battleground_camp",
+            Value = 0
+        },
+    },
+    Actions = {
+        EntityPlayerSet {
+            Tag = "left_stone",
+            Player = "pl_Player1"
+        }
+    }
+};
+
+OnOneTimeEvent {
+    Conditions = {
+        EntityHasJustCastedSpell {
+            Tag = "left_stone",
+            SpellId = AnySpell
+        }
+    },
+    Actions = {
+        MapTimerStart {
+            Name = "mt_open_left_gate"
+        },
+        EffectStart {
+            Tag = "left_gate_forcefield",
+            Effect = "effect_global_level_magicgate_destruction"
+        },
+        CutsceneCameraPlay {
+            Camera = "left_gate_cam"
+        },
+        EntityPlayerSet {
+            Tag = "left_stone",
+            Player = "gaia"
+        }
+    }
+};
+
+OnOneTimeEvent {
+    Conditions = {
+        MapTimerIsElapsed {
+            Name = "mt_open_left_gate",
+            Seconds = 0.5
+        }
+    },
+    Actions = {
+        EffectVanish {
+            Tag = "left_gate_effect"
+        },
+        ObjectVanish {
+            Tag = "left_gate_forcefield"
+        },
+        ObjectSpawn {
+            TargetTag = "left_gate_effect",
+            ObjectId = 529,
+            Direction = 90
+        }
+    }
+};
+---------------
+OnOneTimeEvent {
+    Conditions = {
+        ScriptGroupAliveAmountIsEqual {
+            Group = "sg_right_stone_camp",
+            Value = 0
+        },
+    },
+    Actions = {
+        EntityPlayerSet {
+            Tag = "right_stone",
+            Player = "pl_Player2"
+        }
+    }
+};
+
+OnOneTimeEvent {
+    Conditions = {
+        EntityHasJustCastedSpell {
+            Tag = "right_stone",
+            SpellId = AnySpell
+        }
+    },
+    Actions = {
+        MapTimerStart {
+            Name = "mt_open_right_gate"
+        },
+        EffectStart {
+            Tag = "right_gate_forcefield",
+            Effect = "effect_global_level_magicgate_destruction"
+        },
+        CutsceneCameraPlay {
+            Camera = "right_gate_cam"
+        },
+        EntityPlayerSet {
+            Tag = "left_stone",
+            Player = "gaia"
+        }
+    }
+};
+
+OnOneTimeEvent {
+    Conditions = {
+        MapTimerIsElapsed {
+            Name = "mt_open_right_gate",
+            Seconds = 0.5
+        }
+    },
+    Actions = {
+        EffectVanish {
+            Tag = "right_gate_effect"
+        },
+        ObjectVanish {
+            Tag = "right_gate_forcefield"
+        },
+        ObjectSpawn {
+            TargetTag = "right_gate_effect",
+            ObjectId = 529,
+            Direction = 56
+        }
+    }
 };
 
 State {

@@ -79,13 +79,16 @@ OnIntervalEvent {
         MapTimerStart {
             Name = "mt_aspect2_conversion"
         },
-        MissionOutcry {
-            PortraitFileName = "moon",
-            DurationSeconds = 1,
-            TextTag = "",
-            Player = "ALL",
-            Text = "Moon: Start Conversion!"
-        },
+        --MissionOutcry {
+        --    PortraitFileName = "moon",
+        --    DurationSeconds = 5,
+        --    TextTag = "",
+        --    Player = "ALL",
+        --    Text = "Moon: Start Conversion!"
+        --},
+        CutsceneCameraPlay {
+            Camera = "conversion_cam"
+        }
     }
 }
 
