@@ -190,12 +190,12 @@ State {
                 TargetTag = "vulcanos",
                 MaxHealthAbsolute = 10000
             },
-            ObjectVanish {
-                Tag = "vulcanos_block_1"
-            },
-            ObjectVanish {
-                Tag = "vulcanos_block_2"
-            }
+            --ObjectVanish {
+            --    Tag = "vulcanos_block_1"
+            --},
+            --ObjectVanish {
+            --    Tag = "vulcanos_block_2"
+            --}
         }
     };
 

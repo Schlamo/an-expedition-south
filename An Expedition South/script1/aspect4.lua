@@ -9,13 +9,16 @@ OnRespawnEvent {
         },
         MapTimerIsElapsed {
             Name = "mt_global",
-            Seconds = aspectInitialDelay + (aspectFrequencyInSeconds * 9)
+            Seconds = aspectInitialDelay + (aspectFrequencyInSeconds * 7)
+        },
+        SquadIsDead {
+            Tag = "converted_aspect4",
         }
     },
     Actions = {
         SquadGotoForced {
             Tag = "aspect4", 
-            TargetTag = "fire_altar_target"
+            TargetTag = "aspect_target"
         },
         EntitySetMaxHealthAbsolute {
             TargetTag = "aspect4",
@@ -74,21 +77,11 @@ OnIntervalEvent {
         },
         EffectStart {
             Effect = "effect_global_level_transformation_fire",
-            Tag = "fire_altar_target"
+            Tag = "aspect4"
         },
         MapTimerStart {
             Name = "mt_aspect4_conversion"
         },
-        --MissionOutcry {
-        --    PortraitFileName = "moon",
-        --    DurationSeconds = 5,
-        --    TextTag = "",
-        --    Player = "ALL",
-        --    Text = "Moon: Start Conversion!"
-        --},
-        CutsceneCameraPlay {
-            Camera = "conversion_cam"
-        }
     }
 }
 

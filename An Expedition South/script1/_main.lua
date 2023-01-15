@@ -5,9 +5,10 @@ local OrdinalNumbers = {
     [4] = "fourth",
 };
 
-aspectInitialDelay         = 90; --default 90
-aspectFrequencyInSeconds   = 120; --default 120
+aspectInitialDelay         = 120; --default 120
+aspectFrequencyInSeconds   = 90; --default 90
 aspectMissionTimerDuration = 20; --default 20
+aspectRevealSpawnerInAdvance = 20; --default 20
 
 function AspectSpawnerByIndex (index)
     return "camp_"..OrdinalNumbers[index].."_aspect_spawner"
@@ -66,7 +67,7 @@ OnOneTimeEvent {
         },
         EntitySetMaxHealthAbsolute {
             TargetTag = "fireback",
-            MaxHealthAbsolute = 10000
+            MaxHealthAbsolute = 5000
         },
         EntitySetMaxHealthAbsolute {
             TargetTag = "final_camp_volcano_right",
@@ -323,7 +324,7 @@ OnOneTimeEvent {
         },
         EntitySetMaxHealthAbsolute {
             TargetTag = "fireback",
-            MaxHealthAbsolute = 20000
+            MaxHealthAbsolute = 10000
         },
         EntitySetMaxHealthAbsolute {
             TargetTag = "final_camp_volcano_right",
@@ -339,12 +340,12 @@ OnOneTimeEvent {
         }
     },
     Actions = {
-        --GeneratorVanish {
-        --    Tag = "third_well_p1"
-        --},
-        --GeneratorVanish {
-        --    Tag = "third_well_p2"
-        --},
+        GeneratorVanish {
+            Tag = "third_well_p1"
+        },
+        GeneratorVanish {
+            Tag = "third_well_p2"
+        },
         EntitySetMaxHealthAbsolute {
             TargetTag = "fire_altar",
             MaxHealthAbsolute = 10000
@@ -367,7 +368,7 @@ OnOneTimeEvent {
         },
         EntitySetMaxHealthAbsolute {
             TargetTag = "fireback",
-            MaxHealthAbsolute = 30000
+            MaxHealthAbsolute = 15000
         },
         EntitySetMaxHealthAbsolute {
             TargetTag = "final_camp_volcano_right",
@@ -380,6 +381,22 @@ OnOneTimeEvent {
     Conditions = {
     },
     Actions = {
+        SquadBarrierMount {
+            Tag = "fire_wall_mount",
+            TargetTag = "sg_fire_wall_spire"
+        },
+        SquadBarrierMount {
+            Tag = "fire_wall_mount1",
+            TargetTag = "sg_fire_wall_spire1"
+        },
+        SquadBarrierMount {
+            Tag = "fire_wall_mount2",
+            TargetTag = "sg_fire_wall_spire2"
+        },
+        SquadBarrierMount {
+            Tag = "fire_wall_mount3",
+            TargetTag = "sg_fire_wall_spire3"
+        },
         EntitySpellAdd {
             Tag = "left_stone",
             SpellId = 2749
@@ -475,35 +492,19 @@ OnOneTimeEvent {
         },
         SquadKill {
             Tag = "converted_aspect4"
+        },
+        EntityAbilityAdd {
+            Tag = "volcano_a_spawner",
+            AbilityId = 435
+        },
+        EntityAbilityAdd {
+            Tag = "volcano_b_spawner",
+            AbilityId = 435
         }
     }
 };
 
 for spawnerIndex = 1,4 do
-    OnOneTimeEvent {
-        Conditions = {
-            MapTimerIsElapsed {
-                Name = "mt_global",
-                Seconds = aspectInitialDelay + (aspectFrequencyInSeconds * spawnerIndex) - 30
-            },
-            BuildingIsAlive {
-                Tag = AspectSpawnerByIndex(spawnerIndex)
-            },
-            BuildingIsAlive {
-                Tag = "fire_altar"
-            }
-        },
-        Actions = {
-            MissionOutcry {
-                PortraitFileName = "moon",
-                DurationSeconds = 5,
-                TextTag = "",
-                Player = "ALL",
-                Text = "Moon: Another Aspect Spawner will become active soon!"
-            }
-        }
-    };
-
     OnOneTimeEvent {
         Conditions = {
             OR {
@@ -522,6 +523,107 @@ for spawnerIndex = 1,4 do
                 TargetTag = AspectSpawnerByIndex(spawnerIndex), 
                 Summary = "Destroy the "..OrdinalNumbers[spawnerIndex].." aspect spawner."
             }
+        }
+    };
+
+    if spawnerIndex < 4 then
+        OnOneTimeEvent {
+            Conditions = {
+                BuildingIsDestroyed {
+                    Tag = AspectSpawnerByIndex(spawnerIndex)
+                },
+                MapFlagIsFalse {
+                    Name = "mf_"..AspectSpawnerGoalByIndex(spawnerIndex).."_activated"
+                },
+                BuildingIsAlive {
+                    Tag = AspectSpawnerByIndex(spawnerIndex + 1)
+                },
+            },
+            Actions = {
+                MissionTaskSetActive {
+                    Player = "pl_Player2",
+                    TaskTag = AspectSpawnerGoalByIndex(spawnerIndex), 
+                    TargetTag = AspectSpawnerGoalByIndex(spawnerIndex), 
+                    Summary = "Destroy the "..OrdinalNumbers[spawnerIndex].." aspect spawner."
+                },
+                MapFlagSetTrue {
+                    Name = "mf_"..AspectSpawnerGoalByIndex(spawnerIndex).."_activated"  
+                },
+            }
+        };
+    end
+
+    if spawnerIndex > 1 then
+        OnOneTimeEvent {
+            Conditions = {
+                MapTimerIsElapsed {
+                    Name = "mt_global",
+                    Seconds = aspectInitialDelay + (aspectFrequencyInSeconds * (spawnerIndex * 2 - 1)) - aspectRevealSpawnerInAdvance
+                },
+                BuildingIsAlive {
+                    Tag = AspectSpawnerByIndex(spawnerIndex)
+                },
+                BuildingIsAlive {
+                    Tag = "fire_altar"
+                },
+                MapFlagIsFalse {
+                    Name = "mf_"..AspectSpawnerGoalByIndex(spawnerIndex).."_activated"
+                }
+            },
+            Actions = {
+                MapFlagSetTrue {
+                    Name = "mf_"..AspectSpawnerGoalByIndex(spawnerIndex).."_activated"  
+                },
+                MissionTaskSetActive {
+                    Player = "pl_Player2",
+                    TaskTag = AspectSpawnerGoalByIndex(spawnerIndex), 
+                    TargetTag = AspectSpawnerGoalByIndex(spawnerIndex), 
+                    Summary = "Destroy the "..OrdinalNumbers[spawnerIndex].." aspect spawner."
+                },
+                MissionOutcry {
+                    PortraitFileName = "moon",
+                    DurationSeconds = 5,
+                    TextTag = "",
+                    Player = "ALL",
+                    Text = "Moon: Another Aspect Spawner will become active soon!"
+                }
+            }
+        };
+    end
+
+    --Teleport
+    OnIntervalEvent {
+        Seconds = 1,
+        Conditions = {
+            EntityIsInRange {
+                Tag = "aspect"..spawnerIndex,
+                TargetTag = "aspect_target",
+                Range = 1
+            },
+        },
+        Actions = {
+            EntityTeleport {
+                Tag = "aspect"..spawnerIndex,
+                TargetTag = "altar_spawn_c"
+            }
+        }
+    };
+
+    --Post Teleport Path
+    OnIntervalEvent {
+        Seconds = 1,
+        Conditions = {
+            EntityIsInRange {
+                Tag = "aspect"..spawnerIndex,
+                TargetTag = "altar_spawn_c",
+                Range = 1
+            },
+        },
+        Actions = {
+            SquadGotoForced {
+                Tag = "aspect"..spawnerIndex, 
+                TargetTag = "fire_altar_target"
+            },
         }
     };
 end
@@ -702,30 +804,12 @@ OnOneTimeEvent {
             TargetTag = "camp_first_aspect_spawner", 
             Summary = "Destroy the first aspect spawner."
         },
-        MissionTaskSetActive {
-            Player = "pl_Player2",
-            TaskTag = "goal_destroy_second_aspect_spawner", 
-            TargetTag = "camp_second_aspect_spawner", 
-            Summary = "Destroy the second aspect spawner."
-        },
-        MissionTaskSetActive {
-            Player = "pl_Player2",
-            TaskTag = "goal_destroy_third_aspect_spawner", 
-            TargetTag = "camp_third_aspect_spawner", 
-            Summary = "Destroy the third aspect spawner."
-        },
-        MissionTaskSetActive {
-            Player = "pl_Player2",
-            TaskTag = "goal_destroy_fourth_aspect_spawner", 
-            TargetTag = "camp_fourth_aspect_spawner", 
-            Summary = "Destroy the fourth aspect spawner."
-        },
         MissionOutcry {
             PortraitFileName = "moon",
             DurationSeconds = 8,
             TextTag = "",
             Player = "ALL",
-            Text = "Moon: Sooner or later these spawners will become active and spawn Aspects of Summer, which will aim for the Fire Altar. Once they've reached it, the Twilight Curse will take hold of them and transform them into powerful elemental beings."
+            Text = "Moon: Sooner or later more spawners will become active and spawn Aspects of Summer, which will aim for the Fire Altar. Once they've reached it, the Twilight Curse will take hold of them and transform them into powerful elemental beings."
         }
     }
 };
@@ -864,7 +948,7 @@ OnOneTimeEvent {
             Tag = "sg_firewall"
         },
         MapTimerStart {
-            Name = "mt_show_kill_fireback_goal"
+            Name = "mt_fire_altar_destroyed"
         },
         EntityAbilityRemove {
             Tag = "abaddon",
@@ -899,7 +983,7 @@ OnOneTimeEvent {
 OnOneTimeEvent {
     Conditions = {
         MapTimerIsElapsed {
-            Name = "mt_show_kill_fireback_goal",
+            Name = "mt_fire_altar_destroyed",
             Seconds = 3
         }
     },
@@ -1015,9 +1099,15 @@ OnOneTimeEvent {
 
 OnOneTimeEvent {
     Conditions = {
-        MapTimerIsElapsed {
-            Name = "mt_fireback_killed",
-            Seconds = 15
+        OR {
+            MapTimerIsElapsed {
+                Name = "mt_fireback_killed",
+                Seconds = 15
+            },
+            MapTimerIsElapsed {
+                Name = "mt_fire_wall_destroyed",
+                Seconds = 15
+            }
         }
     },
     Actions = {    
@@ -1036,9 +1126,15 @@ OnOneTimeEvent {
 
 OnOneTimeEvent {
     Conditions = {
-        MapTimerIsElapsed {
-            Name = "mt_fireback_killed",
-            Seconds = 20 --20
+        OR {
+            MapTimerIsElapsed {
+                Name = "mt_fireback_killed",
+                Seconds = 20
+            },
+            MapTimerIsElapsed {
+                Name = "mt_fire_wall_destroyed",
+                Seconds = 20
+            }
         }
     },
     Actions = {    
@@ -1053,9 +1149,15 @@ OnOneTimeEvent {
 
 OnOneTimeEvent {
     Conditions = {
-        MapTimerIsElapsed {
-            Name = "mt_fireback_killed",
-            Seconds = 25 --25
+        OR {
+            MapTimerIsElapsed {
+                Name = "mt_fireback_killed",
+                Seconds = 25 --25
+            },
+            MapTimerIsElapsed {
+                Name = "mt_fire_wall_destroyed",
+                Seconds = 5
+            }
         }
     },
     Actions = {
@@ -1076,9 +1178,15 @@ OnOneTimeEvent {
 
 OnOneTimeEvent {
     Conditions = {
-        MapTimerIsElapsed {
-            Name = "mt_fireback_killed",
-            Seconds = 30 --30
+        OR {
+            MapTimerIsElapsed {
+                Name = "mt_fire_altar_destroyed",
+                Seconds = 30
+            },
+            MapTimerIsElapsed {
+                Name = "mt_fire_wall_destroyed",
+                Seconds = 10
+            }
         }
     },
     Actions = {
@@ -1114,10 +1222,16 @@ OnOneTimeEvent {
 
 OnOneTimeEvent {
     Conditions = {
-        MapTimerIsElapsed {
-            Name = "mt_fireback_killed",
-            Seconds = 40
-        },
+        OR {
+            MapTimerIsElapsed {
+                Name = "mt_fire_altar_destroyed",
+                Seconds = 40
+            },
+            MapTimerIsElapsed {
+                Name = "mt_fire_wall_destroyed",
+                Seconds = 20
+            }
+        }
     },
     Actions = {
         AudioSoundUIPlay {
@@ -1150,7 +1264,6 @@ OnOneTimeEvent {
         }
     }
 };
-
 
 OnOneTimeEvent {
     Conditions = {
@@ -1223,7 +1336,6 @@ OnOneTimeEvent {
         MapFlagIsTrue {
             Name = "mf_right_gate_opened"
         },
-
     },
     Actions = {
         MissionOutcry {
@@ -1334,7 +1446,7 @@ OnOneTimeEvent {
             Camera = "right_gate_cam"
         },
         EntityPlayerSet {
-            Tag = "left_stone",
+            Tag = "right_stone",
             Player = "gaia"
         }
     }
@@ -1358,6 +1470,27 @@ OnOneTimeEvent {
             TargetTag = "right_gate_effect",
             ObjectId = 529,
             Direction = 56
+        }
+    }
+};
+
+OnOneTimeEvent {
+    Conditions = {
+        BarrierModulePercentageIsDead {
+            Tag = "fire_wall",
+            Percent = 5
+        }
+    },
+    Actions = {
+        MapTimerStart {
+            Name = "mt_fire_wall_destroyed", 
+        },
+        MissionOutcry {
+            PortraitFileName = "moon",
+            DurationSeconds = 8,
+            TextTag = "",
+            Player = "ALL",
+            Text = "TEST: REEEEEEEEEEEEEEEEEEEEEE."
         }
     }
 };
