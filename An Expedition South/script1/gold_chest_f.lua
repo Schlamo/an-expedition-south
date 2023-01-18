@@ -24,6 +24,10 @@ State {
                 Player = "ALL",
                 Text = "Some gold has been looted!"
             },
+            EffectStart {
+                Tag = "gold_chest_f",
+                Effect = "effect_building_quest_goldchest_complete"
+            }
         }
     };
 };

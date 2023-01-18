@@ -25,7 +25,7 @@ State {
         Actions = {
             SquadGridGoto {
                 Tag = "sg_volcano_wave_b1", 
-                TargetTag = "moloch_target"
+                TargetTag = "fireback_camp_target"
             },
             MapValueIncrease {
                 Name = "volcano_b_wave_counter"

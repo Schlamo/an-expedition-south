@@ -383,19 +383,19 @@ OnOneTimeEvent {
     Actions = {
         SquadBarrierMount {
             Tag = "fire_wall_mount",
-            TargetTag = "sg_fire_wall_spire"
+            TargetTag = "fire_wall_spire"
         },
         SquadBarrierMount {
             Tag = "fire_wall_mount1",
-            TargetTag = "sg_fire_wall_spire1"
+            TargetTag = "fire_wall_spire1"
         },
         SquadBarrierMount {
             Tag = "fire_wall_mount2",
-            TargetTag = "sg_fire_wall_spire2"
+            TargetTag = "fire_wall_spire2"
         },
         SquadBarrierMount {
             Tag = "fire_wall_mount3",
-            TargetTag = "sg_fire_wall_spire3"
+            TargetTag = "fire_wall_spire3"
         },
         EntitySpellAdd {
             Tag = "left_stone",

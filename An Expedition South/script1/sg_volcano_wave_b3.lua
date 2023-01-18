@@ -29,7 +29,7 @@ State {
         Actions = {
             SquadGridGoto {
                 Tag = "sg_volcano_wave_b3", 
-                TargetTag = "moloch_target"
+                TargetTag = "fireback_camp_target"
             },
         }
     };
