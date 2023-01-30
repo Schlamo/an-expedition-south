@@ -11,7 +11,7 @@ State {
     OnRespawnEvent {
         StartDespawned = false,
         TargetTag = "camp_fourth_aspect_spawnpoint",
-        RespawnDelaySeconds = 60,
+        RespawnDelaySeconds = 120,
         HealthPercent = 100,
         Conditions = {
             MapTimerIsElapsed {

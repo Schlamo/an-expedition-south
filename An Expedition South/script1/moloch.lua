@@ -1,7 +1,7 @@
 OnRespawnEvent {
     StartDespawned = false,
     TargetTag = "moloch_spawnpoint",
-    RespawnDelaySeconds = 120,
+    RespawnDelaySeconds = 480,
     HealthPercent = 100,
     Conditions = {
         MapFlagIsTrue {
@@ -16,6 +16,9 @@ OnRespawnEvent {
         SquadGridGoto {
             Tag = "moloch", 
             TargetTag = "moloch_target"
+        },
+        MapFlagSetFalse {
+            Name = "mf_spawn_wave_moloch"
         }
     }
 };

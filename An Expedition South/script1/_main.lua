@@ -7,7 +7,6 @@ local OrdinalNumbers = {
 
 aspectInitialDelay         = 120; --default 120
 aspectFrequencyInSeconds   = 90; --default 90
-aspectMissionTimerDuration = 20; --default 20
 aspectRevealSpawnerInAdvance = 20; --default 20
 
 function AspectSpawnerByIndex (index)
@@ -36,6 +35,26 @@ function GetSpawnpointTagByAspectIndex(index)
     if index >= 10 and index <= 12 then return AspectSpawnerByIndex(4); end
 end
 
+OnEvent {
+    Conditions = {
+        MissionTimerIsElapsed {
+            TimerTag = "goal_spawner_becomes_active",
+            Seconds = aspectRevealSpawnerInAdvance
+        }
+    },
+    Actions = {
+        MissionTaskSetSolved {
+            Player = "ALL", 
+            TaskTag = "goal_spawner_becomes_active", 
+            TargetTag = "sg_reinforcements", 
+            Summary = ""
+        },
+        MissionTimerStop {
+            Player = "All",
+            TimerTag = "aspectRevealSpawnerInAdvance"
+        }
+    }
+};
 --Difficulties
 OnOneTimeEvent {
     Conditions = {
@@ -64,10 +83,6 @@ OnOneTimeEvent {
         EntitySetMaxHealthAbsolute {
             TargetTag = "final_camp_volcano_left",
             MaxHealthAbsolute = 3000
-        },
-        EntitySetMaxHealthAbsolute {
-            TargetTag = "fireback",
-            MaxHealthAbsolute = 5000
         },
         EntitySetMaxHealthAbsolute {
             TargetTag = "final_camp_volcano_right",
@@ -279,19 +294,6 @@ OnOneTimeEvent {
         SquadVanish {
             Tag = "fire_altar_squad18"
         },
-        --fireback camp
-        SquadVanish {
-            Tag = "fireback_camp_squad12"
-        },
-        SquadVanish {
-            Tag = "fireback_camp_squad13"
-        },
-        SquadVanish {
-            Tag = "fireback_camp_squad19"
-        },
-        SquadVanish {
-            Tag = "fireback_camp_squad27"
-        },
     }
 };
 
@@ -312,18 +314,14 @@ OnOneTimeEvent {
         },
         EntitySetMaxHealthAbsolute {
             TargetTag = "volcano_a",
-            MaxHealthAbsolute = 15000
+            MaxHealthAbsolute = 7500
         },
         EntitySetMaxHealthAbsolute {
             TargetTag = "volcano_b",
-            MaxHealthAbsolute = 15000
+            MaxHealthAbsolute = 7500
         },
         EntitySetMaxHealthAbsolute {
             TargetTag = "final_camp_volcano_left",
-            MaxHealthAbsolute = 10000
-        },
-        EntitySetMaxHealthAbsolute {
-            TargetTag = "fireback",
             MaxHealthAbsolute = 10000
         },
         EntitySetMaxHealthAbsolute {
@@ -356,19 +354,15 @@ OnOneTimeEvent {
         },
         EntitySetMaxHealthAbsolute {
             TargetTag = "volcano_a",
-            MaxHealthAbsolute = 15000
+            MaxHealthAbsolute = 10000
         },
         EntitySetMaxHealthAbsolute {
             TargetTag = "volcano_b",
-            MaxHealthAbsolute = 15000
+            MaxHealthAbsolute = 10000
         },
         EntitySetMaxHealthAbsolute {
             TargetTag = "final_camp_volcano_left",
             MaxHealthAbsolute = 10000
-        },
-        EntitySetMaxHealthAbsolute {
-            TargetTag = "fireback",
-            MaxHealthAbsolute = 15000
         },
         EntitySetMaxHealthAbsolute {
             TargetTag = "final_camp_volcano_right",
@@ -505,6 +499,7 @@ OnOneTimeEvent {
 };
 
 for spawnerIndex = 1,4 do
+    
     OnOneTimeEvent {
         Conditions = {
             OR {
@@ -571,6 +566,12 @@ for spawnerIndex = 1,4 do
                 }
             },
             Actions = {
+                MissionTimerStart {
+                    Player = "All",
+                    TimerTag = "goal_spawner_becomes_active",
+                    LocaTag = "Another Aspect Spawner will become active soon!",
+                    Seconds = aspectRevealSpawnerInAdvance
+                },
                 MapFlagSetTrue {
                     Name = "mf_"..AspectSpawnerGoalByIndex(spawnerIndex).."_activated"  
                 },
@@ -795,6 +796,9 @@ OnOneTimeEvent {
         },
         BuildingIsAlive {
             Tag = "fire_altar"
+        },
+        MapFlagIsFalse {
+            Name = "mf_goal_destroy_first_aspect_spawner_activated"  
         }
     },
     Actions = {
@@ -803,6 +807,9 @@ OnOneTimeEvent {
             TaskTag = "goal_destroy_first_aspect_spawner", 
             TargetTag = "camp_first_aspect_spawner", 
             Summary = "Destroy the first aspect spawner."
+        },
+        MapFlagSetTrue {
+            Name = "mf_goal_destroy_first_aspect_spawner_activated"  
         },
         MissionOutcry {
             PortraitFileName = "moon",
@@ -982,23 +989,6 @@ OnOneTimeEvent {
 
 OnOneTimeEvent {
     Conditions = {
-        MapTimerIsElapsed {
-            Name = "mt_fire_altar_destroyed",
-            Seconds = 3
-        }
-    },
-    Actions = {
-        MissionTaskSetActive {
-            Player = "All",
-            TaskTag = "goal_kill_fireback", 
-            TargetTag = "fireback", 
-            Summary = "Kill Fireback."
-        }
-    }
-};
-
-OnOneTimeEvent {
-    Conditions = {
         OR {
             EntityIsOwnedByPlayer {
                 Tag = "powerslot_scythefiends",
@@ -1081,33 +1071,11 @@ OnOneTimeEvent {
 
 OnOneTimeEvent {
     Conditions = {
-        MapTimerIsElapsed {
-            Name = "mt_fireback_killed",
-            Seconds = 10
-        }
-    },
-    Actions = {    
-        MissionOutcry {
-            PortraitFileName = "moon",
-            DurationSeconds = 5,
-            TextTag = "",
-            Player = "ALL",
-            Text = "Moon: The strongest minion of the prime evil Abaddon has been defeated."
-        },
-    }
-};
-
-OnOneTimeEvent {
-    Conditions = {
         OR {
             MapTimerIsElapsed {
-                Name = "mt_fireback_killed",
-                Seconds = 15
+                Name = "mt_fire_altar_destroyed",
+                Seconds = 0
             },
-            MapTimerIsElapsed {
-                Name = "mt_fire_wall_destroyed",
-                Seconds = 15
-            }
         }
     },
     Actions = {    
@@ -1128,7 +1096,7 @@ OnOneTimeEvent {
     Conditions = {
         OR {
             MapTimerIsElapsed {
-                Name = "mt_fireback_killed",
+                Name = "mt_fire_altar_destroyed",
                 Seconds = 20
             },
             MapTimerIsElapsed {
@@ -1151,8 +1119,8 @@ OnOneTimeEvent {
     Conditions = {
         OR {
             MapTimerIsElapsed {
-                Name = "mt_fireback_killed",
-                Seconds = 25 --25
+                Name = "mt_fire_altar_destroyed",
+                Seconds = 5
             },
             MapTimerIsElapsed {
                 Name = "mt_fire_wall_destroyed",
@@ -1173,49 +1141,84 @@ OnOneTimeEvent {
             TargetTag = "sg_volcano_spawners", 
             Summary = "Withstand the incoming waves."
         },
-    }
-};
-
-OnOneTimeEvent {
-    Conditions = {
-        OR {
-            MapTimerIsElapsed {
-                Name = "mt_fire_altar_destroyed",
-                Seconds = 30
-            },
-            MapTimerIsElapsed {
-                Name = "mt_fire_wall_destroyed",
-                Seconds = 10
-            }
-        }
-    },
-    Actions = {
+        MissionOutcry {
+            PortraitFileName = "moon",
+            DurationSeconds = 2,
+            TextTag = "",
+            Player = "ALL",
+            Text = "KRUBRABRÖ!"
+        },
+        FogOfWarGlanceAt {
+            TargetTag = "glance_50",
+            Team = "tm_Team1",
+            Range = 25
+        },
+        FogOfWarGlanceAt {
+            TargetTag = "glance_50_1",
+            Team = "tm_Team1",
+            Range = 25
+        },
+        FogOfWarGlanceAt {
+            TargetTag = "glance_50_2",
+            Team = "tm_Team1",
+            Range = 25
+        },
+        FogOfWarGlanceAt {
+            TargetTag = "glance_50_3",
+            Team = "tm_Team1",
+            Range = 25
+        },
+        FogOfWarGlanceAt {
+            TargetTag = "glance_50_4",
+            Team = "tm_Team1",
+            Range = 25
+        },
+        FogOfWarGlanceAt {
+            TargetTag = "glance_50_5",
+            Team = "tm_Team1",
+            Range = 25
+        },
+        --FogOfWarGlanceAt {
+        --    TargetTag = "glance_100",
+        --    Team = "tm_Team1",
+        --    Range = 50
+        --},
+        --FogOfWarGlanceAt {
+        --    TargetTag = "glance_100_1",
+        --    Team = "tm_Team1",
+        --    Range = 50
+        --},
+        --FogOfWarGlanceAt {
+        --    TargetTag = "glance_100_2",
+        --    Team = "tm_Team1",
+        --    Range = 50
+        --},
         MissionOutcry {
             PortraitFileName = "moon",
             DurationSeconds = 8,
             TextTag = "",
             Player = "ALL",
-            Text = "Moon: The spawners in the east are magically bond to those volcanos in the west and can't be attacked. Kill the volcanos first, then the spawners! But watch out for waves in the east"        
+            Text = "Moon: The spawners in the east are magically bond to those Volcanos in the west and can't be attacked. You can't kill the spawners itself."        
         },
         FogOfWarObserve {
             TargetTag = "volcano_a_spawner",
             Team = "tm_Team1",
-            Range = 20
+            Range = 25
         },
         FogOfWarObserve {
             TargetTag = "volcano_b_spawner",
             Team = "tm_Team1",
-            Range = 20
+            Range = 25
         },
         FogOfWarObserve {
             TargetTag = "volcano_a",
             Team = "tm_Team1",
-            Range = 20
+            Range = 25
         },
         FogOfWarObserve {
             TargetTag = "volcano_b",
             Team = "tm_Team1",
-            Range = 20
+            Range = 25
         },
     }
 };
@@ -1490,7 +1493,7 @@ OnOneTimeEvent {
             DurationSeconds = 8,
             TextTag = "",
             Player = "ALL",
-            Text = "TEST: REEEEEEEEEEEEEEEEEEEEEE."
+            Text = "Moon: Beware the Moloch!"
         }
     }
 };

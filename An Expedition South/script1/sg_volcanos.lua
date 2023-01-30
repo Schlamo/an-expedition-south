@@ -34,7 +34,7 @@ State {
                 Tag = "volcano_b_effect"
             },
             BuildingDestroy {
-                Tag = "volcano_a_spawner"
+                Tag = "volcano_b_spawner"
             }
         }
     };

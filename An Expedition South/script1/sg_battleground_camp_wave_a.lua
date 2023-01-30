@@ -11,12 +11,12 @@ State {
     OnRespawnEvent {
         StartDespawned = true,
         TargetTag = "battleground_camp_spawnerpoint_a",
-        RespawnDelaySeconds = 120,
+        RespawnDelaySeconds = 150,
         HealthPercent = 100,
         Conditions = {
             MapTimerIsElapsed {
-                Name = "mt_post_fireback_phase", 
-                Seconds = 60
+                Name = "mt_fire_altar_destroyed", 
+                Seconds = 120
             },
             BuildingIsAlive {
                 Tag = "battleground_camp_spawner_a",

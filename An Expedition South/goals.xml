@@ -31,10 +31,6 @@
         <text language="en">Kill all Converted Fire Elementals.</text>
     </goal>
 	
-	<goal tag="goal_kill_fireback" goalletter="A" sortorder="1" timeleft_colorchange="0" musictype="on" positivetimer="1" targettag="fireback" hint="0">
-        <text language="en">Kill Fireback.</text>
-    </goal>
-	
 	<goal tag="goal_destroy_both_volcanos" goalletter="B" sortorder="2" timeleft_colorchange="0" musictype="off" positivetimer="1" targettag="sg_volcanos" hint="0">
         <text language="en">Destroy both volcanos.</text>
     </goal>
@@ -44,4 +40,9 @@
 	<goal tag="goal_kill_abaddon" goalletter="A" sortorder="1" timeleft_colorchange="0" musictype="on" positivetimer="1" targettag="abaddon" hint="0">
         <text language="en">Kill Abaddon.</text>
     </goal>
+
+	<goal tag="goal_spawner_becomes_active" goalletter="Z" sortorder="1" timeleft_colorchange="0" musictype="on" positivetimer="1" hint="0">
+        <text language="en">Another Aspect spawner becomes active soon!</text>
+    </goal>
+    
 </mapgoals>

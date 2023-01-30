@@ -11,7 +11,7 @@ State {
     OnRespawnEvent {
         StartDespawned = false,
         TargetTag = "fake_aspect_spawnpoint",
-        RespawnDelaySeconds = 60,
+        RespawnDelaySeconds = 120,
         HealthPercent = 100,
         Conditions = {
             MapTimerIsElapsed {
