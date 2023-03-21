@@ -109,5 +109,31 @@ State {
             }
         }
     };
+
+    OnOneTimeEvent {
+        Conditions = {
+            BuildingIsDestroyed {
+                Tag = "volcano_a_spawner"
+            }
+        },
+        Actions = {
+            EffectVanish {
+                Tag = "volcano_a_effect2"
+            }
+        }
+    };
+
+    OnOneTimeEvent {
+        Conditions = {
+            BuildingIsDestroyed {
+                Tag = "volcano_b_spawner"
+            }
+        },
+        Actions = {
+            EffectVanish {
+                Tag = "volcano_b_effect2"
+            }
+        }
+    };
 };
  

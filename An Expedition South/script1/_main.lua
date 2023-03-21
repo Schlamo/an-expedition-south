@@ -51,8 +51,8 @@ OnEvent {
         },
         MissionTimerStop {
             Player = "All",
-            TimerTag = "aspectRevealSpawnerInAdvance"
-        }
+            TimerTag = "goal_spawner_becomes_active"
+        },
     }
 };
 --Difficulties
@@ -487,13 +487,13 @@ OnOneTimeEvent {
         SquadKill {
             Tag = "converted_aspect4"
         },
-        EntityAbilityAdd {
-            Tag = "volcano_a_spawner",
-            AbilityId = 435
+        EntitySetMaxHealthAbsolute {
+            TargetTag = "volcano_a_spawner",
+            MaxHealthAbsolute = 50000
         },
-        EntityAbilityAdd {
-            Tag = "volcano_b_spawner",
-            AbilityId = 435
+        EntitySetMaxHealthAbsolute {
+            TargetTag = "volcano_b_spawner",
+            MaxHealthAbsolute = 50000
         }
     }
 };
@@ -737,7 +737,7 @@ OnOneTimeEvent {
         MissionTaskSetSolved {
             Player = "pl_Player2",
             TaskTag = "goal_kill_all_converted_aspects", 
-            TargetTag = "sg_aspects", 
+            TargetTag = "sg_converted_aspects", 
             Summary = "Kill all Converted Fire Elementals."
         },
     }
@@ -1094,6 +1094,26 @@ OnOneTimeEvent {
 
 OnOneTimeEvent {
     Conditions = {
+        MapTimerIsElapsed {
+            Name = "mt_fire_altar_destroyed",
+            Seconds = 10
+        },
+        MapFlagIsFalse {
+            Name = "fire_wall_thingy"
+        }
+    },
+    Actions = {    
+        MissionTaskSetActive {
+            Player = "pl_Player2",
+            TaskTag = "goal_penetrate_the_flame_wall", 
+            TargetTag = "fire_wall", 
+            Summary = "Penetrate the Wall of Flames."
+        },
+    }
+};    
+
+OnOneTimeEvent {
+    Conditions = {
         OR {
             MapTimerIsElapsed {
                 Name = "mt_fire_altar_destroyed",
@@ -1146,7 +1166,7 @@ OnOneTimeEvent {
             DurationSeconds = 2,
             TextTag = "",
             Player = "ALL",
-            Text = "KRUBRABRÖ!"
+            Text = "Moon: <TODO articulate proper announcer>!"
         },
         FogOfWarGlanceAt {
             TargetTag = "glance_50",

@@ -38,8 +38,8 @@ OnRespawnEvent {
             Sound = "sfx_global_horn"
         },
         FogOfWarObserve {
-            TargetTag = "aspect4",
-            Range = 25,
+            TargetTag = "fow_aspect4",
+            Range = 30,
             Team = "tm_Team1"
         },
         MiniMapAlert {
