@@ -10,6 +10,9 @@ OnRespawnEvent {
         BuildingIsAlive {
             For = "ALL", 
             Tag = "moloch_spawner"
+        },
+        MissionDifficultyIsEqual {
+            Difficulty = DifficultyExpert
         }
     },
     Actions = {

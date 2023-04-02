@@ -21,7 +21,11 @@ OnOneTimeEvent {
         }, 
         BuildingIsAlive {
             Tag = "fire_altar"
-        }
+        },
+        BarrierModulePercentageIsAlive {
+            Tag = "fire_wall",
+            Percent = 100
+        },
     },
     Actions = {
         MapFlagSetTrue {
@@ -38,8 +42,28 @@ OnOneTimeEvent {
             Player = "pl_Player2",
             TaskTag = "goal_penetrate_the_flame_wall", 
             TargetTag = "fire_wall", 
-            Summary = "Penetrate the Wall of Flames."
+            Summary = "Break down the burning wall."
         },
+    }
+};
+
+OnOneTimeEvent {
+    Conditions = {
+        BarrierModulePercentageIsDead {
+            Tag = "fire_wall",
+            Percent = 1
+        },
+        MapFlagIsTrue {
+            Name = "fire_wall_thingy"
+        }
+    },
+    Actions = {
+        MissionTaskSetSolved {
+            Player = "pl_Player2",
+            TaskTag = "goal_penetrate_the_flame_wall", 
+            TargetTag = "fire_wall", 
+            Summary = "Break down the burning wall."
+        }
     }
 }
 

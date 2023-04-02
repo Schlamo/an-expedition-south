@@ -38,7 +38,7 @@
         <text language="en">Withstand the incoming waves.</text>
     </goal>
 	<goal tag="goal_penetrate_the_flame_wall" goalletter="I" sortorder="10" timeleft_colorchange="0" musictype="off" positivetimer="1" targettag="fire_wall" hint="0">
-        <text language="en">Penetrate the Wall of Flames.</text>
+        <text language="en">Break down the burning wall..</text>
     </goal>
 	<goal tag="goal_kill_abaddon" goalletter="A" sortorder="1" timeleft_colorchange="0" musictype="on" positivetimer="1" targettag="abaddon" hint="0">
         <text language="en">Kill Abaddon.</text>

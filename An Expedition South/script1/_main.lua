@@ -5,9 +5,9 @@ local OrdinalNumbers = {
     [4] = "fourth",
 };
 
-aspectInitialDelay         = 120; --default 120
-aspectFrequencyInSeconds   = 90; --default 90
-aspectRevealSpawnerInAdvance = 20; --default 20
+aspectInitialDelay         = 5; --default 120
+aspectFrequencyInSeconds   = 10; --default 90
+aspectRevealSpawnerInAdvance = 5; --default 20
 
 function AspectSpawnerByIndex (index)
     return "camp_"..OrdinalNumbers[index].."_aspect_spawner"
@@ -70,7 +70,7 @@ OnOneTimeEvent {
         },
         EntitySetMaxHealthAbsolute {
             TargetTag = "abaddon",
-            MaxHealthAbsolute = 20000
+            MaxHealthAbsolute = 10000
         },
         EntitySetMaxHealthAbsolute {
             TargetTag = "volcano_a",
@@ -172,6 +172,9 @@ OnOneTimeEvent {
         },
         --fourth aspect wave p2
         SquadVanish {
+            Tag = "sg_remove_standard"
+        },
+        SquadVanish {
             Tag = "fourth_aspect_wave2"
         },
         BuildingVanish {
@@ -182,9 +185,6 @@ OnOneTimeEvent {
         },
         SquadVanish {
             Tag = "fourth_aspect_camp_squad8"
-        },
-        SquadVanish {
-            Tag = "fourth_aspect_camp_squad9"
         },
         --general stuff p1
         PlayerBuildingSpawn {
@@ -310,7 +310,7 @@ OnOneTimeEvent {
         },
         EntitySetMaxHealthAbsolute {
             TargetTag = "abaddon",
-            MaxHealthAbsolute = 40000
+            MaxHealthAbsolute = 25000
         },
         EntitySetMaxHealthAbsolute {
             TargetTag = "volcano_a",
@@ -350,7 +350,7 @@ OnOneTimeEvent {
         },
         EntitySetMaxHealthAbsolute {
             TargetTag = "abaddon",
-            MaxHealthAbsolute = 40000
+            MaxHealthAbsolute = 50000
         },
         EntitySetMaxHealthAbsolute {
             TargetTag = "volcano_a",
@@ -499,7 +499,6 @@ OnOneTimeEvent {
 };
 
 for spawnerIndex = 1,4 do
-    
     OnOneTimeEvent {
         Conditions = {
             OR {
@@ -509,6 +508,9 @@ for spawnerIndex = 1,4 do
                 BuildingIsDestroyed {
                     Tag = "fire_altar"
                 }
+            },
+            MapFlagIsTrue {
+                Name = "mf_"..AspectSpawnerGoalByIndex(spawnerIndex).."_activated"
             }
         },
         Actions = {
@@ -528,7 +530,7 @@ for spawnerIndex = 1,4 do
                     Tag = AspectSpawnerByIndex(spawnerIndex)
                 },
                 MapFlagIsFalse {
-                    Name = "mf_"..AspectSpawnerGoalByIndex(spawnerIndex).."_activated"
+                    Name = "mf_"..AspectSpawnerGoalByIndex(spawnerIndex + 1).."_activated"
                 },
                 BuildingIsAlive {
                     Tag = AspectSpawnerByIndex(spawnerIndex + 1)
@@ -560,6 +562,32 @@ for spawnerIndex = 1,4 do
                 },
                 BuildingIsAlive {
                     Tag = "fire_altar"
+                }
+            },
+            Actions = {
+                MapFlagSetTrue {
+                    Name = "mf_"..AspectSpawnerGoalByIndex(spawnerIndex).."_activated"  
+                },
+                MissionTaskSetActive {
+                    Player = "pl_Player2",
+                    TaskTag = AspectSpawnerGoalByIndex(spawnerIndex), 
+                    TargetTag = AspectSpawnerGoalByIndex(spawnerIndex), 
+                    Summary = "Destroy the "..OrdinalNumbers[spawnerIndex].." aspect spawner."
+                }
+            }
+        };
+
+        OnOneTimeEvent {
+            Conditions = {
+                MapTimerIsElapsed {
+                    Name = "mt_global",
+                    Seconds = aspectInitialDelay + (aspectFrequencyInSeconds * (spawnerIndex * 2 - 1)) - aspectRevealSpawnerInAdvance
+                },
+                BuildingIsAlive {
+                    Tag = AspectSpawnerByIndex(spawnerIndex)
+                },
+                BuildingIsAlive {
+                    Tag = "fire_altar"
                 },
                 MapFlagIsFalse {
                     Name = "mf_"..AspectSpawnerGoalByIndex(spawnerIndex).."_activated"
@@ -571,15 +599,6 @@ for spawnerIndex = 1,4 do
                     TimerTag = "goal_spawner_becomes_active",
                     LocaTag = "Another Aspect Spawner will become active soon!",
                     Seconds = aspectRevealSpawnerInAdvance
-                },
-                MapFlagSetTrue {
-                    Name = "mf_"..AspectSpawnerGoalByIndex(spawnerIndex).."_activated"  
-                },
-                MissionTaskSetActive {
-                    Player = "pl_Player2",
-                    TaskTag = AspectSpawnerGoalByIndex(spawnerIndex), 
-                    TargetTag = AspectSpawnerGoalByIndex(spawnerIndex), 
-                    Summary = "Destroy the "..OrdinalNumbers[spawnerIndex].." aspect spawner."
                 },
                 MissionOutcry {
                     PortraitFileName = "moon",
@@ -1090,27 +1109,7 @@ OnOneTimeEvent {
             Sound = "ack_batariel_selection2"
         },
     }
-};
-
-OnOneTimeEvent {
-    Conditions = {
-        MapTimerIsElapsed {
-            Name = "mt_fire_altar_destroyed",
-            Seconds = 10
-        },
-        MapFlagIsFalse {
-            Name = "fire_wall_thingy"
-        }
-    },
-    Actions = {    
-        MissionTaskSetActive {
-            Player = "pl_Player2",
-            TaskTag = "goal_penetrate_the_flame_wall", 
-            TargetTag = "fire_wall", 
-            Summary = "Penetrate the Wall of Flames."
-        },
-    }
-};    
+};  
 
 OnOneTimeEvent {
     Conditions = {
@@ -1291,7 +1290,7 @@ OnOneTimeEvent {
 OnOneTimeEvent {
     Conditions = {
         BuildingIsDestroyed {
-            Tag = "camp_second_aspect_spawner"
+            Tag = "camp_third_aspect_spawner"
         }
     },
     Actions = {
