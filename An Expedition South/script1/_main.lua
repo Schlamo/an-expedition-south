@@ -55,6 +55,21 @@ OnEvent {
         },
     }
 };
+
+OnOneTimeEvent {
+    Conditions = {
+
+    },
+    Actions = {
+        SquadGridGoto {
+            Tag = "sg_cutscene",
+            TargetTag = "camp_fourth_aspect_spawnpoint"
+        },
+        CutsceneCameraPlayFullScreen {
+            Camera = "video"
+        },
+    }
+};
 --Difficulties
 OnOneTimeEvent {
     Conditions = {
@@ -759,24 +774,6 @@ OnOneTimeEvent {
             TargetTag = "sg_converted_aspects", 
             Summary = "Kill all Converted Fire Elementals."
         },
-    }
-};
-
-OnOneTimeEvent {
-    Conditions = {
-        MapTimerIsElapsed {
-            Name = "mt_global",
-            Seconds = 0
-        }
-    },
-    Actions = {
-        MissionOutcry {
-            PortraitFileName = "moon",
-            DurationSeconds = 5,
-            TextTag = "",
-            Player = "ALL",
-            Text = "Moon: The expedition was separated and has been ambushed! You must come to their aid!"
-        }
     }
 };
 
