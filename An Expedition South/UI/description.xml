@@ -1,37 +1,18 @@
 <mapdescription author="Damo" public="0">
-
-<description language="en">
-<mapname>An Expedition South</mapname>
-<description>
-Mora is a god no more - The Sundbridge Shrine was cleansed of the twilight's curse and Mora's minions have been defeated. 
-But the star trapped in the heart of the earth, which the shrine connected to its brother in the boundless void, had already been tainted with the curse of twilight. 
-The worst outgrowth of this new infestation has affected a fire tribe in a distant land in the south, a tribe that worships the molten core.  
-It was not long before the curse spread beyond the tribe's members and plunged the whole land into darkness. 
-A group of brave lyrish volunteers undertook an expedition south to nip this new outbreak in the bud. 
-</description>
-</description>
-
-<description language="de">
-<mapname>Eine Expedition in den Sueden</mapname>
-<description>
-Mora ist kein Gott mehr - Der Sonnensteg-Schrein wurde vom Zwielichtfluch befreit und Moras Schergen wurden besiegt.
-Aber der im Herzen der Erde gefangene Stern, den der Schrein mit seinem Bruder in der grenzenlosen Leere verband, war bereits mit dem Fluch des Zwielichts behaftet.
-Die schlimmste Auswüchse dieser neuen Plage hat einen Feuerstamm in einem fernen Land im Sueden getroffen, einen Stamm, der den geschmolzenen Kern verehrt. 
-Es es dauerte nicht lange, bis sich der Fluch über die Mitglieder des Stammes ausbreitete und das ganze Land in Dunkelheit stürzte.
-Obwohl sie gerade erst ihr eigenes Land von diesem FLuch befreiten, unternahm eine Gruppe tapferer, lyrischer Freiwilliger eine Expedition in den Sueden, um diesen neuen Ausbruch im Keim zu ersticken.
-</description>
-</description>
-
-<description language="fr">
-<mapname>Une expédition vers le sud</mapname>
-<description>
-Une expédition vers le sud
-</description>
-</description>
-
-<description language="ru">
-<mapname>Экспедиция на юг</mapname>
-<description>Экспедиция на юг
-</description>
-</description>
+    <description language="en">
+        <mapname>Expedition - Cutscene 5</mapname>
+        <description>Mora is a god no more - The Sundbridge Shrine was cleansed of the twilight&apos;s curse and Mora&apos;s minions have been defeated. &#x0A;But the star trapped in the heart of the earth, which the shrine connected to its brother in the boundless void, had already been tainted with the curse of twilight. &#x0A;The worst outgrowth of this new infestation has affected a fire tribe in a distant land in the south, a tribe that worships the molten core.  &#x0A;It was not long before the curse spread beyond the tribe&apos;s members and plunged the whole land into darkness. &#x0A;A group of brave lyrish volunteers undertook an expedition south to nip this new outbreak in the bud. &#x0A;</description>
+    </description>
+    <description language="de">
+        <mapname>Expedition - Cutscene 5</mapname>
+        <description>&#x0A;Mora ist kein Gott mehr - Der Sonnensteg-Schrein wurde vom Zwielichtfluch befreit und Moras Schergen wurden besiegt.&#x0A;Aber der im Herzen der Erde gefangene Stern, den der Schrein mit seinem Bruder in der grenzenlosen Leere verband, war bereits mit dem Fluch des Zwielichts behaftet.&#x0A;Die schlimmste Auswüchse dieser neuen Plage hat einen Feuerstamm in einem fernen Land im Sueden getroffen, einen Stamm, der den geschmolzenen Kern verehrt. &#x0A;Es es dauerte nicht lange, bis sich der Fluch über die Mitglieder des Stammes ausbreitete und das ganze Land in Dunkelheit stürzte.&#x0A;Obwohl sie gerade erst ihr eigenes Land von diesem FLuch befreiten, unternahm eine Gruppe tapferer, lyrischer Freiwilliger eine Expedition in den Sueden, um diesen neuen Ausbruch im Keim zu ersticken.&#x0A;</description>
+    </description>
+    <description language="fr">
+        <mapname>Expedition - Cutscene 5</mapname>
+        <description></description>
+    </description>
+    <description language="ru">
+        <mapname>Expedition - Cutscene 5</mapname>
+        <description></description>
+    </description>
 </mapdescription>

@@ -34,7 +34,19 @@ function GetSpawnpointTagByAspectIndex(index)
     if index >= 7 and index <= 9 then return AspectSpawnerByIndex(3); end
     if index >= 10 and index <= 12 then return AspectSpawnerByIndex(4); end
 end
-
+OnOneTimeEvent {
+    Conditions = {
+        MapTimerIsElapsed {
+            Name = "mt_global",
+            Seconds = 2
+        }
+    },
+    Actions = {
+        CutsceneCameraPlayFullScreen {
+            Camera = "video"
+        },
+    }
+};
 OnEvent {
     Conditions = {
         MissionTimerIsElapsed {
