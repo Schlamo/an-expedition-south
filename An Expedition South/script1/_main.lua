@@ -35,6 +35,17 @@ function GetSpawnpointTagByAspectIndex(index)
     if index >= 10 and index <= 12 then return AspectSpawnerByIndex(4); end
 end
 
+OnOneTimeEvent {
+    Conditions = {
+
+    },
+    Actions = {
+        CutsceneCameraPlayFullscreen {
+            Camera = "video"
+        }
+    }
+};
+
 OnEvent {
     Conditions = {
         MissionTimerIsElapsed {
@@ -759,24 +770,6 @@ OnOneTimeEvent {
             TargetTag = "sg_converted_aspects", 
             Summary = "Kill all Converted Fire Elementals."
         },
-    }
-};
-
-OnOneTimeEvent {
-    Conditions = {
-        MapTimerIsElapsed {
-            Name = "mt_global",
-            Seconds = 0
-        }
-    },
-    Actions = {
-        MissionOutcry {
-            PortraitFileName = "moon",
-            DurationSeconds = 5,
-            TextTag = "",
-            Player = "ALL",
-            Text = "Moon: The expedition was separated and has been ambushed! You must come to their aid!"
-        }
     }
 };
 
