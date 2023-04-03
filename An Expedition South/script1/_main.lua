@@ -35,13 +35,24 @@ function GetSpawnpointTagByAspectIndex(index)
     if index >= 10 and index <= 12 then return AspectSpawnerByIndex(4); end
 end
 
+
+
 OnOneTimeEvent {
     Conditions = {
 
     },
     Actions = {
-        CutsceneCameraPlayFullscreen {
+        SquadGridGoto {
+            Tag = "sg_cutscene",
+            TargetTag = "camp_fourth_aspect_spawnpoint"
+        },
+        CutsceneCameraPlayFullScreen {
             Camera = "video"
+        },
+        FogOfWarObserve {
+            TargetTag = "remove_standard29",
+            Team = "tm_Team1",
+            Range = 35
         }
     }
 };
