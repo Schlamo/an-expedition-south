@@ -35,6 +35,17 @@ function GetSpawnpointTagByAspectIndex(index)
     if index >= 10 and index <= 12 then return AspectSpawnerByIndex(4); end
 end
 
+OnOneTimeEvent {
+    Conditions = {
+
+    },
+    Actions = {
+        CutsceneCameraPlayFullScreen {
+            Camera = "video"
+        }
+    }
+};
+
 OnEvent {
     Conditions = {
         MissionTimerIsElapsed {

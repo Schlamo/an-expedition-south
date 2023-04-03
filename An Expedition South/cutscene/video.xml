@@ -1,0 +1,44 @@
+<cutscene version="4" length="15.00000000" position="242.2,45,42">
+    <controller controllerid="1" fourcc="1129665615" version="2" name="Cutscene">
+        <speed version="2" />
+    </controller>
+    <controller controllerid="2" fourcc="1128353103" version="8" name="Camera" cameratype="0">
+        <active version="2" />
+        <position version="2">
+            <track version="4" offset="242.2,45,42" starttime="0.00000000" length="15.00000000" interpolationfunc="1">
+                <key time="0.00000000" value="2.17168,55.7128,-30.7932" continuity="1" />
+                <key time="0.50200003" value="-15.4899,42.5854,12.4006" continuity="1" />
+                <key time="1.00000000" value="-61.7923,33.9031,29.2206" continuity="1" />
+                <controlpoint time="0.05338602" value="2.17168,55.7128,-30.7932" />
+                <controlpoint time="0.26666138" value="0.495682,42.0843,-1.24906" />
+                <controlpoint time="0.82773900" value="-27.2221,42.9532,22.4184" />
+                <controlpoint time="0.64362526" value="-48.6134,33.7815,28.6633" />
+                <data type="0" version="1" />
+            </track>
+        </position>
+        <target version="2">
+            <track version="4" offset="242.2,45,42" starttime="0.00000000" length="15.00000000" interpolationfunc="1">
+                <key time="0.00000000" value="-2.90709,4.12388,-12.7355" continuity="1" />
+                <key time="0.50200003" value="-27.4294,5.49997,25.4388" continuity="1" />
+                <key time="1.00000000" value="-86.3344,5.65836,28.9929" continuity="1" />
+                <controlpoint time="0.16733335" value="-2.90709,4.12388,-12.7355" />
+                <controlpoint time="0.33466670" value="-6.48944,5.11483,14.9652" />
+                <controlpoint time="0.66799998" value="-48.2024,5.88205,35.829" />
+                <controlpoint time="0.83399999" value="-86.3344,5.65836,28.9929" />
+                <data type="0" version="1" />
+            </track>
+        </target>
+        <shakeamplitudet version="2" />
+        <shakefreqt version="2" />
+        <shakeamplituder version="2" />
+        <shakefreqr version="2" />
+        <zoomfactor version="2" />
+        <tiltfactor version="2" />
+        <crossfadealpha version="2" />
+        <subtitle version="2" />
+        <overlayimage version="2" />
+        <localrotation version="2" />
+        <worldrotation version="2" />
+        <relativetag version="2" />
+    </controller>
+</cutscene>
