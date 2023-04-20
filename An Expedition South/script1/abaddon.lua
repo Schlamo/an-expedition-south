@@ -1,5 +1,3 @@
-local barrelExplosionEffect = "effect_je_fire_unit_firesworn_imp";
-
 State {
     StateName = "INIT",
     OnOneTimeEvent {

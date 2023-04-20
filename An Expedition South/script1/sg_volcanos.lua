@@ -33,6 +33,9 @@ State {
             EffectVanish {
                 Tag = "volcano_b_effect"
             },
+            EffectVanish {
+                Tag = "volcano_b_effect2"
+            },
             BuildingDestroy {
                 Tag = "volcano_b_spawner"
             }
@@ -71,6 +74,9 @@ State {
                 Name = "mf_volcano_a_destroyed"
             },
             EffectVanish {
+                Tag = "volcano_a_effect2"
+            },
+            EffectVanish {
                 Tag = "volcano_a_effect"
             },
             BuildingDestroy {
@@ -90,12 +96,6 @@ State {
         },
         Actions = {
             MissionTaskSetSolved {  
-                Player = "pl_Player2",
-                TaskTag = "goal_withstand_the_incoming_waves", 
-                TargetTag = "sg_volcano_spawners", 
-                Summary = "Withstand the incoming waves."
-            },
-            MissionTaskSetSolved {  
                 Player = "pl_Player1",
                 TaskTag = "goal_destroy_both_volcanos", 
                 TargetTag = "first_wall_left", 
@@ -103,6 +103,25 @@ State {
             },
             MapFlagSetTrue {
                 Name = "mf_goal_destroy_both_volcanos_solved"
+            }
+        }
+    };
+
+    OnOneTimeEvent {
+        Conditions = {
+            MapFlagIsTrue {
+                Name = "mf_volcano_a_spawner_destroyed"
+            },
+            MapFlagIsTrue {
+                Name = "mf_volcano_b_spawner_destroyed"
+            }
+        },
+        Actions = {
+            MissionTaskSetSolved {  
+                Player = "pl_Player2",
+                TaskTag = "goal_withstand_the_incoming_waves", 
+                TargetTag = "sg_volcano_spawners", 
+                Summary = "Withstand the incoming waves."
             },
             MapFlagSetTrue {
                 Name = "mf_goal_withstand_the_incoming_waves_solved"
@@ -119,6 +138,9 @@ State {
         Actions = {
             EffectVanish {
                 Tag = "volcano_a_effect2"
+            },
+            MapFlagSetTrue {
+                Name = "mf_volcano_a_spawner_destroyed"
             }
         }
     };
@@ -132,6 +154,9 @@ State {
         Actions = {
             EffectVanish {
                 Tag = "volcano_b_effect2"
+            },
+            MapFlagSetTrue {
+                Name = "mf_volcano_b_spawner_destroyed"
             }
         }
     };

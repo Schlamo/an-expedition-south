@@ -36,7 +36,7 @@ OnOneTimeEvent {
             DurationSeconds = 5,
             TextTag = "",
             Player = "ALL",
-            Text = "Breaking down that wall won't be all too easy. There must be another way to weaken it."
+            Text = "Moon: Breaking down that wall won't be all too easy. There must be another way to weaken it."
         },
         MissionTaskSetActive {
             Player = "pl_Player2",

@@ -33,7 +33,7 @@ State {
                 DurationSeconds = 8,
                 TextTag = "",
                 Player = "ALL",
-                Text = "You reached a magical Amii Screaming Stone or stuff. Use the screaming stone for some other stuff!"
+                Text = "Moon: You reached a magical Amii Screaming Stone or stuff. Use the screaming stone for some other stuff!"
             },
         },
         OffConditions = {

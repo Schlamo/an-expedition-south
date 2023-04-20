@@ -22,7 +22,7 @@ State {
                 DurationSeconds = 3,
                 TextTag = "",
                 Player = "ALL",
-                Text = "Some gold has been looted!"
+                Text = "You found some treasure!"
             },
             EffectStart {
                 Tag = "gold_chest_c",

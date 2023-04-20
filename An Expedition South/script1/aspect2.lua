@@ -13,6 +13,9 @@ OnRespawnEvent {
         },
         SquadIsDead {
             Tag = "converted_aspect2",
+        },
+        BuildingIsAlive {
+            Tag = "fire_altar"
         }
     },
     Actions = {

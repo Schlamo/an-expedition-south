@@ -23,7 +23,7 @@ State {
             },
             MapValueIsGreaterOrEqual {
                 Name = "volcano_a_wave_counter",
-                Value = 6
+                Value = 3
             }
         },
         Actions = {

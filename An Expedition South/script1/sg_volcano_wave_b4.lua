@@ -4,7 +4,7 @@ State {
         Conditions = { },
         Actions = {
             SquadKill {
-                Tag ="sg_volcano_wave_b2",
+                Tag ="sg_volcano_wave_b4",
             }
         }
     },
@@ -23,12 +23,12 @@ State {
             },
             MapValueIsGreaterOrEqual {
                 Name = "volcano_b_wave_counter",
-                Value = 1
+                Value = 3
             }
         },
         Actions = {
             SquadGridGoto {
-                Tag = "sg_volcano_wave_b2", 
+                Tag = "sg_volcano_wave_b4", 
                 TargetTag = "moloch_target"
             },
         }

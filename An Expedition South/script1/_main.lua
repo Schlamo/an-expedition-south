@@ -5,9 +5,9 @@ local OrdinalNumbers = {
     [4] = "fourth",
 };
 
-aspectInitialDelay         = 5; --default 120
-aspectFrequencyInSeconds   = 10; --default 90
-aspectRevealSpawnerInAdvance = 5; --default 20
+aspectInitialDelay         = 120; --default 120
+aspectFrequencyInSeconds   = 90; --default 90
+aspectRevealSpawnerInAdvance = 20; --default 20
 
 function AspectSpawnerByIndex (index)
     return "camp_"..OrdinalNumbers[index].."_aspect_spawner"
@@ -55,38 +55,44 @@ OnEvent {
         },
     }
 };
+
 --Difficulties
 OnOneTimeEvent {
     Conditions = {
-        MissionDifficultyIsEqual {
-            Difficulty = DifficultyStandard
+        OR {
+            MissionDifficultyIsEqual {
+                Difficulty = DifficultyStandard
+            },
+            MissionDifficultyIsEqual {
+                Difficulty = DifficultyAdvanced
+            }
         }
     },
     Actions = {
         --general stuff both players
         EntitySetMaxHealthAbsolute {
             TargetTag = "fire_altar",
-            MaxHealthAbsolute = 5000
-        },
-        EntitySetMaxHealthAbsolute {
-            TargetTag = "abaddon",
             MaxHealthAbsolute = 10000
         },
         EntitySetMaxHealthAbsolute {
+            TargetTag = "abaddon",
+            MaxHealthAbsolute = 25000
+        },
+        EntitySetMaxHealthAbsolute {
             TargetTag = "volcano_a",
-            MaxHealthAbsolute = 5000
+            MaxHealthAbsolute = 7500
         },
         EntitySetMaxHealthAbsolute {
             TargetTag = "volcano_b",
-            MaxHealthAbsolute = 5000
+            MaxHealthAbsolute = 7500
         },
         EntitySetMaxHealthAbsolute {
             TargetTag = "final_camp_volcano_left",
-            MaxHealthAbsolute = 3000
+            MaxHealthAbsolute = 10000
         },
         EntitySetMaxHealthAbsolute {
             TargetTag = "final_camp_volcano_right",
-            MaxHealthAbsolute = 3000
+            MaxHealthAbsolute = 10000
         },
         --general stuff p2
         BuildingVanish {
@@ -195,6 +201,35 @@ OnOneTimeEvent {
         BuildingVanish {
             Tag = "some_rocket_tower1"
         },
+        SquadVanish {
+            Tag = "patrol_emberstrike_left"
+        },
+        BuildingVanish {
+            Tag = "another_flame_tower"
+        },
+        PlayerBuildingSpawn {
+            TargetTag = "another_flame_tower",
+            Player = "pl_Enemy1",
+            BuildingId = 39051
+        },
+        BuildingVanish {
+            Tag = "remove_standard36"
+        },
+        PlayerBuildingSpawn {
+            TargetTag = "remove_standard36",
+            Player = "pl_Enemy1",
+            BuildingId = 39050
+        },
+        PlayerBuildingSpawn {
+            TargetTag = "remove_standard35",
+            Player = "pl_Enemy1",
+            BuildingId = 39051
+        },
+        PlayerBuildingSpawn {
+            TargetTag = "remove_standard34",
+            Player = "pl_Enemy1",
+            BuildingId = 39051
+        },
         --first camp p1
         SquadVanish {
             Tag = "camp_first_left3"
@@ -294,40 +329,39 @@ OnOneTimeEvent {
         SquadVanish {
             Tag = "fire_altar_squad18"
         },
-    }
-};
-
-OnOneTimeEvent {
-    Conditions = {
-        MissionDifficultyIsEqual {
-            Difficulty = DifficultyAdvanced
+        SquadVanish {
+            Tag = "volcano_wave_a4_2"
+        },
+        SquadVanish {
+            Tag = "volcano_wave_a2_2"
+        },
+        SquadVanish {
+            Tag = "volcano_wave_a1_2"
+        },
+        SquadVanish {
+            Tag = "volcano_wave_b2_2"
+        },
+        SquadVanish {
+            Tag = "volcano_wave_b1_2"
+        },
+        SquadVanish {
+            Tag = "battleground_camp_wave_b"
+        },
+        SquadVanish {
+            Tag = "battleground_camp_wave_a"
+        },
+        SquadVanish {
+            Tag = "battleground_camp_wave_b4"
+        },
+        SquadVanish {
+            Tag = "battleground_camp_wave_a1"
+        },
+        SquadVanish {
+            Tag = "moloch_patrol"
+        },
+        SquadVanish {
+            Tag = "worm_patrol_2"
         }
-    },
-    Actions = {
-        EntitySetMaxHealthAbsolute {
-            TargetTag = "fire_altar",
-            MaxHealthAbsolute = 10000
-        },
-        EntitySetMaxHealthAbsolute {
-            TargetTag = "abaddon",
-            MaxHealthAbsolute = 25000
-        },
-        EntitySetMaxHealthAbsolute {
-            TargetTag = "volcano_a",
-            MaxHealthAbsolute = 7500
-        },
-        EntitySetMaxHealthAbsolute {
-            TargetTag = "volcano_b",
-            MaxHealthAbsolute = 7500
-        },
-        EntitySetMaxHealthAbsolute {
-            TargetTag = "final_camp_volcano_left",
-            MaxHealthAbsolute = 10000
-        },
-        EntitySetMaxHealthAbsolute {
-            TargetTag = "final_camp_volcano_right",
-            MaxHealthAbsolute = 10000
-        },
     }
 };
 
@@ -498,6 +532,38 @@ OnOneTimeEvent {
     }
 };
 
+for spawnerIndex = 1,3 do
+    OnOneTimeEvent {
+        Conditions = {
+            BuildingIsDestroyed {
+                Tag = AspectSpawnerByIndex(spawnerIndex)
+            },
+            MapFlagIsFalse {
+                Name = "mf_"..AspectSpawnerGoalByIndex(spawnerIndex + 1).."_activated"
+            },
+            BuildingIsAlive {
+                Tag = AspectSpawnerByIndex(spawnerIndex + 1)
+            },
+        },
+        Actions = {
+            MissionTaskSetActive {
+                Player = "pl_Player2",
+                TaskTag = AspectSpawnerGoalByIndex(spawnerIndex +1), 
+                TargetTag = AspectSpawnerGoalByIndex(spawnerIndex +1), 
+                Summary = "Destroy the "..OrdinalNumbers[spawnerIndex +1].." aspect spawner."
+            },
+            MapFlagSetTrue {
+                Name = "mf_"..AspectSpawnerGoalByIndex(spawnerIndex +1).."_activated"  
+            },
+            FogOfWarObserve {
+                TargetTag = "camp_"..OrdinalNumbers[spawnerIndex +1].."_aspect_spawnpoint",
+                Team = "tm_Team1",
+                Range = 15
+            },
+        }
+    };
+end
+
 for spawnerIndex = 1,4 do
     OnOneTimeEvent {
         Conditions = {
@@ -519,36 +585,14 @@ for spawnerIndex = 1,4 do
                 TaskTag = AspectSpawnerGoalByIndex(spawnerIndex), 
                 TargetTag = AspectSpawnerByIndex(spawnerIndex), 
                 Summary = "Destroy the "..OrdinalNumbers[spawnerIndex].." aspect spawner."
-            }
+            },
+            FogOfWarGlanceAt {
+                TargetTag = "camp_"..OrdinalNumbers[spawnerIndex].."_aspect_spawnpoint",
+                Team = "tm_Team1",
+                Range = 15
+            },
         }
     };
-
-    if spawnerIndex < 4 then
-        OnOneTimeEvent {
-            Conditions = {
-                BuildingIsDestroyed {
-                    Tag = AspectSpawnerByIndex(spawnerIndex)
-                },
-                MapFlagIsFalse {
-                    Name = "mf_"..AspectSpawnerGoalByIndex(spawnerIndex + 1).."_activated"
-                },
-                BuildingIsAlive {
-                    Tag = AspectSpawnerByIndex(spawnerIndex + 1)
-                },
-            },
-            Actions = {
-                MissionTaskSetActive {
-                    Player = "pl_Player2",
-                    TaskTag = AspectSpawnerGoalByIndex(spawnerIndex), 
-                    TargetTag = AspectSpawnerGoalByIndex(spawnerIndex), 
-                    Summary = "Destroy the "..OrdinalNumbers[spawnerIndex].." aspect spawner."
-                },
-                MapFlagSetTrue {
-                    Name = "mf_"..AspectSpawnerGoalByIndex(spawnerIndex).."_activated"  
-                },
-            }
-        };
-    end
 
     if spawnerIndex > 1 then
         OnOneTimeEvent {
@@ -772,7 +816,7 @@ OnOneTimeEvent {
     Actions = {
         MissionOutcry {
             PortraitFileName = "moon",
-            DurationSeconds = 5,
+            DurationSeconds = 8,
             TextTag = "",
             Player = "ALL",
             Text = "Moon: The expedition was separated and has been ambushed! You must come to their aid!"
@@ -811,7 +855,7 @@ OnOneTimeEvent {
     Conditions = {
         MapTimerIsElapsed {
             Name = "mt_global",
-            Seconds = 30
+            Seconds = 10
         },
         BuildingIsAlive {
             Tag = "fire_altar"
@@ -829,6 +873,11 @@ OnOneTimeEvent {
         },
         MapFlagSetTrue {
             Name = "mf_goal_destroy_first_aspect_spawner_activated"  
+        },
+        FogOfWarObserve {
+            TargetTag = "camp_first_aspect_spawnpoint",
+            Team = "tm_Team1",
+            Range = 15
         },
         MissionOutcry {
             PortraitFileName = "moon",
@@ -1116,11 +1165,11 @@ OnOneTimeEvent {
         OR {
             MapTimerIsElapsed {
                 Name = "mt_fire_altar_destroyed",
-                Seconds = 20
+                Seconds = 4
             },
             MapTimerIsElapsed {
                 Name = "mt_fire_wall_destroyed",
-                Seconds = 20
+                Seconds = 4
             }
         }
     },
@@ -1139,11 +1188,11 @@ OnOneTimeEvent {
         OR {
             MapTimerIsElapsed {
                 Name = "mt_fire_altar_destroyed",
-                Seconds = 5
+                Seconds = 2
             },
             MapTimerIsElapsed {
                 Name = "mt_fire_wall_destroyed",
-                Seconds = 5
+                Seconds = 2
             }
         }
     },
@@ -1165,7 +1214,7 @@ OnOneTimeEvent {
             DurationSeconds = 2,
             TextTag = "",
             Player = "ALL",
-            Text = "Moon: <TODO articulate proper announcer>!"
+            Text = "Moon: We are getting closer!"
         },
         FogOfWarGlanceAt {
             TargetTag = "glance_50",
@@ -1256,24 +1305,11 @@ OnOneTimeEvent {
         }
     },
     Actions = {
-        AudioSoundUIPlay {
-            Sound = "sfx_xl_moloch_cheer_02"
-        },
-        CutsceneCameraPlay {
-            Camera = "moloch_cam"
-        },
         MapFlagSetTrue {
             Name = "mf_spawn_wave_volcano_a"
         },
         MapFlagSetTrue {
             Name = "mf_spawn_wave_volcano_b"
-        },
-        MapFlagSetTrue {
-            Name = "mf_spawn_wave_moloch"
-        },
-        SquadGridGoto {
-            Tag = "moloch", 
-            TargetTag = "moloch_target"
         },
         MapFlagSetTrue {
             Name = "mf_goal_destroy_both_volcanos_active"
@@ -1284,6 +1320,41 @@ OnOneTimeEvent {
         MapTimerStart {
             Name = "mt_post_fireback_phase"
         }
+    }
+};
+
+OnOneTimeEvent {
+    Conditions = {
+        AND {
+            OR {
+                MapTimerIsElapsed {
+                    Name = "mt_fire_altar_destroyed",
+                    Seconds = 40
+                },
+                MapTimerIsElapsed {
+                    Name = "mt_fire_wall_destroyed",
+                    Seconds = 20
+                }
+            },
+            MissionDifficultyIsEqual {
+                Difficulty = DifficultyExpert
+            }
+        }
+    },
+    Actions = {
+        AudioSoundUIPlay {
+            Sound = "sfx_xl_moloch_cheer_02"
+        },
+        CutsceneCameraPlay {
+            Camera = "moloch_cam"
+        },
+        MapFlagSetTrue {
+            Name = "mf_spawn_wave_moloch"
+        },
+        SquadGridGoto {
+            Tag = "moloch", 
+            TargetTag = "moloch_target"
+        },
     }
 };
 
